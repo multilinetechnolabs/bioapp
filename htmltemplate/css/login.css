@@ -1,0 +1,59 @@
+body {
+    background-color: #a69576;
+    background-position: 50% 50%;
+    font-family: arial, serif;
+}
+
+#basic-addon1 {
+    color: #9b9eab;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.icon-img {
+    width: 16px;
+    height: 20px;
+}
+
+.logo-img {
+    position: relative;
+    top: -65px;
+    display: block;
+
+}
+
+@media only screen and (max-width: 768px) {
+    .main-body {
+        margin-top: 75px;
+    }
+}
+
+#create-account {
+    background-color: #8edb29;
+    font-family: arial, serif;
+    font-size: 16px;
+}
+
+.main-body {
+    margin-top: 150px;
+}
+
+#login-div {
+    margin-top: 5px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #ffffff;
+}
+
+.create-button {
+    background-color: #8edb29;
+    color: #ffffff;
+    border-color: #8edb29;
+}
+
+.create-button:hover {
+    background-color: #8edb29;
+    color: #ffffff;
+    border-color: #8edb29;
+}
+

@@ -1,0 +1,85 @@
+.row-1 {
+    background-color: #f3f660;
+    height: 25px;
+}
+
+.row-2 {
+    background-color: #e7a23c;
+    color: #174891;
+    font-size: 20px;
+    height: 25px;
+
+}
+
+.row-3 {
+    background-color: #31b6e8;
+    height: 20px;
+}
+
+body {
+    background-color: #a69576;
+    background-position: 50% 50%;
+    font-family: Myriad_Pro_Regular, serif;
+
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+}
+
+.main-body {
+    margin-top: 60px;
+}
+
+.main-body-down {
+
+    bottom: 0px;
+    background-color: #5a5d5e;
+}
+
+.text-heading-row {
+    margin-top: 30px;
+}
+
+.text-heading-color {
+    color: #ffffff;
+}
+
+#footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+@media only screen and (max-width: 768px) {
+    #footer {
+        position: relative;
+        bottom: 0;
+        width: 100%;
+    }
+}
+
+.button-learn-more {
+    margin-top: 30px;
+    margin-bottom: 30px
+}
+
+.learn-more {
+    background-color: #31b6e8;
+    color: #ffffff;
+    width: auto;
+    margin: 0px;
+}
+
+.icon-img {
+    height: 150px;
+    width: 150px;
+}
+
+@font-face {
+    font-family: Myriad_Pro_Regular;
+    src: url(../fonts/Myriad_Pro_Regular.ttf);
+}
+

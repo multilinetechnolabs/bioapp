@@ -1,0 +1,42 @@
+# This is a sample build configuration for PHP.
+# Check our guides at https://confluence.atlassian.com/x/e8YWN for more examples.
+# Only use spaces to indent your .yml configuration.
+# -----
+# You can specify a custom docker image from Docker Hub as your build environment
+image: php:7.2-apache-stretch
+
+pipelines:
+  default:
+    - step:
+        caches:
+          - composer
+        script:
+          - php -v
+          - apt-get update && apt-get install -y unzip libpng-dev gnupg2
+          - curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+          - docker-php-ext-install -j$(nproc) gd mysqli pdo pdo_mysql zip
+          - composer install
+          - curl -sL https://deb.nodesource.com/setup_11.x | bash -
+          - apt-get update && apt-get install -y nodejs build-essential
+          - node -v 
+          - npm -v 
+          - npm install
+          - cp .env.pipelines .env
+          - php artisan migrate --force
+          - php artisan passport:install
+          - php artisan security-check:now
+          - php artisan code:analyse
+          - ./vendor/bin/phpunit --log-junit ./test-reports/phpunit.xml
+        services: 
+          - mysql
+
+definitions: 
+  services: 
+    mysql: 
+      image: mysql:5.7 
+      environment: 
+        MYSQL_DATABASE: 'homestead'
+        MYSQL_RANDOM_ROOT_PASSWORD: 'yes' 
+        MYSQL_USER: 'homestead'
+        MYSQL_PASSWORD: 'secret'
+          

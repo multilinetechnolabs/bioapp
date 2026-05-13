@@ -1,0 +1,174 @@
+table {
+  width: 100%;
+}
+
+table:not(.table-datatable) thead {
+  color: #fff;
+
+  tr {
+    background-color: #679bf9;
+  }
+}
+
+
+table:not(.table-datatable) tr th {
+  cursor: pointer;
+  padding: 10px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+table:not(.table-datatable) tbody tr:nth-child(odd) td {
+  background-color: #dcad67;
+}
+
+table:not(.table-datatable) tbody tr:nth-child(even) td {
+  background-color: #f4f3ee;
+}
+
+table:not(.table-datatable) tbody tr td {
+  background-color: #f4f3ee;
+}
+
+table:not(.table-datatable) tbody tr.plain td {
+  background-color: #f4f3ee !important;
+}
+
+td.header-radical {
+  background-color: #dcad67;
+  color: #fff;
+  font-weight: 300;
+  padding: 5px;
+  padding-left: 40px;
+  text-transform: uppercase;
+}
+
+td.header-radical-0 {
+  background-color: #dcad67;
+}
+
+td.header-radical-1 {
+  background-color: #6ebab7;
+}
+
+td.header-radical-2 {
+  background-color: #e06a50;
+}
+
+button.btn-data-cache {
+  background-color: #bfeafb;
+  border-radius: 6px;
+  color: #000;
+  cursor: pointer;
+  font-weight: bold;
+  height: 40px;
+  margin: 0 8px;
+}
+
+td button:disabled {
+  color: #808080;
+}
+
+.data-cache-section {
+  background-color: #4b4b47;
+  border-radius: 10px;
+  cursor: pointer;
+  padding-bottom: 10px;
+  padding-top: 15px;
+  width: 240px;
+
+  &:hover {
+    background-color: #3e3e3b;
+  }
+
+  h3 {
+    color: #fff;
+    margin: 0;
+    text-decoration: none;
+  }
+
+  img {
+    height: 70px;
+    margin-bottom: 10px;
+  }
+}
+
+#clientInfoModal,
+#preferencesModal {
+  color: #000 !important;
+}
+
+#clientInfoModal .form-group,
+#preferencesModal .form-group {
+  margin: 8px 0;
+}
+
+#clientInfoModal .modal-footer,
+#preferencesModal .modal-footer {
+  display: flex;
+}
+
+#clientInfoModal .btn,
+#preferencesModal .btn {
+  width: 150px;
+}
+
+#clientInfoModal .save-btn,
+#preferencesModal .save-btn {
+  background-color: #008000;
+  color: #fff;
+  width: 100%;
+}
+
+#clientInfoModal .save-btn:hover,
+#preferencesModal .save-btn:hover {
+  background-color: #007100;
+}
+
+#clientInfoModal .logo-box,
+#preferencesModal .logo-box {
+  border: 1px solid #000;
+  cursor: pointer;
+  height: 132px;
+  width: 132px;
+}
+
+#clientInfoModal .logo-box:focus,
+#clientInfoModal .logo-box:hover,
+#preferencesModal .logo-box:focus,
+#preferencesModal .logo-box:hover {
+  border: 3px solid #00f;
+}
+
+#clientInfoModal .logo-box.active,
+#preferencesModal .logo-box.active {
+  border: 4px solid #31b6e8;
+}
+
+.data-cache a:link {
+  text-decoration: none;
+}
+
+.data-cache .adjust {
+  cursor: pointer;
+  margin-right: 210px;
+}
+
+@media only screen and (max-width: 767px) {
+  .data-cache .adjust {
+    margin-right: 20px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .data-cache .adjust {
+    margin-right: 20px;
+  }
+}
+
+@media only screen and (max-width: 499px) {
+  .data-cache .adjust {
+    margin-bottom: 20px;
+    margin-right: 0;
+  }
+}

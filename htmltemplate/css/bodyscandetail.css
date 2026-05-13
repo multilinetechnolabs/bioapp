@@ -1,0 +1,87 @@
+.row-1 {
+    background-color: #f3f660;
+    height: 25px;
+}
+
+.row-2 {
+    background-color: #e7a23c;
+    color: #174891;
+    font-size: 20px;
+    height: 30px;
+
+}
+
+.row-3 {
+    background-color: #31b6e8;
+    height: 20px;
+}
+
+body {
+    background-color: #a69576;
+    background-position: 50% 50%;
+    font-family: Myriad_Pro_Regular, serif;
+
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+}
+
+.responsive {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+}
+
+.main-body {
+    margin-top: 60px;
+}
+
+.main-body-down {
+
+    bottom: 0px;
+    background-color: #5a5d5e;
+}
+
+.text-heading-row {
+    margin-top: 30px;
+}
+
+.text-heading-color {
+    color: #ffffff;
+}
+
+.bodyicon-img {
+    height: 24px;
+    width: 24px;
+}
+
+#footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.text-footer-heading {
+    margin-top: 200px;
+}
+
+@media only screen and (max-width: 768px) {
+    #footer {
+        position: relative;
+        bottom: 0;
+        width: 100%;
+    }
+
+    .text-footer-heading {
+        margin-top: 50px;
+    }
+}
+
+@font-face {
+    font-family: Myriad_Pro_Regular;
+    src: url(../fonts/Myriad_Pro_Regular.ttf);
+}
+

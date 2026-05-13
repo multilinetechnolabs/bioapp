@@ -1,0 +1,154 @@
+/* Layout */
+.main-body {
+  padding: 15px;
+  background: #f5f7fa;
+}
+
+/* Center container for large screens */
+.friends-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* GRID (Fix for 4K screens) */
+.friends-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+/* Each item */
+.friend-item {
+  display: flex;
+  justify-content: center;
+}
+
+/* Card */
+.friend-card {
+  width: 100%;
+  max-width: 200px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 12px 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+  transition: 0.3s;
+}
+
+.friend-card:hover {
+  transform: translateY(-3px);
+}
+
+/* Avatar */
+.friend-avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+  border: 3px solid #14b8a6;
+  padding: 0;
+  box-shadow: 0 4px 16px rgba(20, 184, 166, 0.25), 0 2px 6px rgba(0, 0, 0, 0.12);
+  margin-bottom: 10px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+/* Text */
+.friend-name {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.friend-info p {
+  font-size: 12px;
+  margin: 0;
+}
+
+/* Button */
+.friend-actions {
+  margin-top: 10px;
+}
+
+.friend-actions .btn {
+  font-size: 12px;
+  padding: 5px;
+  border-radius: 6px;
+}
+
+/* Loader */
+.loader {
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #007bff;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+  margin: 40px auto;
+}
+
+.loader-inline {
+  margin: 20px auto 0;
+  width: 24px;
+  height: 24px;
+}
+
+.friends-scroll-status {
+  min-height: 44px;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* ========================= */
+/* SEARCH (FIXED CLEAN UI) */
+/* ========================= */
+
+/* Container */
+.search-container {
+  display: flex;
+  justify-content: right;
+  margin-bottom: 40px;
+}
+
+/* Inline search */
+.search-inline {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid #ddd;
+  padding: 6px 4px;
+  width: 320px;
+  max-width: 90%;
+  transition: 0.2s;
+}
+
+/* Icon */
+.search-inline i {
+  color: #999;
+  font-size: 13px;
+}
+
+/* Input */
+.search-inline input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 13px;
+  background: transparent;
+}
+
+/* Focus */
+.search-inline:focus-within {
+  border-color: #007bff;
+}
+
+/* Placeholder */
+.search-inline input::placeholder {
+  color: #aaa;
+}

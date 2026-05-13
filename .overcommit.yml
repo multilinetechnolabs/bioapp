@@ -1,0 +1,21 @@
+verify_signatures: true
+
+CommitMsg:
+  HardTabs:
+    enabled: true
+
+PreCommit:
+  LineEndings:
+    enabled: true
+  PhpCsFixer:
+    enabled: true
+  PhpStan:
+    enabled: true
+    command: ['vendor/bin/phpstan', 'analyse', 'app']
+  ScssLint:
+    enabled: true
+    command: ['bundle', 'exec', 'scss-lint']
+  TrailingWhitespace:
+    enabled: true
+  YamlSyntax:
+    enabled: true

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+<url>
+  <loc>https://biomagnetism.app</loc>
+</url>
+<url>
+  <loc>https://biomagnetism.app/signup</loc>
+</url>
+<url>
+  <loc>https://biomagnetism.app/home</loc>
+</url>
+<url>
+  <loc>https://biomagnetism.app/dashboard</loc>
+</url>
+<url>
+  <loc>https://biomagnetism.app/bodyscan/info</loc>
+</url>
+<url>
+  <loc>https://biomagnetism.app/chakrascan/info</loc>
+</url>
+<url>
+  <loc>https://biomagnetism.app/data_cache/info</loc>
+</url>
+<url>
+  <loc>https://biomagnetism.app/bioconnect</loc>
+</url>
+<url>
+  <loc>https://biomagnetism.app/bioconnect/info</loc>
+</url>
+<url>
+  <loc>https://biomagnetism.app/bioconnect/groups</loc>
+</url>
+<url>
+  <loc>https://biomagnetism.app/products</loc>
+</url>
+<url>
+  <loc>https://biomagnetism.app/products/bio</loc>
+</url>
+<url>
+  <loc>https://biomagnetism.app/products/chakra</loc>
+</url>
+<url>
+  <loc>https://biomagnetism.app/login</loc>
+</url>
+<url>
+  <loc>https://biomagnetism.app/register</loc>
+</url>
+<url>
+  <loc>https://biomagnetism.app/password/reset</loc>
+</url>
+
+</urlset>

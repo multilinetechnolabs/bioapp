@@ -1,0 +1,45 @@
+header > section > .header-row {
+    font-family: Myriad_Pro_Regular, serif; 
+    font-size: 32px;
+    color: #000000;
+}
+
+@font-face {
+    font-family: Myriad_Pro_Regular;
+    src: url(../fonts/Myriad_Pro_Regular.ttf);
+}
+
+body {
+    background-image: url("../images/iconimages/mainbg.png");
+    background-repeat: no-repeat;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-position: center
+}
+
+@media only screen and (max-width: 768px) {
+    header > section > .header-row {
+        font-size: 24px;
+    }
+}
+
+.main-body {
+    height: 560px;
+}
+
+.main-body-down {
+
+    bottom: 0px;
+    background-color: #5a5d5e
+}
+
+.footer-images {
+    height: 78px;
+    margin-top: 1px;
+}
+

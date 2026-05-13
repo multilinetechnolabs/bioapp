@@ -1,0 +1,16 @@
+body {
+    background-color: #a69576;
+    background-position: 50% 50%;
+}
+
+img {
+    margin-top: 150px;
+    height: 447px;
+}
+
+@media only screen and (max-width: 768px) {
+    img {
+        margin-top: 50px;
+        height: 300px;
+    }
+}

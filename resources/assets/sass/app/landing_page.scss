@@ -1,0 +1,396 @@
+@import "~bootstrap/dist/css/bootstrap";
+@import "~font-awesome/css/font-awesome";
+@import "~swiper/dist/css/swiper.css";
+
+html, body {
+  overflow-x: hidden;
+}
+
+.top_page {
+  background-image: url("/images/landing_page/TopBG_Asset_4.png");
+  height: 100%;
+  width: 100%;
+}
+
+.top-header {
+  background-image: url("/images/landing_page/BlackS_Asset 3.png");
+}
+
+.logo img {
+  padding-left: 0;
+  width: 100px;
+  padding-top: 5px;
+}
+
+#top_bar {
+  padding-top: 10px;
+  padding-left: 0%;
+  padding-right: 0%;
+  width: 100%;
+}
+
+#title h1 {
+  font-size: 40px;
+}
+
+.third img {
+  width: 100%;
+}
+
+.balance img {
+  width: 270px;
+  padding-top: 20px;
+}
+
+.third {
+  background: #006400;
+}
+
+.fourth img {
+  width: 100%;
+}
+
+.fifth img {
+  width: 100%;
+}
+
+#caption {
+  color: #006400;
+  font-weight: 900;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.sixth {
+  padding-top: 30px;
+}
+
+.sixth h1 {
+  /* font-size: 40px; */
+  font-weight: 600;
+}
+
+.sixth .list p {
+  font-size: 30px;
+  font-weight: 400;
+  display: list-item;
+}
+
+.sixth1 img {
+  width: 70%;
+  padding-top: 30px;
+  padding-bottom: 20px;
+}
+
+.sixth p.hereis {
+  font-size: 40px;
+  font-weight: normal;
+}
+
+.side h4 {
+  padding-left: 30px;
+  padding-bottom: 20px;
+  padding-right: 30px;
+}
+
+.bot h3 {
+  font-weight: normal;
+}
+
+.man_blur img {
+  width: 100%;
+  height: 100%;
+}
+
+#seventh {
+  background: #539d13;
+}
+
+.eighth {
+  background-image: url("/images/landing_page/Image_Asset-25.png"); 
+  background-size: 100% 100%;
+}
+
+.eighth > div.background {
+  padding: 40px 80px;
+}
+
+.eighth p {
+  font-size: 24px;
+  font-weight: 300;
+  text-align: justify;
+  width: 85%;
+}
+
+.eighth h4 {
+  color: #147b1c;
+  margin-bottom: 16px;
+  margin-top: 16px;
+}
+
+.caption2 {
+  padding-top: 50px;
+}
+
+.caption2 h4 {
+  color: #006400;
+  font-size: 30px;
+}
+
+.background {
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.background img {
+  position: relative;
+  width: 100%;
+}
+
+.s-txt {
+  position: absolute;
+  top: 805%;
+  left: 10%;
+  right: 0;
+  font-size: 20px;
+}
+
+.s-txt p {
+  overflow: hidden;
+  width: 75%;
+}
+
+.leaf {
+  position: absolute;
+  bottom: 900px !important;
+  width: 100%;
+  padding-left: 10%;
+  padding-top: 5%;
+}
+
+.one p {
+  font-size: 20px;
+  color: black;
+  z-index: 1;
+}
+
+.imagebg5 img {
+  width: 100%;
+  position: relative;
+}
+
+.footer {
+  background: #28415c;
+  height: 100%;
+  width: 100%;
+}
+
+#stay_connected p {
+  padding-top: 10px;
+  padding-right: 30px;
+}
+
+#stay_connected p {
+  padding-top: 10px;
+  padding-right: 30px;
+}
+
+#stay_connected img {
+  padding-right: 30px;
+  width: 60px;
+}
+
+#footer_logo img {
+  width: 100px;
+  padding-top: 60px;
+}
+
+#footer_logo h3 {
+  font-weight: 100;
+}
+
+.logo_left img {
+  width: 80px;
+  padding-top: 60px;
+}
+
+#introducing {
+  background: #228b22;
+}
+
+.to-top img {
+  position: relative;
+  color: #fff;
+  padding-top: 100px;
+  width: 40px;
+}
+
+.third {
+  background: #539d13;
+  height: auto;
+  width: 100%;
+  padding-top: 10px;
+}
+
+#join img {
+  max-width: 200px;
+  top: 2rem;
+  padding-bottom: 0;
+  left: 1rem;
+}
+
+#bg_join img {
+  width: 98%;
+  position: relative;
+  top: -3rem;
+  max-width: 2000px;
+}
+
+#bg_bar img {
+  width: 98%;
+  top: -2rem;
+  position: relative;
+  max-width: 1900px;
+}
+
+.vid1 img {
+  padding-bottom: 12%;
+  width: 90%;
+  position: relative;
+  top: 0rem;
+}
+
+.vid2 img {
+  padding-bottom: 12%;
+  width: 90%;
+  position: relative;
+  top: 0rem;
+}
+
+.vid3 img {
+  padding-bottom: 12%;
+  width: 90%;
+  position: relative;
+  top: 0rem;
+}
+
+.ninth {
+  background-image: url("/images/landing_page/Image2_Asset 26.png");
+  background-size: 100% 100%;
+  padding-left: 28%;
+}
+
+.ninth h2 {
+  color: #147b1c;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding-left: 40px;
+}
+
+.ninth p {
+  font-size: 22px;
+  font-weight: 300;
+  padding-left: 40px;
+  width: 90%;
+}
+
+.ninth ul > li {
+  font-size: 22px;
+  font-weight: 300;
+  list-style-image: url('/images/landing_page/GreenMagnet_Asset 24.png');
+}
+
+.slider {
+  background-color: #228b22;
+}
+
+.swiper-container {
+  width: 100%;
+  padding: 0%;
+  margin: 0%;
+}
+
+.swiper-slide {
+  background-position: left;
+  background-size: cover;
+  width: 400px;
+  height: 400px;
+}
+
+.swiper-slide .image1 {
+  /* width: 1200px; */
+
+  overflow: hidden;
+}
+
+.swiper-slide .image1 img {
+  width: 500px;
+  height: 400px;
+}
+
+@media (max-width: 767px) {
+  #title h1 {
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 767px) {
+  .logo img {
+    width: 50px;
+  }
+}
+
+@media (max-width: 767px) {
+  #top_bar {
+    width: 100%;
+  }
+}
+
+@media (max-width: 767px) {
+  .to-top img {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  #stay_connected {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+@media (max-width: 556px) {
+  #join img {
+    max-width: 150px;
+    top: 2rem;
+    padding-bottom: 0;
+    left: 1rem;
+  }
+}
+
+@media (max-width: 410px) {
+  #join img {
+    max-width: 100px;
+    top: 2rem;
+    padding-bottom: 0;
+    left: 1rem;
+  }
+}
+
+
+@media (max-width: 767px) {
+  .eighth > div.background {
+    padding: 40px 20px;
+  }
+
+  .eighth p {
+    width: 90%;
+  }
+}

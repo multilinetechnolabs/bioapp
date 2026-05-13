@@ -1,0 +1,24 @@
+.slider{
+  background-color: #228B22;
+}
+.swiper-container {
+    width: 100%;
+    padding: 0%;
+    margin: 0%;
+  }
+.swiper-slide {
+    background-position: left;
+    background-size: cover;
+    width: 400px;
+    height: 400px;
+}
+.swiper-slide .image1{
+  /* width: 1200px; */
+  
+  overflow: hidden;
+  
+}
+.swiper-slide .image1 img {
+  width: 500px;
+  height: 400px;
+}

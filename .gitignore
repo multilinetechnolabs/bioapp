@@ -1,0 +1,52 @@
+# Ignore node resources
+/node_modules
+/vendor
+
+# Ignore IDE files
+.DS_Store
+/.idea
+/.vscode
+/.vagrant
+
+# Ignore config files
+Homestead.json
+Homestead.yaml
+/storage/*.key
+.env
+
+# Ignore log files
+npm-debug.log
+yarn-error.log
+
+# Ignore public files or directories
+/public/mix-manifest.json
+# public/assets/
+# /public/css
+# /public/fonts
+/public/hot
+/public/images
+# /public/js
+/public/storage
+/public/uploads
+
+# Ignore docker data files
+/docker/data
+
+# Ignore files starting with dot
+.*
+!.env.example
+!.env.pipelines
+!.gitignore
+!.gitattributes
+!.dockerignore
+!.htaccess
+!.overcommit.yml
+!.scss-lint.yml
+
+## Ignore some Cypress directory or files
+/cypress/videos
+/cypress/screenshots
+laradock/workspace/insecure_id_rsa
+storage/storage-backup
+.zip*
+*.zip

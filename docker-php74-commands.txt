@@ -1,0 +1,102 @@
+Docker commands for this project
+================================
+
+Project path:
+/var/www/Project/Fiver/dgaleener
+
+Compose file:
+docker-compose.php74.yml
+
+
+1. Install Docker on Ubuntu 24.04
+---------------------------------
+
+sudo apt update
+sudo apt remove -y docker.io docker-compose docker-compose-v2 docker-doc podman-docker containerd runc
+
+sudo apt install -y ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo ${UBUNTU_CODENAME:-$VERSION_CODENAME}) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+sudo apt update
+sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+sudo usermod -aG docker $USER
+newgrp docker
+
+Check installation:
+docker --version
+docker compose version
+docker run hello-world
+
+
+2. First time project start
+---------------------------
+
+cd /var/www/Project/Fiver/dgaleener
+docker compose -f docker-compose.php74.yml up --build -d
+
+If vendor/autoload.php is missing:
+docker compose -f docker-compose.php74.yml run --rm app composer install
+
+
+3. Normal daily start
+---------------------
+
+cd /var/www/Project/Fiver/dgaleener
+docker compose -f docker-compose.php74.yml up -d
+
+Do not use --build every time.
+Use --build only if you changed:
+- docker/php74/Dockerfile
+- docker/php74/entrypoint.sh
+- docker-compose.php74.yml
+
+
+4. Open project
+---------------
+
+Main app:
+http://127.0.0.1:8081
+
+Affiliate pages:
+http://127.0.0.1:8081/affiliate
+
+
+5. Common commands
+------------------
+
+Stop containers:
+docker compose -f docker-compose.php74.yml down
+
+Restart:
+docker compose -f docker-compose.php74.yml restart
+
+View logs:
+docker compose -f docker-compose.php74.yml logs -f
+
+Open shell inside container:
+docker compose -f docker-compose.php74.yml exec app bash
+
+Run composer install:
+docker compose -f docker-compose.php74.yml run --rm app composer install
+
+Run artisan commands:
+docker compose -f docker-compose.php74.yml exec app php artisan migrate
+docker compose -f docker-compose.php74.yml exec app php artisan cache:clear
+docker compose -f docker-compose.php74.yml exec app php artisan config:clear
+docker compose -f docker-compose.php74.yml exec app php artisan route:clear
+docker compose -f docker-compose.php74.yml exec app php artisan view:clear
+
+
+6. Notes
+--------
+
+- This Docker setup uses PHP 7.4 for this project only.
+- It uses the host machine's MySQL, not a MySQL container.
+- Your Laravel/PHP code changes are picked up immediately because the project directory is mounted into the container.
+- If MySQL connection fails from Docker, the usual cause is MySQL user/auth settings on the host.
+- If you want a different port, run with `APP_PORT=8090 docker compose -f docker-compose.php74.yml up -d`.

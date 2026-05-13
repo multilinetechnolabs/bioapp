@@ -1,0 +1,27 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/php74/Dockerfile
+    container_name: dgaleener-php74
+    working_dir: /var/www/html
+    network_mode: host
+    user: "${DOCKER_UID:-1000}:${DOCKER_GID:-1000}"
+    environment:
+      APP_ENV: docker
+      APP_DEBUG: "true"
+      APP_HTTPS: "false"
+      APP_DISABLE_ROUTE_DOMAINS: "true"
+      APP_PORT: "${APP_PORT:-8081}"
+      APP_URL: "http://127.0.0.1:${APP_PORT:-8081}"
+      APP_WEB_URL: "http://127.0.0.1:${APP_PORT:-8081}"
+      APP_WEB_API_URL: "http://127.0.0.1:${APP_PORT:-8081}"
+      APP_AFFILIATE_URL: "http://127.0.0.1:${APP_PORT:-8081}/affiliate"
+    volumes:
+      - .:/var/www/html
+    entrypoint:
+      - /usr/local/bin/project-entrypoint
+    command:
+      - sh
+      - -lc
+      - php artisan serve --host=0.0.0.0 --port=$${APP_PORT:-8081}

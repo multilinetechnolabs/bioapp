@@ -1,0 +1,3 @@
+Sitemap: https://biomagnetism.app/sitemap.xml
+User-agent: *
+Disallow: 

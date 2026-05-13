@@ -1,0 +1,31 @@
+body {
+    background-color: #eee;
+}
+
+.cardHolder {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.card {
+    flex: 1;
+    margin: .5em;
+    height: 100px;
+    min-width: 100px;
+    background-color: #fff;
+    border-radius: 3px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: all .25s ease;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    z-index: 1;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes populate {
+    0% {
+        transform: scale(0);
+    }
+}

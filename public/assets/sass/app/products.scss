@@ -1,0 +1,48 @@
+.products-body {
+  color: #000;
+
+  .bg-dark-blue {
+    background-color: #206287;
+  }
+
+  .bg-orange {
+    background-color: #f06e3e;
+  }
+
+  .bg-light-blue {
+    background-color: #3aa3e0;
+  }
+
+  span {
+    color: #000;
+    font-size: 24px;
+    font-weight: 200 !important;
+  }
+
+  .product-text {
+    background-color: #f5f5dc;
+  }
+
+  .product-detail {
+    padding: 10px 50px;
+
+    span {
+      font-size: 18px;
+    }
+
+    button[type=submit] {
+      background-image: url('/images/products/cart.png') !important;
+      background-repeat: no-repeat;
+      background-size: 100% !important;
+      height: 65px;
+      margin: 10px;
+      width: 80px;
+    }
+  }
+}
+
+.products-bg {
+  background-color: #fff !important;
+  background-size: cover !important;
+  min-height: 650px;
+}

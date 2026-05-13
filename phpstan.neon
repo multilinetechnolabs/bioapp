@@ -1,0 +1,7 @@
+includes:
+    - ./vendor/nunomaduro/larastan/extension.neon
+parameters:
+    level: 5
+    ignoreErrors:
+        - '#Call to an undefined method Maatwebsite\\Excel\\Sheet::getHighestRow().#'
+        - '#Parameter \#1 $data of method Illuminate\\Contracts\\Routing\\ResponseFactory::json() expects array|string#'

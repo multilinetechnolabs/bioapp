@@ -1,0 +1,11 @@
+require('../angular/factories/Activity');
+require('../angular/factories/ActivityCategory');
+require('../angular/factories/Client');
+require('../angular/factories/ClientPair');
+require('../angular/factories/Discussion');
+require('../angular/factories/Logo');
+require('../angular/factories/ModelLabel');
+require('../angular/factories/ScanSession');
+require('../angular/factories/ScanSessionPair');
+require('../angular/factories/Pair');
+require('../angular/factories/User');

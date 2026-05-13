@@ -1,0 +1,11 @@
+require('../angular/controllers/DataCacheClientAddPairsCtrl');
+require('./controllers/DataCacheBioCtrl');
+require('./controllers/DataCacheChakraCtrl');
+require('./controllers/DataCacheClientShowCtrl');
+require('./controllers/DataCacheClientShowBioCtrl');
+require('./controllers/DataCacheClientShowChakraCtrl');
+require('../angular/controllers/BioConnectActivitiesCtrl');
+require('../angular/controllers/BioConnectDiscussionsCtrl');
+require('../angular/controllers/BioConnectFriendsCtrl');
+require('../angular/controllers/BioConnectFindFriendsCtrl');
+require('../angular/controllers/ModelLabelsCtrl');

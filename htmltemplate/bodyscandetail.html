@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bodyscandetail.css">
+
+    <title>Anew Avenue Biomagnetism</title>
+</head>
+<body class="container-fluid">
+<div id="container">
+    <section class="header">
+        <div class="row row-1"></div>
+        <div class="row row-2">
+            <div class="col-md-12 text-center">Biomagnetism Body Scan &nbsp;<img src="images/iconimages/humanicon24.png"
+                                                                                 class="bodyicon-img"></div>
+        </div>
+        <div class="row row-3"></div>
+        <div class="row row-3"></div>
+    </section>
+
+
+    <div class="row main-body">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-10 offset-md-2">
+
+                    <div>-887 Bio Pairs</div>
+                    <div>-1st block open to the pair it relates to - a + sign to add it to the client scan</div>
+                    <div>-to open next square, it will have apause and resume scan button.</div>
+                </div>
+            </div>
+
+            <div class="row text-footer-heading">
+                <div class="col-md-10 offset-md-2">
+                    <div>Something like this, as far as i have found but full body and rotating.</div>
+                    <div>Only-separate purchase</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div id="loading"><h3 style="color: #fff;">Loading . . . </h3></div>
+            <div id="modelcontainer"></div>
+        </div>
+
+
+    </div>
+    </section>
+    <section class="footer" id="footer">
+        <footer>
+            <div class="row main-body-down">
+                <div class="col-md-2 text-center"><a href=""><img src="images\iconimages\home80.png"
+                                                                  class="footer-images"></a></div>
+                <div class="col-md-2 text-center"><a href=""><img src="images\iconimages\human-180.png"
+                                                                  class="footer-images"></a></div>
+                <div class="col-md-2 text-center"><a href=""><img src="images\iconimages\human80.png"
+                                                                  class="footer-images"></a></div>
+                <div class="col-md-2 text-center"><a href=""><img src="images\iconimages\briefcase80.png"
+                                                                  class="footer-images"></a></div>
+                <div class="col-md-2 text-center"><a href=""><img src="images\iconimages\share80.png"
+                                                                  class="footer-images"></a></div>
+                <div class="col-md-2 text-center"><a href=""><img src="images\iconimages\more80.png"
+                                                                  class="footer-images"></a></div>
+            </div>
+        </footer>
+
+    </section>
+</div>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="js/jquery-3.3.1.slim.min.js"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+<script src="js/three.js"></script>
+<script src="js/Detector.js"></script>
+<script src="js/OrbitControls.js"></script>
+<script src="js/OBJLoader.js"></script>
+<script src="js/MTLLoader.js"></script>
+<script>
+
+    if (!Detector.webgl) {
+        Detector.addGetWebGLMessage();
+    }
+
+    var container;
+    var camera, scene, renderer;
+    var mouseX = 0, mouseY = 0;
+    var windowHalfX = window.innerWidth / 2;
+    var windowHalfY = window.innerHeight / 2;
+
+    // load fonts
+
+    var loader = new THREE.FontLoader();
+    loader.load( 'fonts/gentilis_regular.typeface.json', function ( font ) {
+        init( font );
+        animate();
+    } );
+
+    // initialize
+
+    function init(font) {
+        container = document.createElement( 'div' );
+        container.style = 'width: 100%';
+        console.log(document.getElementById('modelcontainer'));
+        document.getElementById('modelcontainer').appendChild( container );
+
+        // camera
+
+        camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 1, 2000 );
+        camera.position.z = 250;
+        camera.position.x = -200;
+        // scene
+        scene = new THREE.Scene();
+        var ambientLight = new THREE.AmbientLight( 0xcccccc, 0.4 );
+        scene.add( ambientLight );
+        var pointLight = new THREE.PointLight( 0xffffff, 0.8 );
+
+        //update camera with light
+
+        camera.add( pointLight );
+        scene.add( camera );
+
+        // texture
+
+        var manager = new THREE.LoadingManager();
+        manager.onProgress = function ( item, loaded, total ) {
+            console.log( item, loaded, total );
+        };
+
+        var textureLoader = new THREE.TextureLoader( manager );
+        var texture = textureLoader.load( './assets/female.png' );
+        // model
+
+        var onProgress = function ( xhr ) {
+            if ( xhr.lengthComputable ) {
+                var percentComplete = xhr.loaded / xhr.total * 100;
+                console.log( Math.round(percentComplete, 2) + '% downloaded' );
+                if (percentComplete === 100){
+                    document.getElementById('loading').style = 'display: none;'
+                }
+            }
+        };
+
+        var onError = function ( xhr ) {
+        };
+
+        var loader = new THREE.OBJLoader( manager );
+        loader.load( 'assets/Female.obj', function ( object ) {
+            object.traverse( function ( child ) {
+                if ( child instanceof THREE.Mesh ) {
+                    child.material.map = texture;
+                }
+            } );
+            object.position.y = - 95;
+            scene.add( object );
+        }, onProgress, onError );
+
+        //add labels
+        addLabel( "Dorsal 1", new THREE.Vector3( -100, 0, 0 ), font );
+        addLabel( "Dorsal 2", new THREE.Vector3( 50, 0, 0 ), font );
+
+        //
+        renderer = new THREE.WebGLRenderer();
+        renderer.setPixelRatio( container.devicePixelRatio );
+        renderer.setSize( windowHalfX, windowHalfY );
+        container.appendChild( renderer.domElement );
+        container.addEventListener( 'mousemove', onDocumentMouseMove, false );
+        container.addEventListener("touchmove", onDocumentTouchMove, false);
+        //
+        window.addEventListener( 'resize', onWindowResize, false );
+    }
+
+    //add label
+    function addLabel( name, location, font ) {
+        var textGeo = new THREE.TextBufferGeometry( name, {
+            font: font,
+            size: 11,
+            height: 1,
+            curveSegments: 1
+        });
+        var textMaterial = new THREE.MeshBasicMaterial( { color: 0xffffff } );
+        var textMesh = new THREE.Mesh( textGeo, textMaterial );
+        textMesh.position.copy( location );
+        scene.add( textMesh );
+    }
+
+    var material = new THREE.LineBasicMaterial( { color: 0x0000ff } );
+    var geometry = new THREE.Geometry();
+    geometry.vertices.push(new THREE.Vector3( -100, 0, 0) );
+    geometry.vertices.push(new THREE.Vector3( 50, 0, 0) );
+    var line = new THREE.Line( geometry, material );
+    scene.add( line );
+
+
+    function onWindowResize() {
+        windowHalfX = container.innerWidth;
+        windowHalfY = container.innerHeight;
+        camera.aspect = windowHalfX / windowHalfY;
+        camera.updateProjectionMatrix();
+        renderer.setSize( windowHalfX, windowHalfY );
+    }
+
+    function onDocumentMouseMove( event ) {
+        mouseX = ( event.clientX - windowHalfX ) / 2;
+        mouseY = ( event.clientY - windowHalfY ) / 2;
+    }
+
+
+    function onDocumentTouchMove( event ) {
+        mouseX = ( event.clientX - windowHalfX ) / 2;
+        mouseY = ( event.clientY - windowHalfY ) / 2;
+    }
+
+    //
+    function animate() {
+        requestAnimationFrame( animate );
+        render();
+    }
+    function render() {
+        camera.position.x += ( mouseX - camera.position.x ) * .05;
+        camera.position.y += ( - mouseY - camera.position.y ) * .05;
+        camera.lookAt( scene.position );
+        renderer.render( scene, camera );
+    }
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,189 @@
+.row-1 {
+    background-color: #f3f660;
+    height: 25px;
+}
+
+.row-2 {
+    background-color: #e7a23c;
+    color: #174891;
+    font-size: 20px;
+    height: 25px;
+
+}
+
+.row-3 {
+    background-color: #31b6e8;
+    color: #ffffff;
+    font-size: 20px;
+
+}
+
+.link-decoration {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.link-decoration:hover {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+body {
+    background-color: #fafafa;
+    background-position: 50% 50%;
+    font-family: Myriad_Pro_Regular, serif;
+
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
+}
+
+.btn.add-button {
+    background-color: #f26522;
+    margin-left: 10px;
+    color: #ffffff;
+}
+
+.text-name-head {
+    margin-top: 15px;
+
+}
+
+.arrow-icon-img {
+    height: 20px;
+
+}
+
+.main-body {
+    margin-top: 60px;
+}
+
+.main-body-down {
+
+    bottom: 0px;
+    background-color: #5a5d5e
+}
+
+.text-heading-row {
+    margin-top: 30px;
+}
+
+.text-heading-color {
+    color: #ffffff;
+}
+
+.sort {
+    text-align: right;
+}
+
+.add-sort-button {
+    text-align: left;
+}
+
+.padding-adjust-left {
+    padding-left: 0px;
+}
+
+.padding-adjust-right {
+    padding-right: 0px;
+}
+
+.dropdownMenuLinkClass {
+    background-color: #ebebeb;
+    border-color: #ebebeb;
+    color: #1d2850;
+}
+
+.btn-secondary:not(:disabled):not(.disabled):active, .show > .btn-secondary.dropdown-toggle {
+    background-color: #ebebeb;
+    border-color: #ebebeb;
+    color: #1d2850;
+}
+
+.btn-secondary:not(:disabled):not(.disabled):hover, .show > .btn-secondary.dropdown-toggle {
+    background-color: #ebebeb;
+    border-color: #ebebeb;
+    color: #1d2850;
+}
+
+.show > .btn-secondary.dropdown-toggle:focus {
+    box-shadow: none;
+}
+
+.textareacustom {
+    background-color: #e1e1e1;
+}
+
+.image-bgc {
+    background-color: #cccccc;
+}
+
+.dropdown-toggle::after {
+    display: inline-block;
+    width: 0;
+    height: 0px;
+    margin-left: 30.255em;
+    vertical-align: .255em;
+    content: "";
+    border-top: 0.3em solid;
+    border-right: .3em solid transparent;
+    border-bottom: 0;
+    border-left: .3em solid transparent;
+    color: #00aeef;
+    margin-right: 0px;
+}
+
+#dropdownMenuLinkLeft {
+
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
+#dropdownMenuLinkRight {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+#footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+@media only screen and (max-width: 768px) {
+    #footer {
+        position: relative;
+        bottom: 0;
+        width: 100%;
+    }
+
+    .image-contain-head {
+        text-align: center;
+    }
+
+    .sort {
+        text-align: center;
+    }
+
+    .add-sort-button {
+        text-align: center;
+    }
+}
+
+.icon-img {
+    height: 150px;
+    width: 150px;
+}
+
+@font-face {
+    font-family: Myriad_Pro_Regular;
+    src: url(../fonts/Myriad_Pro_Regular.ttf);
+}
+
+.image-contain-head {
+    margin-bottom: 10px;
+    margin-top: 10px;
+}

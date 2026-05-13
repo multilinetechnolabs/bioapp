@@ -1,0 +1,28 @@
+scss_files:
+  - 'resources/assets/sass/**/*.scss'
+
+exclude:
+  - 'resources/assets/sass/app/admin.scss'
+  - 'resources/assets/sass/app/audioplayernew.scss'
+  - 'resources/assets/sass/app/jplayer.blue.monday.scss'
+
+linters:
+  ColorVariable:
+    enabled: false
+  ImportantRule:
+    enabled: false
+  IdSelector:
+    enabled: false
+  QualifyingElement:
+    enabled: false
+  NestingDepth:
+    max_depth: 5
+  SelectorDepth:
+    max_depth: 5
+  SelectorFormat:
+    exclude: 
+      - 'resources/assets/sass/app/data_cache.scss'
+      - 'resources/assets/sass/app/bioconnect.scss'
+  MergeableSelector:
+    exclude: 
+      - 'resources/assets/sass/app/bioconnect.scss'

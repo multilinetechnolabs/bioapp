@@ -1,0 +1,36 @@
+@media (max-width: 767px){
+    #title h1{
+        font-size: 30px;
+    }
+}
+@media (max-width: 767px){
+    .logo img{
+        width: 50px;
+        
+    }
+}
+@media (max-width: 767px){
+    #top_bar{
+        width: 100%;
+    }
+}
+@media (max-width: 767px){
+    .to-top img{
+        display: none;
+        
+    }
+}
+@media (max-width: 767px){
+    #stay_connected{
+        display: none;
+        
+    }
+}
+@media (max-width: 767px){
+    body{
+        width:100%;
+        margin: 0;
+        padding: 0;
+        
+    }
+}

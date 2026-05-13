@@ -1,0 +1,94 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-image: url('/images/products/magnets.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.columns {
+  float: left;
+  padding: 8px 16px;
+  width: 50%;
+}
+
+.price {
+  border: 1px solid #eee;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  transition: .3s;
+
+  &:hover {
+    box-shadow: 0 8px 12px 0 rgba(0, 0, 0, .2);
+    cursor: pointer;
+  }
+
+  .header {
+    background-color: #111;
+    color: #fff;
+    font-size: 30px;
+    padding: 8px;
+  }
+
+  li {
+    border-bottom: 1px solid #eee;
+    padding: 20px;
+    text-align: center;
+  }
+
+  .grey {
+    background-color: #eee;
+    font-size: 24px;
+  }
+}
+
+.button {
+  background-color: #4caf50;
+  border: 0;
+  border-radius: 40px;
+  color: #fff;
+  font-size: 18px;
+  padding: 10px 25px;
+  text-align: center;
+  text-decoration: none;
+
+  .buy-now,
+  .try-it {
+    margin: 0 8px;
+  }
+
+  &.buy-now {
+    background-color: #ff0;
+    border: 3px solid #31b6e8;
+    color: #000;
+  }
+
+  &.try-it {
+    background-color: #31b6e8;
+    border: 3px solid #f28857;
+    color: #fff;
+  }
+}
+
+.price-body {
+  margin: 0 200px !important;
+}
+
+@media only screen and (max-width: 600px) {
+  .columns {
+    width: 100%;
+  }
+
+  .price-body {
+    margin: 0 25px !important;
+  }
+}
+
+.pricing-header {
+  color: #31b6e8;
+  font-weight: bold;
+  margin: 16px 0;
+}

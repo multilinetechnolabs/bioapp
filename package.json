@@ -1,0 +1,43 @@
+{
+    "private": true,
+    "scripts": {
+        "dev": "npm run development",
+        "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "watch": "npm run development -- --watch",
+        "watch-prod": "npm run production -- --watch",
+        "watch-poll": "npm run watch -- --watch-poll",
+        "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "prod": "npm run production",
+        "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+    },
+    "devDependencies": {
+        "angular": "^1.7.5",
+        "angular-filter": "^0.5.17",
+        "angular-resource": "^1.7.5",
+        "axios": "^0.18",
+        "bootstrap": "^4.3.0",
+        "clean-webpack-plugin": "^0.1.19",
+        "cross-env": "^5.2.0",
+        "cypress": "^3.4.0",
+        "datatables": "^1.10.18",
+        "detector-webgl": "^2.0.0",
+        "font-awesome": "^4.7.0",
+        "jquery": "^3.2",
+        "jquery-ui": "^1.12.1",
+        "laravel-mix": "^2.0.1",
+        "lodash": "^4.17.11",
+        "popper.js": "^1.14.5",
+        "three": "^0.94.0",
+        "three-objmtll-loader": "^1.0.1",
+        "vue": "^2.5.17"
+    },
+    "dependencies": {
+        "ajv": "^6.5.5",
+        "imagemin": "^5.3.1",
+        "node-sass": "^9.0.0",
+        "swiper": "^4.5.0"
+    },
+    "overrides": {
+        "node-sass": "^9.0.0"
+    }
+}
