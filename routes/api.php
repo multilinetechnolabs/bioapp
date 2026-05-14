@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpFoundation\Response;
 
 /*
@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 |
 */
 
-Route::namespace('Api')->group(function () {
+Route::middleware('auth:api')->namespace('Api')->group(function () {
     Route::get('/', function (Request $request) {
         return $request->user();
     });

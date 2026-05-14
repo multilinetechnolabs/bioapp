@@ -2,59 +2,31 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\Route;
+use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
 {
-    /**
-     * This namespace is applied to your controller routes.
-     *
-     * In addition, it is set as the URL generator's root namespace.
-     *
-     * @var string
-     */
-    protected $namespace = 'App\Http\Controllers';
+    public const HOME = '/home';
 
-    /**
-     * Define your route model bindings, pattern filters, etc.
-     *
-     * @return void
-     */
     public function boot()
     {
-        //
+        $this->configureRateLimiting();
 
-        parent::boot();
+        $this->routes(function () {
+            $this->mapApiRoutes();
+            $this->mapWebRoutes();
+            $this->mapAffiliateRoutes();
+        });
     }
 
-    /**
-     * Define the routes for the application.
-     *
-     * @return void
-     */
-    public function map()
-    {
-        $this->mapApiRoutes();
-
-        $this->mapWebRoutes();
-
-        $this->mapAffiliateRoutes();
-
-        //
-    }
-
-    /**
-     * Define the "web" routes for the application.
-     *
-     * These routes all receive session state, CSRF protection, etc.
-     *
-     * @return void
-     */
     protected function mapWebRoutes()
     {
         $route = Route::middleware('web')
-             ->namespace($this->namespace);
+            ->namespace('App\Http\Controllers');
 
         if ($this->shouldBindRoutesToDomains()) {
             $route->domain($this->normalizeRouteDomain(env('APP_WEB_URL')));
@@ -63,17 +35,10 @@ class RouteServiceProvider extends ServiceProvider
         $route->group(base_path('routes/web.php'));
     }
 
-    /**
-     * Define the "api" routes for the application.
-     *
-     * These routes are typically stateless.
-     *
-     * @return void
-     */
     protected function mapApiRoutes()
     {
-        $route = Route::middleware('auth:api')
-             ->namespace($this->namespace);
+        $route = Route::middleware('api')
+            ->namespace('App\Http\Controllers');
 
         if ($this->shouldBindRoutesToDomains()) {
             $route->domain($this->normalizeRouteDomain(env('APP_WEB_API_URL')));
@@ -85,8 +50,8 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapAffiliateRoutes()
     {
         $route = Route::middleware('web')
-             ->namespace($this->namespace)
-             ->name('affiliate.');
+            ->namespace('App\Http\Controllers')
+            ->name('affiliate.');
 
         if ($this->shouldBindRoutesToDomains()) {
             $route->domain($this->normalizeRouteDomain(env('APP_AFFILIATE_URL')));
@@ -95,6 +60,13 @@ class RouteServiceProvider extends ServiceProvider
         }
 
         $route->group(base_path('routes/affiliate.php'));
+    }
+
+    protected function configureRateLimiting()
+    {
+        RateLimiter::for('api', function (Request $request) {
+            return Limit::perMinute(60)->by(optional($request->user())->id ?: $request->ip());
+        });
     }
 
     protected function shouldBindRoutesToDomains()

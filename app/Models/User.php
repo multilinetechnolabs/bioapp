@@ -19,6 +19,7 @@ use Watson\Validating\ValidatingTrait;
 
 use App\Traits\HelperMethods;
 use Storage;
+use Illuminate\Support\Arr;
 
 class User extends Authenticatable implements Auditable, MustVerifyEmail
 {
@@ -176,7 +177,7 @@ class User extends Authenticatable implements Auditable, MustVerifyEmail
         $ids = [];
         array_push($ids, $this->friends()->get()->pluck('friend_id'));
         array_push($ids, $this->friends()->get()->pluck('user_id'));
-        return array_flatten($ids);
+        return Arr::flatten($ids);
     }
 
     public function requestedFriendIds()
