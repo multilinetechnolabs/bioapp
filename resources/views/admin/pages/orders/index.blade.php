@@ -48,10 +48,10 @@
                 ajax: { url: '{{ env("APP_WEB_API_URL") }}/{{ env("APP_WEB_API_VERSION") }}/orders/datatables' },
                 columns: [
                     { data: 'id', name: 'id' },
-                    { data: 'user', name: 'user', orderable: false, searchable: false, render: function(d) { return d.name; } },
-                    { data: 'product', name: 'product', orderable: false, searchable: false, render: function(d) { return d.name; } },
+                    { data: 'user', name: 'user', orderable: false, searchable: false, render: function(d) { return d ? d.name : ''; } },
+                    { data: 'product', name: 'product', orderable: false, searchable: false, render: function(d) { return d ? d.name : ''; } },
                     { data: 'description', name: 'description' },
-                    { data: 'product', name: 'product_price', orderable: false, searchable: false, render: function(d) { return '$' + d.unit_price; } },
+                    { data: 'product', name: 'product_price', orderable: false, searchable: false, render: function(d) { return d ? '$' + d.unit_price : '$0'; } },
                     { data: 'quantity', name: 'quantity' },
                     { data: 'cost', name: 'cost', orderable: false, searchable: false, render: function(d) { return '$' + d; } },
                     { data: 'paid', name: 'paid', orderable: false, searchable: false, render: function(d) { return d ? 'Yes' : 'No'; } },

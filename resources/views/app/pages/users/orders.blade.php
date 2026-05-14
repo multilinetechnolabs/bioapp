@@ -69,11 +69,11 @@
                 ajax: { url : '{{ env("APP_WEB_API_URL") }}/{{ env("APP_WEB_API_VERSION" )}}/users/me/orders/datatables' },
                 columns: [
                     { data: 'product', name: 'product', orderable: false, searchable: false,
-                        render: function ( data, type, row, meta ) { return data.name; }
+                        render: function ( data, type, row, meta ) { return data ? data.name : ''; }
                     },
                     { data: 'description', name: 'description' },
                     { data: 'product', name: 'product', orderable: false, searchable: false,
-                        render: function ( data, type, row, meta ) { return '$' + data.unit_price; }
+                        render: function ( data, type, row, meta ) { return data ? '$' + data.unit_price : '$0'; }
                     },
                     { data: 'quantity', name: 'quantity' },
                     { data: 'cost', name: 'cost', orderable: false, searchable: false,

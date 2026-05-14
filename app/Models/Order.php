@@ -57,13 +57,19 @@ class Order extends Base
 
     public function cost()
     {
-        return ($this->product->unit_price * $this->quantity) + $this->shipping_rate;
+        if ($this->product) {
+            return ($this->product->unit_price * $this->quantity) + $this->shipping_rate;
+        }
+        return $this->shipping_rate;
     }
 
     public function totalWeight()
     {
-        $weight = floatval(explode(' ', $this->product->weight, 2)[0]);
-        return $weight * $this->quantity;
+        if ($this->product) {
+            $weight = floatval(explode(' ', $this->product->weight, 2)[0]);
+            return $weight * $this->quantity;
+        }
+        return 0;
     }
 
     public function paid()
