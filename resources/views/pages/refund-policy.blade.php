@@ -1,4 +1,4 @@
-@extends('layouts.application')
+@extends('layouts.modern')
 
 @section('page-title', 'Refund Policy')
 
