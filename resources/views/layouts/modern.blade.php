@@ -16,6 +16,7 @@
         $isBioconnectRoute = \Illuminate\Support\Str::startsWith(request()->path(), 'bioconnect');
 
         $currentRouteUri = optional(Route::getCurrentRoute())->uri() ?? '';
+        $currentRouteName = Route::currentRouteName();
         $authUser = Auth::user();
         $showPlayer =
             $authUser &&
@@ -28,6 +29,7 @@
             (!isset($hidePlayer) || !$hidePlayer);
 
         $loadFoot = !empty($useAppShell) || $showPlayer || (!empty($isBioconnectRoute) && Auth::check());
+        $showLegalFooter = in_array($currentRouteName, ['app.root', 'app.home', 'app.chakrascan', 'app.chakrascan.info', 'app.dashboard'], true);
     @endphp
     <title>{{ $pageTitle !== '' ? $pageTitle . ' - ' . $siteTitle : $siteTitle }}</title>
 
@@ -68,6 +70,16 @@
 
     @if (!isset($hideBottomNav) || !$hideBottomNav)
         @include('partials.modern.bottom_nav')
+    @endif
+
+    @if ($showLegalFooter)
+        <footer class="modern-legal-footer text-center py-2">
+            <small>
+                <a href="{{ route('app.terms') }}">Terms of Service</a> |
+                <a href="{{ route('app.privacy') }}">Privacy Policy</a> |
+                <a href="{{ route('app.refund-policy') }}">Refund Policy</a>
+            </small>
+        </footer>
     @endif
 
     @if ($loadFoot)

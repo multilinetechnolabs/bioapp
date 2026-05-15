@@ -48,6 +48,9 @@ Route::get('/magnetictherapyblog/{slug}', 'BlogController@show')->name('app.blog
 
 Route::post('/contact', 'ContactController@store')->name('contact.store');
 
+Route::get('/terms', 'PageController@terms')->name('app.terms');
+Route::get('/privacy', 'PageController@privacy')->name('app.privacy');
+Route::get('/refund-policy', 'PageController@refundPolicy')->name('app.refund-policy');
 
 
 
