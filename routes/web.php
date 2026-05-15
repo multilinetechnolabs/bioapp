@@ -225,4 +225,21 @@ Route::get('subscriptions', 'SubscriptionController@index')->name('admin.subscri
     Route::delete('contact/{id}', 'ContactController@destroy')->name('admin.contact.destroy');
 });
 
+Route::get('/audio_files/{filename}', function ($filename) {
+    $path = storage_path('app/public/audio_files/' . $filename);
+    if (!file_exists($path)) {
+        abort(404);
+    }
+    return response()->file($path);
+})->middleware('auth');
+
+Route::get('/users/{path}', function ($path) {
+    $path = ltrim(str_replace(['..\\', '../'], '', $path), '/');
+    $fullPath = storage_path('app/public/users/' . $path);
+    if (!file_exists($fullPath)) {
+        abort(404);
+    }
+    return response()->file($fullPath);
+})->where('path', '.*')->middleware('auth');
+
 /*** Admin ***/

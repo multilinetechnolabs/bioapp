@@ -43,7 +43,7 @@
                 <div class="form-group row">
                     <label for="upload" class="col-sm-3 col-form-label">Profile Picture / Foto de perfil</label>
                     <div class="col-sm-9">
-                        <label class="bilingual-file-label d-inline-flex align-items-center" style="gap:8px;cursor:pointer;flex-wrap:wrap;">
+                        <label for="upload" class="bilingual-file-label d-inline-flex align-items-center" style="gap:8px;cursor:pointer;flex-wrap:wrap;">
                             <span style="background:#f1f5f9;border:1px solid #cbd5e1;border-radius:4px;padding:6px 12px;font-size:0.875rem;white-space:nowrap;">Choose File / Elegir archivo</span>
                             <span id="upload_file_name" style="font-size:0.82rem;color:#64748b;">No file chosen / Ningún archivo elegido</span>
                         </label>
