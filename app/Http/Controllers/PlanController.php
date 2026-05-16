@@ -28,6 +28,14 @@ use URL;
 
 use App\Models\Plan;
 use App\Models\Subscription;
+use App\Models\PaddleTransaction;
+
+use Paddle\SDK\Client;
+use Paddle\SDK\Environment;
+use Paddle\SDK\Options;
+
+use Paddle\SDK\Entities\Shared\CustomData;
+use Paddle\SDK\Resources\Transactions\Operations\CreateTransaction;
 
 class PlanController extends Controller
 {
@@ -52,65 +60,79 @@ class PlanController extends Controller
         $this->apiContext->setConfig($paypalConfig['settings']);
     }
 
-    public function subscribe(Request $request, $id)
+    public function subscribe(Request $request)
     {
         if (Auth::user()->hasValidSubscription()) {
-            return redirect()->to(URL::route('app.dashboard'))->with('message.fail', 'You still have a valid subscription. Action Forbidden.');
+            return response()->json([
+                'success' => false,
+                'transaction_id' => "",
+                'message' => "You still have a valid subscription. Action Forbidden."
+            ]);
         }
 
-        $plan = Plan::findOrFail($id);
+        $plan = Plan::findOrFail($request->plan_id);
 
-        $payer = new Payer();
-        $payer->setPaymentMethod('paypal');
+        if($plan->category == 'monthly'){
+            $price_id = config('paddle.monthly_price_id');
+        }elseif($plan->category == 'yearly'){
+            $price_id = config('paddle.yearly_price_id');
+        }else{
+            return redirect()->to(URL::route('app.dashboard'))->with('message.fail', 'Invalid Subscription Plan');
+        }
 
-        $item = new Item();
-        $itemList = new ItemList();
+        $paddleTransaction = PaddleTransaction::create([
+            'user_id' => auth()->id(),
+            'plan_id' => $request->plan_id,
+            'paddle_price_id' => $price_id,
+            'amount' => $plan->price,
+            'currency' => 'USD',
+            'status' => 'pending',
+            'customer_email' => auth()->user()->email,
+        ]);
 
-        $item->setName($plan->description)->setCurrency('USD')->setQuantity('1')->setPrice($plan->price);
-        $itemList->setItems(array($item));
+        $environment = config('paddle.environment') === 'production'
+            ? Environment::PRODUCTION
+            : Environment::SANDBOX;
 
-        $amount = new Amount();
-        $amount->setCurrency('USD')->setTotal($plan->price);
-
-        $transaction = new Transaction();
-        $transaction->setAmount($amount)
-            ->setItemList($itemList)
-            ->setDescription($plan->description);
-
-        $redirectTo = URL::route('app.plans.subscribe.status', ['id' => $plan->id]);
-        $redirectUrls = new RedirectUrls();
-        $redirectUrls->setReturnUrl($redirectTo)->setCancelUrl($redirectTo);
-
-        $payment = new Payment();
-        $payment->setIntent('Sale')
-            ->setPayer($payer)
-            ->setRedirectUrls($redirectUrls)
-            ->setTransactions(array($transaction));
+        $paddle = new Client(
+            apiKey: config('paddle.api_key'),
+            options: new Options($environment)
+        );
 
         try {
-            $payment->create($this->apiContext);
+            $transaction = $paddle->transactions->create(
+                new CreateTransaction(
+                    items: [
+                        [
+                            'price_id' => $price_id,
+                            'quantity' => 1
+                        ]
+                    ]
+                )
+            );
+            $paddleTransaction->update([
+                'paddle_transaction_id' => $transaction->id
+            ]);
         } catch (PayPalConnectionException $ex) {
             if (Config::get('app.debug')) {
-                return redirect()->to(URL::route('app.dashboard'))->with('message.fail', 'Payment Connection Timeout.');
+                return response()->json([
+                    'success' => false,
+                    'transaction_id' => "",
+                    'message' => "Payment Connection Timeout."
+                ]);
             } else {
-                return redirect()->to(URL::route('app.dashboard'))->with('message.fail', 'Payment cannot proceed. An unknown error occurred, please try again.');
+                return response()->json([
+                    'success' => false,
+                    'transaction_id' => "",
+                    'message' => "Payment cannot proceed. An unknown error occurred, please try again."
+                ]);
             }
         }
 
-        foreach ($payment->getLinks() as $link) {
-            if ($link->getRel() == 'approval_url') {
-                $redirectUrl = $link->getHref();
-                break;
-            }
-        }
-
-        Session::put('paymentId', $payment->getId());
-
-        if (isset($redirectUrl)) {
-            return Redirect::away($redirectUrl);
-        }
-
-        return redirect()->to(URL::route('app.dashboard'))->with('message.fail', 'Payment cannot proceed. An unknown error occurred, please try again.');
+        return response()->json([
+            'success' => true,
+            'transaction_id' => $transaction->id
+        ]);
     }
 
     public function status(Request $request, $id)

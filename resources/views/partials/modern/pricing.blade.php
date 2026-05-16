@@ -32,8 +32,9 @@
         @endif
         <div class="pricing-card-single__footer">
             @auth
-                <form method="POST" action="{{ $monthlyPlan ? route('app.plans.subscribe', ['id' => $monthlyPlan->id]) : '#' }}">
+                <form class="paddleCheckoutForm">
                     @csrf
+                    <input type="hidden" name="plan_id" value="{{ $monthlyPlan->id }}">
                     <button type="submit" class="pricing-card-single__btn">Get Started</button>
                 </form>
             @else
@@ -56,8 +57,9 @@
         @endif
         <div class="pricing-card-single__footer">
             @auth
-                <form method="POST" action="{{ $yearlyPlan ? route('app.plans.subscribe', ['id' => $yearlyPlan->id]) : '#' }}">
+                <form class="paddleCheckoutForm">
                     @csrf
+                    <input type="hidden" name="plan_id" value="{{ $yearlyPlan->id }}">
                     <button type="submit" class="pricing-card-single__btn">Get Started</button>
                 </form>
             @else
@@ -91,4 +93,48 @@
         setYearly(toggle.getAttribute('aria-checked') !== 'true');
     });
 }());
+</script>
+<script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
+<script>
+    Paddle.Environment.set("{{ config('paddle.environment') }}");
+    Paddle.Initialize({
+        token: "{{ config('paddle.client_token') }}"
+    });
+</script>
+<script>
+    document.querySelectorAll('.paddleCheckoutForm').forEach(form => {
+
+        form.addEventListener('submit', async function(e) {
+
+            e.preventDefault();
+
+            const formData = new FormData(this);
+
+            const response = await fetch("{{ route('app.plans.subscribe') }}", {
+                method: "POST",
+                headers: {
+                    "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                },
+                body: formData
+            });
+
+            const data = await response.json();
+
+            if(data.success)
+            {
+                Paddle.Checkout.open({
+                    transactionId: data.transaction_id,
+                    customer: {
+                        email: "{{ auth()->user()->email }}"
+                    }
+                });
+            }
+            else
+            {
+                alert(data.message || 'Something went wrong');
+            }
+
+        });
+
+    });
 </script>

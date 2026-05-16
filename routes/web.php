@@ -17,6 +17,11 @@ Route::get('/phpinfo', function () {
     phpinfo();
 });
 
+Route::post(
+    '/paddle/webhook',
+    'PaddleWebhookController@handle'
+)->name('paddle.webhook');
+
 // Route::get('/signup', 'HomeController@signup')->name('app.signup');
 // Route::get('/', 'DashboardController@index')->name('app.root');
 // Route::get('/landing_page', 'HomeController@landing_page')->name('app.landing_page');
@@ -66,7 +71,7 @@ Route::middleware('verified')->group(function () {
     Route::get('/subscriptions', 'HomeController@subscriptions')->name('app.user.subscriptions');
 
     ## Plans — no subscription check (these ARE the payment routes)
-    Route::post('/plans/{id}/subscribe', 'PlanController@subscribe')->name('app.plans.subscribe');
+    Route::post('/plans/subscribe', 'PlanController@subscribe')->name('app.plans.subscribe');
     Route::get('/plans/{id}/subscribe/status', 'PlanController@status')->name('app.plans.subscribe.status');
 
     // All feature routes require an active subscription
