@@ -125,7 +125,7 @@
                 Paddle.Checkout.open({
                     transactionId: data.transaction_id,
                     customer: {
-                        email: "{{ auth()->user()->email }}"
+                        email: "{{ optional(auth()->user())->email }}"
                     }
                 });
             }
