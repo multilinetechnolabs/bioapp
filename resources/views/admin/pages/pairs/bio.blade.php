@@ -26,12 +26,12 @@
                         <th>{{ __('Ref No.') }}</th>
                         <th>{{ __('Guided Ref No.') }}</th>
                         <th>{{ __('Scan Type') }}</th>
-                        <th>{{ __('Points / Name') }}</th>
-                        <th>{{ __('Radical') }}</th>
+                        <th>{{ __('MAPPING MATRIX / MATRIZ DE MAPEO') }}</th>
+                        <th>{{ __('CLASSIFICATION / CLASIFICACIÓN') }}</th>
                         <th>{{ __('Start / Origin') }}</th>
-                        <th>{{ __('Leads / Symptoms') }}</th>
-                        <th>{{ __('Path / Route / Cause and Effect') }}</th>
-                        <th>{{ __('Alternative Routes') }}</th>
+                        <th>{{ __('RESONANCE SIGNALS / SEÑALES DE RESONANCIA') }}</th>
+                        <th>{{ __('MATRIX RELATION / RELACIÓN DE MATRIZ') }}</th>
+                        <th>{{ __('SYSTEM UTILITIES / UTILIDADES DEL SISTEMA') }}</th>
                         <th class="text-center">{{ __('Actions') }}</th>
                     </tr>
                 </thead>

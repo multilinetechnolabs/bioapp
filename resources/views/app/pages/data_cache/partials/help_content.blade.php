@@ -64,20 +64,19 @@
             'title_en' => '6. Music and Playlist Tools',
             'title_es' => '6. Herramientas de música y listas',
             'english' => [
-                'Use the music dropdown to upload tracks and create playlists.',
-                'The briefcase toolbar opens to reveal your client list; after selecting a scan session, simply click Play on the music bar to fill the space with relaxing audio for your client.',
+                'The briefcase toolbar opens to reveal your client list; after selecting a scan session, simply click Play on the music bar to fill the space with focus audio for your session environment.',
             ],
             'spanish' => [
-                'Use el menú de música para cargar pistas y crear listas de reproducción.',
-                'La barra del portafolio se abre para mostrar su lista de clientes; después de seleccionar una sesión de escaneo, simplemente haga clic en Reproducir en la barra de música para llenar el espacio con audio relajante para su cliente.',
+                'La barra del portafolio se abre para mostrar su lista de clientes; después de seleccionar una sesión de escaneo,simplemente haga clic en Reproducir en la barra de música para llenar el espacio con audio de enfoque para el entorno de su sesión.',
             ],
         ],
         [
-            'title_en' => '7. Open Client Info',
-            'title_es' => '7. Abrir Información del cliente',
+            'title_en' => '7. Open Profile Info',
+            'title_es' => '7.  Abrir Información del Perfil',
             'english' => [
-                'Go to Data Cache and open Client Info to add or manage client records.',
-                'This area stores contact details, date of birth, emergency contact details, and session pricing.',
+                'Open Profile Info Go to Data Cache and open Profile Info to add or manage user data sheets. ',
+                'This area stores log categories, profile creation dates, backup contact details,and session pricing.
+',
             ],
             'spanish' => [
                 'Vaya a Data Cache y abra Información del cliente para agregar o administrar registros de clientes.',
@@ -85,41 +84,40 @@
             ],
         ],
         [
-            'title_en' => '8. Add or Edit a Client',
-            'title_es' => '8. Agregar o editar un cliente',
+            'title_en' => '8. Add or Edit a Profile',
+            'title_es' => '8. Agregar o editar un perfil',
             'english' => [
-                'Use Create New Client to add a record and Save when the form is complete.',
-                'Use the edit action to update an existing client when details change.',
+                'Add or Edit a Profile Use Create New Profile to add a record and Save when the form is complete.',
+                'Use the edit action to update an existing profile when details change.',
             ],
             'spanish' => [
-                'Use Crear nuevo cliente para agregar un registro y Guardar cuando el formulario esté completo.',
-                'Use la acción de editar para actualizar un cliente existente cuando cambien los datos.',
+                'Agregar o editar un perfil Use Crear nuevo perfil para agregar un registro y Guardar cuando el formulario esté completo.',
+                'Use la acción de editar para actualizar un perfil existente cuando cambien los datos.',
             ],
         ],
         [
-            'title_en' => '9. Medical Notes and Consent Forms',
-            'title_es' => '9. Notas médicas y formularios de consentimiento',
+            'title_en' => '9.  Configuration Notes',
+            'title_es' => '9. Notas de Configuración',
             'english' => [
-                'Open the client record to review medical notes and history.',
-                'Upload consent forms so all required documents stay attached to the client record.',
+                'Configuration Notes and Data Sheets Open the profile record to review user research logs and configuration history.',
+                'Upload verification forms so all required documentation stays attached to the data profile.',
             ],
             'spanish' => [
-                'Abra el registro del cliente para revisar notas médicas e historial.',
-                'Cargue formularios de consentimiento para que todos los documentos necesarios queden adjuntos al registro del cliente.',
+                'Notas de configuración y hojas de datos Abra el registro del perfil para revisar los registros de investigación del usuario y el historial de configuración.',
+                'Cargue formularios de verificación para que toda la documentación requerida quede adjunta al perfil de datos.',
             ],
         ],
         [
             'title_en' => '10. Start a Body or Chakra Scan',
             'title_es' => '10. Iniciar un Body o Chakra Scan',
             'english' => [
-                'Choose Body Scan or Chakra Scan after loading a client.',
-                'Once a client is loaded, their information carries forward into the workspace.',
-                'Simply select View Details or View Through Scan to enter the active session and begin your work.',
+                'Choose Body Scan or Chakra Scan after loading a profile.',
+                'Once a profile is loaded, their information carries forward into the 
+                 workspace.',
             ],
             'spanish' => [
-                'Elija Body Scan o Chakra Scan después de cargar un cliente.',
-                'Al cargar un cliente, su información se transfiere al espacio de trabajo.',
-                'Solo seleccione View Details o View Through Scan para entrar en la sesión activa y comenzar su trabajo.',
+                'Elija Body Scan o Chakra Scan después de cargar un perfil.',
+                'Al cargar un perfil, su información se transfiere al espacio de trabajo.',
             ],
         ],
         [
@@ -162,24 +160,26 @@
             'title_en' => '14. Finish, Print, and Email Sessions',
             'title_es' => '14. Finalizar, imprimir y enviar sesiones',
             'english' => [
-                'Mark the session done when treatment is complete.',
-                'From the session view, print or email the completed scan details to the client when needed.',
+                'Mark the session done when data entry is complete.',
+                'From the session view, print or email the completed mapping details to your 
+                 primary contact when needed.',
             ],
             'spanish' => [
-                'Marque la sesión como finalizada cuando el tratamiento esté completo.',
-                'Desde la vista de sesión, imprima o envíe por correo los detalles del escaneo al cliente cuando sea necesario.',
+                'Marque la sesión como finalizada cuando el registro de datos esté completo.',
+                'Desde la vista de sesión,imprima o envíe por correo los detalles del mapeo completado a su contacto principal cuando sea necesario.',
             ],
         ],
         [
-            'title_en' => '15. Review Client History',
-            'title_es' => '15. Revisar historial del cliente',
+            'title_en' => '15.  Review Profile History',
+            'title_es' => '15. Revisar historial del perfil',
             'english' => [
-                'Open the client view to review details and previous scan work.',
-                'This allows you to continue care by keeping up with both past and present sessions, while also viewing all clients and pairs to identify similarities and possible new pairs along the way.',
+                'Review Profile History Open the profile view to review details and previous scan work.',
+                'This allows you to continue research by keeping up with both past and present
+                 sessions.',
             ],
             'spanish' => [
-                'Abra la vista del cliente para revisar los detalles y el trabajo de escaneos anteriores.',
-                'Esto le permite continuar la atención al mantenerse al día con las sesiones pasadas y presentes, además de ver todos los clientes y pares para identificar similitudes y posibles pares nuevos en el camino.',
+                'Revisar historial del perfil Abra la vista del perfil para revisar los detalles y el trabajo de escaneos anteriores. ',
+                'Esto le permite continuar la investigación al mantenerse al día con las sesiones pasadas y presentes.',
             ],
         ],
         [

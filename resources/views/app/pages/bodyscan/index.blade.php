@@ -345,79 +345,58 @@
                                     Use la posici&oacute;n que le resulte m&aacute;s c&oacute;moda y natural.</em></p>
 
                             <p><strong>2. Choose Your Observation Method</strong></p>
-                            <p>If using body feedback, observe the right side of the body.<br>
+                            <p>If using signal feedback, observe the right axis orientation of the model<br>
                                 This may include:<br>
-                                &nbsp;&nbsp;Right leg length<br>
-                                &nbsp;&nbsp;Right hand or foot response<br>
-                                &nbsp;&nbsp;Subtle body sway<br>
-                                This will be your reference for detecting changes.</p>
+                                &nbsp;&nbsp;Right indicator alignment<br>
+                                &nbsp;&nbsp;Right hand or foot coordinate response<br>
+                                &nbsp;&nbsp;Subtle directional sway<br>
+                                This will be your reference for detecting layout changes.</p>
                             <p style="color:#555;"><em>2. Elija su m&eacute;todo de observaci&oacute;n<br>
-                                    Si utiliza la respuesta corporal, observe el lado derecho del cuerpo.<br>
-                                    Puede observar:<br>
-                                    &nbsp;&nbsp;La longitud de la pierna derecha<br>
-                                    &nbsp;&nbsp;La respuesta de la mano o pie derecho<br>
-                                    &nbsp;&nbsp;El balanceo corporal o movimientos sutiles<br>
-                                    Esto servir&aacute; como referencia para detectar cambios.</em></p>
+                                    Si utiliza la respuesta de señal, observe la orientación del eje derecho del modelo.<br>
+                                    Esto puede incluir:<br>
+                                    &nbsp;&nbsp;Alineación del indicador derecho<br>
+                                    &nbsp;&nbsp;Respuesta de coordenadas de la mano o pie derecho<br>
+                                    &nbsp;&nbsp;Balanceo direccional sutil<br>
+                                    Esto servir&aacute; como referencia para detectar cambios de diseño.</em></p>
                         </div>
                         <div class="col-md-4">
                             <p><strong>3. Begin the Scan</strong></p>
-                            <p>Place a negative magnet on the area you are scanning.<br>
-                                Observe the body&rsquo;s response on the right side.<br><br>
-                                <strong>If the right side shortens (contraction):</strong><br>
-                                &nbsp;&nbsp;Leave the negative magnet in place<br>
-                                &nbsp;&nbsp;Locate its corresponding pair point from your scan list<br>
-                                &nbsp;&nbsp;Place a positive magnet on that paired point<br><br>
-                                <strong>If the right side lengthens:</strong><br>
-                                &nbsp;&nbsp;Switch the magnet on the scan point to positive<br>
-                                &nbsp;&nbsp;Then locate the corresponding pair<br>
-                                &nbsp;&nbsp;Place a negative magnet on the paired point
+                            <p>Select a negative polarity variable on the matrix coordinate 
+                                 you are mapping.<br>
+                                Observe the system response on the right axis.<br><br>
+                                <strong>If the right axis indicates a layout shift(variance):</strong><br>
+                                &nbsp;&nbsp;Leave the negative variable active<br>
+                                &nbsp;&nbsp;Locate its corresponding pair coordinate from your directory list<br>
+                                &nbsp;&nbsp;Assign a positive polarity variable to that paired grid coordinate.<br><br>
                             </p>
                             <p style="color:#555;"><em>3. Inicie el escaneo<br>
-                                    Coloque un im&aacute;n negativo en el &aacute;rea que est&aacute; evaluando.<br>
-                                    Observe la respuesta del cuerpo en el lado derecho.<br><br>
-                                    Si el lado derecho se acorta (contracci&oacute;n):<br>
-                                    &nbsp;&nbsp;Deje el im&aacute;n negativo en su lugar<br>
-                                    &nbsp;&nbsp;Localice el punto par correspondiente en su lista<br>
-                                    &nbsp;&nbsp;Coloque un im&aacute;n positivo en ese punto par<br><br>
-                                    Si el lado derecho se alarga:<br>
-                                    &nbsp;&nbsp;Cambie el im&aacute;n en el punto evaluado a positivo<br>
-                                    &nbsp;&nbsp;Luego localice el punto par correspondiente<br>
-                                    &nbsp;&nbsp;Coloque un im&aacute;n negativo en el punto par</em></p>
+                                    Seleccione una variable de polaridad negativa en la
+                                    coordenada de la matriz que está mapeando.<br>
+                                   Observe la respuesta del sistema en el eje derecho.<br><br>
+                                    Si el eje derecho indica un cambio de diseño (varianza):<br>
+                                    &nbsp;&nbsp;Deje la variable negativa activa<br>
+                                    &nbsp;&nbsp;Localice su coordenada par correspondiente en su lista de directorio<br>
+                                    &nbsp;&nbsp;Asigne una variable de polaridad positiva a esa coordenada de cuadrícula emparejada<br><br>
+                                    </em></p>
 
-                            <p><strong>4. Confirm Balance</strong></p>
-                            <p>When the correct pair is placed, the body returns to a neutral or balanced response (even
-                                alignment, no noticeable shift).</p>
-                            <p style="color:#555;"><em>4. Confirmar equilibrio<br>
-                                    Cuando el par correcto est&aacute; colocado, el cuerpo regresa a una respuesta neutral o
-                                    equilibrada (alineaci&oacute;n uniforme, sin cambios visibles).</em></p>
+                            <p><strong>4. Confirm Calibration</strong></p>
+                            <p>When the correct data pair is aligned, the system matrix returns to a neutral or calibrated response (even alignment, no noticeable shift).</p>
+                            <p style="color:#555;"><em>4. Confirmar calibración<br>
+                                   Cuando el par de datos correcto está alineado, la matriz del sistema regresa a una respuesta neutral o calibrada (alineación uniforme, sin cambios visibles).</em></p>
                         </div>
                         <div class="col-md-4">
-                            <p><strong>5. Leave Magnets in Place</strong></p>
-                            <p>Once a pair is found and balanced, leave both magnets in place.<br>
-                                This allows the body time to respond and rebalance.</p>
-                            <p style="color:#555;"><em>5. Deje los imanes en su lugar<br>
-                                    Una vez identificado el par y logrado el equilibrio, deje ambos imanes colocados.<br>
-                                    Esto permite que el cuerpo responda y se reequilibre.</em></p>
+                            <p><strong>5. Save Variables in Workspace</strong></p>
+                            <p>Once a pair is mapped and balanced, save both variables in the workspace.<br>
+                               This allows the system time to log and calibrate. Move to the next coordinate on your tracking directory.</p>
+                            <p style="color:#555;"><em>5. Guardar variables en el espacio de trabajo<br>
+                                   Una vez mapeado un par y logrado el equilibrio, guarde ambas variables en el espacio de trabajo.<br>
+                                   Esto permite que el sistema registre y calibre.<br>
+                                   Pase a la siguiente coordenada en su directorio de</em></p>
 
-                            <p><strong>6. Continue the Scan</strong></p>
-                            <p>Move to the next area on your scan list.<br>
-                                Repeat the same process:<br>
-                                &nbsp;&nbsp;Place magnet<br>
-                                &nbsp;&nbsp;Observe response<br>
-                                &nbsp;&nbsp;Find the pair<br>
-                                &nbsp;&nbsp;Leave magnets in place</p>
-                            <p style="color:#555;"><em>6. Contin&uacute;e el escaneo<br>
-                                    Pase a la siguiente &aacute;rea en su lista.<br>
-                                    Repita el mismo proceso:<br>
-                                    &nbsp;&nbsp;Colocar el im&aacute;n<br>
-                                    &nbsp;&nbsp;Observar la respuesta<br>
-                                    &nbsp;&nbsp;Encontrar el par<br>
-                                    &nbsp;&nbsp;Dejar los imanes en su lugar</em></p>
-
-                            <p><strong>7. Completion</strong></p>
+                            <p><strong>6. Completion</strong></p>
                             <p>After finishing the scan, leave magnets in place for approximately 15 minutes.<br>
                                 This supports the body&rsquo;s natural balancing process.</p>
-                            <p style="color:#555;"><em>7. Finalizaci&oacute;n<br>
+                            <p style="color:#555;"><em>6. Finalizaci&oacute;n<br>
                                     Al terminar el escaneo, deje los imanes colocados durante aproximadamente 15
                                     minutos.<br>
                                     Esto apoya el proceso natural de equilibrio del cuerpo.</em></p>

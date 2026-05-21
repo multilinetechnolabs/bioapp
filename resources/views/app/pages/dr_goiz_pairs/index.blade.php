@@ -12,8 +12,8 @@
         <div class="modern-data-cache-wrap">
             <header class="modern-page-header">
                 <div>
-                    <h1 class="modern-page-title">FREE PROTOCOL PAIRS</h1>
-                    <p class="modern-page-subtitle">Pares de Protocolo Gratis</p>
+                    <h1 class="modern-page-title">FREE REFERENCE CODES</h1>
+                    <p class="modern-page-subtitle">Códigos de Referencia Gratis</p>
                 </div>
             </header>
 
@@ -28,7 +28,7 @@
                     <div class="row justify-content-center mb-3">
                         <div class="col-12 text-center"
                             style="background: #ccfbf1; color: #0f766e; font-weight: 600; padding: 8px 0; font-size: 14px; letter-spacing: 0.5px; border-radius: 6px;">
-                            267 Classic FREE PROTOCOL PAIRS &nbsp;|&nbsp; 267 Pares Clásicos de Protocolo Gratis
+                            267 Classic FREE REFERENCE CODES &nbsp;|&nbsp; 267 Pares Clásicos de Referencia Gratis
                         </div>
                     </div>
                     <div class="modern-data-cache-table-shell data-cache-client-table-shell">
@@ -39,8 +39,8 @@
                                         <th>Place / Lugar</th>
                                         <th>Resonance / Resonancia</th>
                                         <th>Name / Nombre</th>
-                                        <th>Characteristic / Característica</th>
-                                        <th>Description / Descripción</th>
+                                        <th>MAPPING PROPERTY / PROPIEDAD DE MAPEO</th>
+                                        <th>RESONANCE SUMMARY / RESUMEN DE RESONANCIA</th>
                                     </tr>
                                 </thead>
                                 <tbody>

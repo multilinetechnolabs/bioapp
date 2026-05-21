@@ -1,6 +1,6 @@
 <article class="modern-info-card cs-info-card">
 
-    <p class="cs-card-header">Proprietary Chakra Method / Método de Chakra Propietario</p>
+    <p class="cs-card-header">Proprietary Chakra MAPPING / Método de Chakra Propietario</p>
 
     <div class="cs-icon-box">
         <div class="icon-tile icon-tile-chakra-scan" style="width:56px;height:56px;">
@@ -19,14 +19,17 @@
     <p class="cs-desc-en">A specialized system developed to decode emotional blocks through a comprehensive network of Major, Minor, and Micro chakras.</p>
     <p class="cs-desc-es">Un sistema especializado desarrollado para descodificar bloqueos emocionales a través de una red integral de chakras Mayores, Menores y Micro.</p>
 
-    <h3 class="cs-section-title mt-4">Mind &amp; Body Connection</h3>
+    <h3 class="cs-section-title mt-4">Systemic Resonance &amp; Interface Flow</h3>
 
-    <p class="cs-desc-en">The Chakra Body Scan works directly with emotional patterns and the pathway of energy inflow and outflow. The body and mind react with 5% conscious mind, while the other 95% lies within the subconscious — encoded memories and responses to memory energies.</p>
-    <p class="cs-desc-es">El Escaneo Corporal Chakra trabaja directamente con los patrones emocionales y el flujo de energía. El cuerpo y la mente reaccionan con el 5% de la mente consciente, mientras que el otro 95% reside en el subconsciente — memorias codificadas y respuestas a las energías de la memoria.</p>
+    <p class="cs-desc-en">The Chakra Coordinate Index maps user-selected emotional focus
+    data alongside biofield energy pathways. The interface serves to visually represent the
+    connection between conscious data entry and historical subconscious reference matrices,
+    organizing logged coordinates for personal study and review</p>
+    <p class="cs-desc-es">El Índice de Coordenadas de Chakras mapea los datos de enfoque emocional seleccionados por el usuario junto con las vías de energía del biocampo. La interfaz sirve para representar visualmente la conexión entre la entrada de datos conscientes y las matrices de referencia subconscientes históricas, organizando las coordenadas registradas para su estudio y revisión personal.</p>
 
-    <h3 class="cs-section-title mt-4">Release &amp; Ascend / Liberar y Ascender</h3>
+    <h3 class="cs-section-title mt-4">Data Mapping &amp; Configuration</h3>
 
-    <p class="cs-desc-en">Magnets are another form of energy and the body is a force field. A magnet to a trapped emotion, when surfaced, decodes the data and wipes it away — detoxing and releasing. Rise and ascend emotional vibration; respect, honor, and release.</p>
-    <p class="cs-desc-es mb-0">Los imanes son otra forma de energía y el cuerpo es un campo de fuerza. Un imán sobre una emoción atrapada, al salir a la superficie, decodifica los datos y los borra — desintoxicando y liberando. Eleva y asciende la vibración emocional; respeta, honra y libera.</p>
+    <p class="cs-desc-en">Biomagnetic software application modules analyze input data fields using localized grid systems. Utilizing magnetic polarity coordinates as a digital reference guide allows users to track, log, and organize biofield records, streamlining the management of personal educational data and historical profile progression</p>
+    <p class="cs-desc-es mb-0">Los módulos de software biomagnético analizan los campos de datos de entrada mediante sistemas de cuadrículas localizadas. El uso de coordenadas de polaridad magnética como guía de referencia digital permite a los usuarios rastrear, registrar y organizar los datos del biocampo, optimizando la gestión de los datos educativos personales y la evolución del perfil histórico.</p>
 
 </article>

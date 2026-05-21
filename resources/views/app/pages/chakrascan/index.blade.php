@@ -357,67 +357,43 @@
                                     Tercer Ojo &rarr; Corona<br>
                                     Contin&uacute;e paso a paso siguiendo las instrucciones.</em></p>
 
-                            <p><strong>2. Check Each Major Chakra</strong></p>
-                            <p>Place the negative magnet on the front of the chakra.<br>
-                                Observe the body&rsquo;s biofeedback response. You may monitor:<br>
-                                &nbsp;&nbsp;Right leg length &nbsp;|&nbsp; Hands or feet response &nbsp;|&nbsp; Body sway
-                                or subtle movement<br><br>
-                                <strong>Shortening (contraction):</strong> &rarr; Place positive magnet on the back and
-                                recheck<br>
-                                <strong>Lengthening:</strong> &rarr; Reverse polarity (positive front / negative back) and
-                                recheck<br>
-                                <strong>No change:</strong> &rarr; Indicates a balanced response
+                            <p><strong>2. Verify Main Grid Nodes</strong></p>
+                            <p>Select a coordinate and observe the system's structural alignment feedback.<br>
+                                You may monitor.<br>
+                                &nbsp;&nbsp;Right axis indicator alignment &nbsp;|&nbsp; Hands or feet coordinate response &nbsp;|&nbsp; Subtle directional sway<br><br>
+                                <strong>Layout shift (variance):</strong> &rarr; Apply positive parameter to back and recheck<br>
+                                <strong>Axis extension:</strong> &rarr;Reverse layout polarity and recheck<br>
+                                <strong>No change:</strong> &rarr; Indicates a calibrated response.
                             </p>
-                            <p style="color:#555;"><em>Coloque el im&aacute;n negativo en la parte frontal del chakra.<br>
-                                    Observe la respuesta de biorretroalimentaci&oacute;n del cuerpo. Puede observar:<br>
-                                    &nbsp;&nbsp;Longitud de la pierna derecha &nbsp;|&nbsp; Respuesta de manos o pies
-                                    &nbsp;|&nbsp; Balanceo corporal o movimiento sutil<br><br>
-                                    Acortamiento (contracci&oacute;n): &rarr; Coloque el im&aacute;n positivo en la parte
-                                    posterior y vuelva a verificar<br>
-                                    Alargamiento: &rarr; Invierta la polaridad (positivo al frente / negativo atr&aacute;s)
-                                    y vuelva a verificar<br>
-                                    Sin cambio: &rarr; Indica una respuesta equilibrada</em></p>
+                            <p style="color:#555;"><em>Seleccione una coordenada y observe la respuesta de alineación estructural del sistema<br>
+                                    Puede monitorear:<br>
+                                    &nbsp;&nbsp;Alineación del indicador del eje derecho &nbsp;|&nbsp; Respuesta de coordenadas de manos o pies
+                                    &nbsp;|&nbsp; Balanceo direccional sutil<br><br>
+                                    Cambio de diseño (varianza): 
+                                    Aplique un parámetro positivo en la parte posterior y vuelva a verificar
+                                    <br>
+                                   Extensión del eje:  Invierta la polaridad del diseño y vuelva a verificar.<br>
+                                    Sin cambio: Indica una respuesta calibrada.</em></p>
                         </div>
                         <div class="col-md-6">
-                            <p><strong>3. Magnets Remain on All Major Chakras</strong></p>
-                            <p>After each major chakra is checked, magnets remain in place on every major chakra.<br>
-                                Even when a chakra appears balanced, the magnets stay applied.<br>
-                                Standard placement is negative in front / positive in back.<br>
-                                By the end of the scan, all 7 major chakras will have magnets in place.<br>
-                                This supports consistent energetic flow throughout the full scan.</p>
-                            <p style="color:#555;"><em>Despu&eacute;s de verificar cada chakra mayor, los imanes permanecen
-                                    colocados en cada chakra mayor.<br>
-                                    Incluso cuando un chakra parece equilibrado, los imanes permanecen colocados.<br>
-                                    La colocaci&oacute;n est&aacute;ndar es negativo al frente / positivo atr&aacute;s.<br>
-                                    Al final del escaneo, los 7 chakras mayores tendr&aacute;n imanes colocados.<br>
-                                    Esto apoya un flujo energ&eacute;tico constante durante todo el escaneo.</em></p>
+                            <p><strong>3. Variables Remain Active</strong></p>
+                            <p>After each main coordinate is verified, variables remain active in the workspace on every major node. <br>
+                                Even when a coordinate appears calibrated, the variables stay applied.<br>
+                               Standard mapping configuration is negative polarity in front / positive polarity in back.<br>
+                                By the end of the run, all 7 main nodes will have variables active. <br>
+                                This supports consistent data flow throughout the full scan layout.</p>
+                            <p style="color:#555;"><em>Despu&eacute;s de
+                                    verificar cada coordenada principal, las variables permanecen activas en el espacio de trabajo en cada nodo mayor. <br>Incluso cuando una coordenada parece calibrada, las variables permanecen aplicadas. <br>
+                                    La configuración de mapeo estándar es polaridad negativa al frente / polaridad positiva atrás<br>
+                                    Al final del proceso, los 7 nodos principales tendrán variables activas. Estom apoya un flujo de datos constante en todo el diseño del escaneo.<br>
 
-                            <p><strong>4. Follow the Guided Scan for Each Chakra</strong></p>
-                            <p>Within the guided scan, each major chakra is followed by its related minor and micro
-                                areas.<br>
-                                If a major chakra shows imbalance, continue through the areas listed beneath it.<br>
-                                Work through the listed areas until the next major chakra appears, then continue upward.
-                            </p>
-                            <p style="color:#555;"><em>Dentro del escaneo guiado, cada chakra mayor es seguido por sus
-                                    &aacute;reas relacionadas menores y micro.<br>
-                                    Si un chakra mayor muestra desequilibrio, contin&uacute;e con las &aacute;reas listadas
-                                    debajo.<br>
-                                    Trabaje a trav&eacute;s de las &aacute;reas listadas hasta que aparezca el siguiente
-                                    chakra mayor, luego contin&uacute;e hacia arriba.</em></p>
-
-                            <p><strong>5. Completion &amp; Timing</strong></p>
-                            <p>After all chakras have been scanned and balanced, leave magnets in place for approximately 15
-                                minutes in most areas.<br>
-                                This follows biomagnetic principles, supporting balance through a hemispheric-to-equatorial
-                                magnetic response.<br>
-                                Timing may vary slightly, though 15 minutes is commonly used.</p>
-                            <p style="color:#555;"><em>Despu&eacute;s de que todos los chakras hayan sido escaneados y
-                                    equilibrados, deje los imanes colocados durante aproximadamente 15 minutos en la
-                                    mayor&iacute;a de las &aacute;reas.<br>
-                                    Esto sigue principios biom&aacute;gneticos, apoyando el equilibrio a trav&eacute;s de
-                                    una respuesta magn&eacute;tica de hemisferio a ecuador.<br>
-                                    El tiempo puede variar ligeramente, aunque 15 minutos es lo m&aacute;s
-                                    com&uacute;n.</em></p>
+                            <p><strong>4. Completion & Timing</strong></p>
+                            <p>After all coordinates have been mapped and calibrated, leave variables active for approximately 15 minutes.<br>
+                                This follows system logging principles, supporting alignment through a hemispheric-to-equatorial data response.<br>
+                                Timing may vary slightly, though 15 minutes is commonly used for baseline logs.</p>
+                            <p style="color:#555;"><em>Despu&eacute;s de que todas las coordenadas hayan sido mapeadas y calibradas, deje las variables activas durante aproximadamente 15 minutos. <br>
+                            Esto sigue los principios de registro del sistema, apoyando la alineación a través de una respuesta de datos de hemisferio a ecuador.<br>
+                            El tiempo puede variar ligeramente, aunque comúnmente se usan 15 minutos para los registros de referencia.</em></p>
                         </div>
                     </div>
                 </div>

@@ -74,6 +74,33 @@
         <p class="disclaimer-modal__text">
             <strong>Descargo de responsabilidad:</strong> Esta aplicación es solo para fines de autoeducación e investigación. Los pares biomagnéticos están destinados a ser una bioretroalimentación para apoyar el funcionamiento normal del cuerpo y no son un tratamiento, diagnóstico o prescripción para ninguna condición médica o psicológica. Estas declaraciones no han sido evaluadas por la FDA, y esta herramienta no está destinada a apoyar o sostener la vida humana ni a prevenir el deterioro de la salud. Los usuarios con condiciones médicas existentes utilizan esta plataforma bajo su propio riesgo.
         </p>
+        <hr class="disclaimer-modal__divider">
+        <p class="disclaimer-modal__text">
+            <strong>Platform Specifications & Scope:</strong> Anew Avenue Biomagnetism is an interactive
+            data-visualization software utility designed for educational research, historical data
+            logging, and anatomical mapping. The platform serves as a digital reference
+            directory for tracking biofeedback coordinates and biofield polarities. This software
+            utility does not feature clinical diagnostic tools, medical advice interfaces,
+            prescription modules, or therapeutic treatment protocols. These data mappings
+            have not been evaluated by the FDA. This product is a reference database tool and
+            is not intended to diagnose, treat, cure, or prevent any physical or psychological
+            health condition. Users utilize this educational software interface at their own
+            discretion.
+        </p>
+        <hr class="disclaimer-modal__divider">
+        <p class="disclaimer-modal__text">
+            <strong>Especificaciones y alcance de la plataforma:</strong> Anew Avenue Biomagnetism es
+            una utilidad de software de visualización de datos interactiva diseñada para la
+            investigación educativa, el registro de datos históricos y el mapeo anatómico. La
+            plataforma sirve como un directorio de referencia digital para rastrear coordenadas
+            de bioretroalimentación y polaridades de campos biológicos. Esta utilidad de
+            software no cuenta con herramientas de diagnóstico clínico, interfaces de
+            asesoramiento médico, módulos de prescripción ni protocolos de tratamiento
+            terapéutico. Estos mapeos de datos no han sido evaluados por la FDA. Este
+            producto es una herramienta de base de datos de referencia y no está destinado a
+            diagnosticar, tratar, curar o prevenir ninguna afección de salud física o psicológica.
+            Los usuarios utilizan esta interfaz de software educativo a su propia discreción.
+        </p>
     </div>
 </div>
 
