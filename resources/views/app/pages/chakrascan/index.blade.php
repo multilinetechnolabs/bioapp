@@ -377,7 +377,7 @@
                         </div>
                         <div class="col-md-6">
                             <p><strong>3. Variables Remain Active</strong></p>
-                            <p>After each main coordinate is verified, variables remain active in the workspace on every major node. <br>
+                            <p>After each main coordinate is verified, variables remain active in the workspace on every major chakra. <br>
                                 Even when a coordinate appears calibrated, the variables stay applied.<br>
                                Standard mapping configuration is negative polarity in front / positive polarity in back.<br>
                                 By the end of the run, all 7 main nodes will have variables active. <br>
