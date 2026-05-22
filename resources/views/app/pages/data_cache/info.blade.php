@@ -24,8 +24,8 @@
             </div>
             <span class="pill pill-data-cache mb-3"><span class="pill-dot"></span>Data Cache</span>
             <h5 class="fw-bold text-dark mb-2">Session Records</h5>
-            <p class="text-secondary mb-1">Securely manage private data profile sheets, historical session logs, and personalized configuration notes.</p>
-            <p class="cs-desc-es mb-0">Gestione de forma segura las hojas de perfil de datos privados, los registros históricos de sesiones y las notas de configuración personalizadas.</p>
+            <p class="text-secondary mb-1">Securely manage private client intake forms, session history logs, and personalized notes.</p>
+            <p class="cs-desc-es mb-0">Gestione su práctica de forma segura con formularios de admisión de clientes privados, registros de historial de sesiones y notas personalizadas.</p>
         </div>
 
         <div class="row modern-row-gap">
@@ -48,11 +48,9 @@
                     </div>
 
                     <ul class="modern-copy-list modern-copy-list-centered mt-3">
-                        <li>A comprehensive digital index, packed full of coordinate
-                        pairs, resonance data, origins, and descriptive structural entries. 
-                        Includes secondary routing alternatives and cross-referenced relational data matrices, permanently embedded within the application architecture for streamlined reference.</li>
-                        <li>A isolated, local storage directory designed to host customized user profile metrics and reference notes. This encrypted local environment is ideal for reviewing historical log configurations, individual profile sessions, specific group categorization, and familiar structural data trends.</li>
-                        <li>Data Cache is interact based to work with each of the body scan models. Just by tapping the + icon in the body scan, will automatically direct the selected coordinate pair to your personal Data Cache profile.</li>
+                        <li>A treasure in itself, packed full of pairs, radicals, origin, detailed descriptions of causes and effects. Plus, alternative routes and complimentary pairs relation. All embedded deep within and locked away, to always be there for you.</li>
+                        <li>A stand alone island, just for you, to add your confidential client’s detailed intake information and notes. Your locked away secure data are great tools of resources for your eyes only. Resources enabling you to research by case studies, past sessions, individual client’s log, patterns, symptoms, list by groups, client’s with familiarities.</li>
+                        <li>Data Cache is interact based to work with each of the body scan models. Just by tapping the + icon in the body scan, will automatically direct the pair to the client cache. Or the Data Cache can be used as a stand alone database.</li>
                     </ul>
 
                     {{-- Email highlight --}}

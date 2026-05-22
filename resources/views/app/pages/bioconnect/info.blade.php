@@ -66,19 +66,19 @@
 
                     <div class="modern-info-highlight-block mt-4">
                         <p class="mb-1">
-                            <strong>Community Network</strong> — Bio-Connect:  Your space to connect with other researchers, share mapping insights, and stay inspired on your path to educational data discovery.
+                            <strong>Healing is Better Together</strong> — Bio-Connect: Your space to find friends, share insights, and stay inspired on your path to wellness.
                         </p>
                         <p class="modern-info-highlight-es mb-0">
-                            <em>Sanar es Mejor Juntos</em> — Bio-Connect: Tu espacio para conectar con otros investigadores, compartir conocimientos sobre cartografía y mantenerte inspirado en tu camino hacia el descubrimiento de datos educativos.
+                            <em>Sanar es Mejor Juntos</em> — Bio-Connect: Tu espacio para encontrar amigos, compartir conocimientos y mantener la inspiración en tu camino hacia el bienestar.
                         </p>
                     </div>
 
                     <div class="modern-info-highlight-block mt-3 mb-0">
                         <p class="mb-1">
-                            🎵 <strong>Audio Synchronization</strong> — Built-in focus audio for your sessions.Use our integrated library or upload your own tracks to customize your reference environment.
+                            🎵 <strong>Harmonic Relaxation</strong> — Built-in healing music for your sessions. Use our library or upload your own to keep your clients in the flow.
                         </p>
                         <p class="modern-info-highlight-es mb-0">
-                            🎵 <em>Sincronización de audio</em> — Audio de enfoque integrado para tus sesiones. Utiliza nuestra biblioteca integrada o sube tus propias pistas para personalizar tu entorno de referencia.
+                            🎵 <em>Relajación Armónica</em> — Música de sanación integrada para tus sesiones. Usa nuestra biblioteca o sube la tuya para mantener a tus clientes en sintonía.
                         </p>
                     </div>
 

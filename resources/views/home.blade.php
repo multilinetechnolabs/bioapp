@@ -11,11 +11,13 @@
         <section class="mb-5">
             <h3 class="eyebrow mb-4">Ion Positive &amp; Negative Alignment</h3>
             <h2 class="hero-heading mb-4">
-                A journey to <span class="italic-wellness">mindfulness</span> through magnetic energy
+                A journey to <span class="italic-wellness">wellness</span> through magnetic energy
             </h2>
             <div class="mb-4" style="width:3rem;height:2px;background:#006a63;"></div>
             <p class="mb-0 text-secondary" style="max-width:32rem;">
-                Navigate Major Chakra Vortexes to Release Emotional Stress, or Optimize Your Systemic Alignment by Balancing Biofield Resonance Coordinates Through Biomagnetism.
+                Open Major Chakra Vortexes to Release the Emotional Stress
+                Behind Physical Imbalance, or Optimize Your Bio-Terrain by
+                Balancing pH Radicals Through Biomagnetism.
             </p>
         </section>
 
@@ -33,8 +35,8 @@
                         </div>
                         <div>
                             <span class="pill pill-body-scan mb-3"><span class="pill-dot"></span>Body Scan</span>
-                            <h5 class="fw-bold text-dark mb-2">Anatomical Mapping Guide</h5>
-                            <p class="text-secondary mb-0">Visualize and map biofield coordinates across standard structural reference profiles.</p>
+                            <h5 class="fw-bold text-dark mb-2">Full Body Analysis</h5>
+                            <p class="text-secondary mb-0">Detect energy imbalances across all organ systems and tissue fields.</p>
                         </div>
                     </a>
                 </div>
@@ -66,7 +68,7 @@
                         <div>
                             <span class="pill pill-data-cache mb-3"><span class="pill-dot"></span>Data Cache</span>
                             <h5 class="fw-bold text-dark mb-2">Session Records</h5>
-                            <p class="text-secondary mb-0">Access historical reference data, session logs, and tracked progress over time.</p>
+                            <p class="text-secondary mb-0">Access treatment history, session logs, and tracked progress over time.</p>
                         </div>
                     </a>
                 </div>
@@ -97,9 +99,9 @@
                                 </svg>
                             </div>
                             <h4 class="free-protocol-banner__title">Free Protocol Pairs</h4>
-                            <p class="free-protocol-banner__desc text-white">Browse 267 Original Biomagnetism Reference Codes for Educational Mapping — No Subscription Needed.</p>
+                            <p class="free-protocol-banner__desc text-white">Browse 267 Original Biomagnetism Protocol Pairs for Therapeutic Reference — No Subscription Needed.</p>
                             <span class="free-protocol-banner__cta">
-                                Explore Free Reference Codes
+                                Explore Free Protocol Pairs
                                 <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                                 </svg>

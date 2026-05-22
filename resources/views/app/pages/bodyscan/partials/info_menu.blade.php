@@ -8,7 +8,7 @@
         <li class="modern-feature-item">Male and Female models</li>
         <li class="modern-feature-item">Pairs, radical and origin</li>
         <li class="modern-feature-item">Search data &amp; points on the body</li>
-        <li class="modern-feature-item">+ save coordinate pairs to session log</li>
+        <li class="modern-feature-item">+ direct pairs to patient database</li>
         <li class="modern-feature-item">Free Relaxing Music</li>
     </ul>
 

@@ -7,30 +7,11 @@
     <h1>Terms of Service / Términos de Servicio</h1>
     <div class="mt-4">
         <h2>English</h2>
-        <p>This application is a digital database interface designed strictly for
-            educational reference and data-visualization research. By utilizing Anew Avenue
-            Biomagnetism, you acknowledge and agree that this software is an interactive form
-            of biofeedback logging and is not a substitute for professional healthcare, medical
-            advice, or clinical intervention. While basic biomagnetic coordinate pairs are derived
-            from universal public concepts, the specific application mapping, software interface,
-            proprietary 3D anatomical models, and guided scanning logic are the exclusive
-            intellectual property of Anew Avenue Biomagnetism. Users are entirely responsible
-            for maintaining the security and confidentiality of their account credentials.
-        </p>
+        <p>This application is for educational and research purposes only. By using Anew Avenue Biomagnetism, you agree that this tool is a form of biofeedback and not a substitute for professional medical advice, diagnosis, or treatment. While some biomagnetic pairs are based on universal practices, the specific mapping, software interface, 3D anatomical models, and guided scanning logic are the exclusive intellectual property of Anew Avenue Biomagnetism. You are responsible for maintaining the confidentiality of your account credentials.</p>
     </div>
     <div class="mt-4">
         <h2>Español</h2>
-        <p>Esta aplicación es una interfaz de base de datos digital diseñada
-            estrictamente para referencia educativa e investigación de visualización de datos.
-            Al utilizar Anew Avenue Biomagnetism, usted reconoce y acepta que este software
-            es una forma interactiva de registro de bioretroalimentación y no un sustituto de la
-            atención médica profesional, el asesoramiento médico o la intervención clínica. Si
-            bien los pares de coordenadas biomagnéticas básicos se derivan de conceptos
-            públicos universales, el mapeo específico de la aplicación, la interfaz del software,
-            los modelos anatómicos 3D propietarios y la lógica de escaneo guiado son
-            propiedad intelectual exclusiva de Anew Avenue Biomagnetism. Los usuarios son
-            totalmente responsables de mantener la seguridad y confidencialidad de las
-            credenciales de su cuenta.</p>
+        <p>Esta aplicación es solo para fines educativos y de investigación. Al usar Anew Avenue Biomagnetism, usted acepta que esta herramienta es una forma de bioretroalimentación y no un sustituto del consejo, diagnóstico o tratamiento médico profesional. Si bien algunos pares biomagnéticos se basan en prácticas universales, el mapeo específico, la interfaz del software, los modelos anatómicos 3D y la lógica de escaneo guiado son propiedad intelectual exclusiva de Anew Avenue Biomagnetism. Usted es responsable de mantener la confidencialidad de las credenciales de su cuenta.</p>
     </div>
 </div>
 @endsection
