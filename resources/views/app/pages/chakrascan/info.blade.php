@@ -16,7 +16,7 @@
         </section>
 
         <div class="modern-info-card module-intro-card mb-4">
-            <p class="cs-card-header mb-3">Proprietary Chakra MAPPING / Mapeo de Chakra Propietario</p>
+            <p class="cs-card-header mb-3">Proprietary Chakra MAPPING / Método de Chakra Propietario</p>
             <div class="icon-tile icon-tile-chakra-scan mb-3">
                 <svg class="module-card-icon" fill="none" stroke="currentColor" viewBox="0 0 100 100" aria-hidden="true" stroke-width="1.2">
                     <circle cx="50" cy="50" r="32"/><circle cx="50" cy="50" r="16"/><circle cx="66" cy="50" r="16"/><circle cx="58" cy="36.1" r="16"/><circle cx="42" cy="36.1" r="16"/><circle cx="34" cy="50" r="16"/><circle cx="42" cy="63.9" r="16"/><circle cx="58" cy="63.9" r="16"/>

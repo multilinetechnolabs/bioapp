@@ -1,6 +1,6 @@
 <article class="modern-info-card cs-info-card">
 
-    <p class="cs-card-header">Proprietary Chakra MAPPING / Mapeo de Chakra Propietario</p>
+    <p class="cs-card-header">Proprietary Chakra MAPPING / Método de Chakra Propietario</p>
 
     <div class="cs-icon-box">
         <div class="icon-tile icon-tile-chakra-scan" style="width:56px;height:56px;">
