@@ -78,6 +78,14 @@
         </small>
         <div class="disclaimer-modal__body">
             <p class="disclaimer-modal__text">
+                <strong>Disclaimer:</strong> This app is for self-education and research purposes only. Biomagnetic pairs are intended as biofeedback to support normal body function and are not a treatment, diagnosis, or prescription for any medical or psychological condition. These statements have not been evaluated by the FDA, and this tool is not intended to support or sustain human life or prevent health impairment. Users with existing medical conditions use this platform at their own risk.
+            </p>
+            <hr class="disclaimer-modal__divider">
+            <p class="disclaimer-modal__text">
+                <strong>Descargo de responsabilidad:</strong> Esta aplicación es solo para fines de autoeducación e investigación. Los pares biomagnéticos están destinados a ser una bioretroalimentación para apoyar el funcionamiento normal del cuerpo y no son un tratamiento, diagnóstico o prescripción para ninguna condición médica o psicológica. Estas declaraciones no han sido evaluadas por la FDA, y esta herramienta no está destinada a apoyar o sostener la vida humana ni a prevenir el deterioro de la salud. Los usuarios con condiciones médicas existentes utilizan esta plataforma bajo su propio riesgo.
+            </p>
+            <hr class="disclaimer-modal__divider">
+            <p class="disclaimer-modal__text">
                 <strong>Platform Specifications & Scope:</strong> Anew Avenue Biomagnetism is an interactive
                 data-visualization software utility designed for educational research, historical data
                 logging, and anatomical mapping. The platform serves as a digital reference
