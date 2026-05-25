@@ -32,7 +32,7 @@
         @endif
         <div class="pricing-card-single__footer">
             @auth
-                <form class="paddleCheckoutForm">
+                <form class="freemiusCheckoutForm">
                     @csrf
                     <input type="hidden" name="plan_id" value="{{ $monthlyPlan->id }}">
                     <button type="submit" class="pricing-card-single__btn">Get Started</button>
@@ -57,7 +57,7 @@
         @endif
         <div class="pricing-card-single__footer">
             @auth
-                <form class="paddleCheckoutForm">
+                <form class="freemiusCheckoutForm">
                     @csrf
                     <input type="hidden" name="plan_id" value="{{ $yearlyPlan->id }}">
                     <button type="submit" class="pricing-card-single__btn">Get Started</button>
@@ -94,47 +94,119 @@
     });
 }());
 </script>
-<script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
+<script type="text/javascript" src="https://checkout.freemius.com/js/v1/"></script>
 <script>
-    Paddle.Environment.set("{{ config('paddle.environment') }}");
-    Paddle.Initialize({
-        token: "{{ config('paddle.client_token') }}"
-    });
-</script>
-<script>
-    document.querySelectorAll('.paddleCheckoutForm').forEach(form => {
+    function initFreemiusCheckout() {
+        document.querySelectorAll('.freemiusCheckoutForm').forEach(form => {
+            form.addEventListener('submit', async function (e) {
+                e.preventDefault();
+                
+                try {
+                    const formData = new FormData(this);
+                    const response = await fetch("{{ route('app.plans.subscribe') }}", {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                            'Accept': 'application/json'
+                        },
+                        body: formData
+                    });
 
-        form.addEventListener('submit', async function(e) {
+                    const data = await response.json();
 
-            e.preventDefault();
-
-            const formData = new FormData(this);
-
-            const response = await fetch("{{ route('app.plans.subscribe') }}", {
-                method: "POST",
-                headers: {
-                    "X-CSRF-TOKEN": "{{ csrf_token() }}"
-                },
-                body: formData
-            });
-
-            const data = await response.json();
-
-            if(data.success)
-            {
-                Paddle.Checkout.open({
-                    transactionId: data.transaction_id,
-                    customer: {
-                        email: "{{ optional(auth()->user())->email }}"
+                    if (!data.success) {
+                        alert(data.message || 'Something went wrong while preparing the payment.');
+                        console.error('Freemius init error:', data);
+                        return;
                     }
-                });
-            }
-            else
-            {
-                alert(data.message || 'Something went wrong');
-            }
 
+                    if (!data.product_id || !data.plan_id || !data.public_key) {
+                        alert('Payment configuration is incomplete.');
+                        console.error('Freemius missing config:', data);
+                        return;
+                    }
+
+                    const checkoutData = {
+                        product_id: data.product_id,
+                        plan_id: data.plan_id,
+                        public_key: data.public_key,
+                        image: data.image,
+                        ...(data.sandbox && { sandbox: {
+                            token: data.sandbox_token,
+                            ctx: data.sandbox_ctx
+                        }}),
+                    };
+
+                    const handler = new FS.Checkout(checkoutData);
+
+                    handler.open({
+                        name: data.purchase_name,
+                        licenses: data.licenses,
+                        purchaseCompleted: async (response) => {
+                            console.log('Freemius purchase completed:', response);
+                            try {
+                                const responseData = await fetch('/plans/success', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                                    },
+                                    body: JSON.stringify({
+                                        transaction_id: data.transaction_id,
+                                        status: 'success',
+                                        response: response
+                                    })
+
+                                });
+                                const result = await responseData.json();
+                                if (result.success) {
+                                    alert(result.message || 'Subscription updated successfully.');
+                                } else {
+                                    alert(result.message || 'Unable to update payment.');
+                                }
+                            } catch (error) {
+                                console.error('Success update failed:', error);
+                            }
+                        },
+                        cancel: async () => {
+                            try {
+                                const responseData = await fetch('/plans/failed', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json',
+                                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                                    },
+                                    body: JSON.stringify({
+                                        transaction_id: data.transaction_id,
+                                        status: 'failed'
+                                    })
+                                });
+                                const result = await responseData.json();
+                                if (result.success) {
+                                    alert(result.message || 'Subscription Failed.');
+                                } else {
+                                    alert(result.message || 'Unable to update payment.');
+                                }
+                            } catch (error) {
+                                console.error('Failure update failed:', error);
+                            }
+                        },
+                        success: () => {
+                            alert('Purchase completed successfully.');
+                        }
+
+                    });
+                } catch (error) {
+                    console.error('Freemius checkout failed:', error);
+                    alert('Unable to open the payment window right now. Please try again.');
+                }
+            });
         });
+    }
 
-    });
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initFreemiusCheckout);
+    } else {
+        initFreemiusCheckout();
+    }
 </script>
