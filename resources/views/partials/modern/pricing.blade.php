@@ -142,6 +142,8 @@
                     handler.open({
                         name: data.purchase_name,
                         licenses: data.licenses,
+                        user_email:data.email,
+                        readonly_user: true,
                         purchaseCompleted: async (response) => {
                             console.log('Freemius purchase completed:', response);
                             try {

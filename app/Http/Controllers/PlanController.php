@@ -73,6 +73,7 @@ class PlanController extends Controller
             'plan_id' => $planId,
             'public_key' => $publicKey,
             'purchase_name' => 'Anew Avenue Subscription',
+            'email' => auth()->user()->email,
             'licenses' => 1,
             'image' => url('/favicon.ico'),
             'sandbox' => $sandbox
