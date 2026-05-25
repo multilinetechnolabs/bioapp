@@ -14,13 +14,13 @@ class PlanController extends Controller
 {
     public function subscribe(Request $request)
     {
-        // if (Auth::user()->hasValidSubscription()) {
-        //     return response()->json([
-        //         'success' => false,
-        //         'transaction_id' => '',
-        //         'message' => 'You still have a valid subscription. Action Forbidden.'
-        //     ]);
-        // }
+        if (Auth::user()->hasValidSubscription()) {
+            return response()->json([
+                'success' => false,
+                'transaction_id' => '',
+                'message' => 'You still have a valid subscription. Action Forbidden.'
+            ]);
+        }
 
         $plan = Plan::findOrFail($request->plan_id);
         if ($plan->category === 'monthly') {
