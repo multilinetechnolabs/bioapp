@@ -90,7 +90,7 @@ class ScanSession extends Base
         if (Auth::user()) {
             $filename = 'scan_sessions'.Auth::user()->id.'_'.$timestamp.'.xlsx';
         }
-        Excel::store(new ScanSessionExport($this->id), $filename);
+        Excel::store(new ScanSessionExport($this->id), $filename, 'local');
 
         return $filename;
     }

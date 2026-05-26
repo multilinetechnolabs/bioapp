@@ -24,6 +24,7 @@ function ModelLabelsCtrl($scope, $filter, ModelLabel, ClientPair, Client, ScanSe
     var tempObjects = [];
     var inactiveColor = "rgb(255,0,0)";
     var activeColor = "rgb(0,12,255)";
+    var firstCoordinateColor = "rgb(0,160,60)";
 
     // scene
     scene = new THREE.Scene();
@@ -388,9 +389,15 @@ function ModelLabelsCtrl($scope, $filter, ModelLabel, ClientPair, Client, ScanSe
     }
 
     this.getCoordinates = function(event, model_label_id){
+        var _this = this
         ModelLabel.get({ id: model_label_id }, function(result) {
             if (result != undefined) {
-                renderPoint(result, highlightedObjects)
+                if (_this.search.params.scan_type == 'body_scan' && result.point != undefined) {
+                    model_labels = $filter('filter')(_this.model_labels, { point: { id: result.point.id, name: result.point.name } })
+                    renderCoordinateSelection(result, model_labels)
+                } else {
+                    renderPoint(result, highlightedObjects)
+                }
 
                 if ($("#addPoint").length > 0) {
                     $('#pointX').data('value', result.point_x);
@@ -474,9 +481,9 @@ function ModelLabelsCtrl($scope, $filter, ModelLabel, ClientPair, Client, ScanSe
         }
     }
 
-    function renderPoint(object, objectArray, color = activeColor, points = []) {
+    function renderPoint(object, objectArray, color = activeColor, points = [], shouldClear = true) {
         // Clear all green highlighted points
-        if (color == activeColor) {
+        if (shouldClear && color == activeColor) {
             angular.forEach(highlightedObjects, function(object) {
                 scene.remove(object) 
             });
@@ -503,6 +510,28 @@ function ModelLabelsCtrl($scope, $filter, ModelLabel, ClientPair, Client, ScanSe
             scene.add(dot);
             objectArray.push(dot);
         }
+    }
+
+    function renderCoordinateSelection(selectedObject, points) {
+        removeSceneObjects(highlightedObjects)
+
+        selectedIndex = -1
+        angular.forEach(points, function(object, index) {
+            if (object.id == selectedObject.id) {
+                selectedIndex = index
+            }
+        })
+
+        angular.forEach(points, function(object, index) {
+            pointColor = inactiveColor
+            if (selectedIndex == 0 && index == 0) {
+                pointColor = activeColor
+            } else if (selectedIndex == 1 && index == 1) {
+                pointColor = firstCoordinateColor
+            }
+
+            renderPoint(object, highlightedObjects, pointColor, [], false)
+        })
     }
 
     function removeSceneObjects(objects) {

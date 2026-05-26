@@ -10,8 +10,8 @@
 
         <div class="d-flex align-items-center gap-2">
             {{-- Pills visible on md+ --}}
-            <a href="#pricing" class="brand-nav__pill d-none d-md-inline-flex">Pricing</a>
-            <a href="#contact" class="brand-nav__pill d-none d-md-inline-flex">Contact Us</a>
+            <a href="{{ url('/#pricing') }}" class="brand-nav__pill d-none d-md-inline-flex">Pricing</a>
+            <a href="{{ url('/#contact') }}" class="brand-nav__pill d-none d-md-inline-flex">Contact Us</a>
 
             {{-- Disclaimer button --}}
             <!-- <button type="button" class="brand-disclaimer-btn" id="disclaimerNavBtn" aria-label="View disclaimer">

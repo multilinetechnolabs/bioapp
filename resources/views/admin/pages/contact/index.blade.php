@@ -48,7 +48,7 @@
                     <p style="white-space:pre-wrap;font-size:0.875rem;" id="msgModalBody"></p>
                 </div>
                 <div class="modal-footer">
-                    <a id="msgReplyBtn" href="#" class="admin-btn admin-btn--primary">Reply via Email</a>
+                    <a id="msgReplyBtn" target="_blank" href="#" class="admin-btn admin-btn--primary">Reply via Email</a>
                     <button type="button" class="admin-btn admin-btn--outline" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -108,7 +108,18 @@
             $('#msgModalTitle').text(d.data('subject') !== '—' ? d.data('subject') : 'Message from ' + d.data('name'));
             $('#msgModalMeta').text('From: ' + d.data('name') + ' <' + d.data('email') + '>  ·  ' + d.data('date'));
             $('#msgModalBody').text(decodeURIComponent(d.data('msg')));
-            $('#msgReplyBtn').attr('href', 'mailto:' + d.data('email') + '?subject=Re: ' + encodeURIComponent(d.data('subject') !== '—' ? d.data('subject') : 'Your message'));
+
+        var subject = d.data('subject') !== '—'
+        ? 'Re: ' + d.data('subject')
+        : 'Your message';
+
+        var gmailUrl =
+            'https://mail.google.com/mail/?view=cm&fs=1'
+            + '&to=' + encodeURIComponent(d.data('email'))
+            + '&su=' + encodeURIComponent(subject);
+
+        $('#msgReplyBtn').attr('href', gmailUrl);
+
             $('#msgModal').modal('show');
 
             // Mark as read

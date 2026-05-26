@@ -5,6 +5,7 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use RuntimeException;
 
 use Illuminate\Contracts\Mail\Mailer;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -23,17 +24,6 @@ class ScanSessionEmail extends Mailable
     public function __construct($scan_session)
     {
         $this->scan_session = $scan_session;
-    }
-
-    public function send(\Illuminate\Contracts\Mail\Mailer $mailer)
-    {
-        parent::send($mailer);
-
-        foreach ($this->attachments as $attachment) {
-            if (\File::exists($attachment['file'])) {
-                \File::delete($attachment['file']);
-            }
-        }
     }
 
     /**
@@ -55,17 +45,22 @@ class ScanSessionEmail extends Mailable
                 'scan_session_id' => $this->scan_session->id,
                 'exception' => $e,
             ]);
+
+            throw $e;
         }
 
         $mail = $this->view('emails.scan_session')
                     ->text('emails.plain.scan_session')
                     ->subject(env('APP_TITLE').' | Scan Session')
-                    ->with([ 'content' => '']);
+                    ->with([
+                        'content' => '',
+                        'scan_session' => $this->scan_session,
+                    ]);
 
-        if (! empty($filename) && ! empty($filePath) && \File::exists($filePath)) {
-            $mail->attach($filePath, [ 'as' => $filename, 'mime' => $fileMimeType ]);
+        if (empty($filename) || empty($filePath) || ! \File::exists($filePath)) {
+            throw new RuntimeException('Scan session attachment was not created: '.$filePath);
         }
 
-        return $mail;
+        return $mail->attach($filePath, [ 'as' => $filename, 'mime' => $fileMimeType ]);
     }
 }

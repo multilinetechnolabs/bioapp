@@ -945,6 +945,7 @@ body.modern-theme {
     color: #0f172a;
 }
 
+
 .modern-btn--danger {
     background: #ffffff;
     border-color: #dc2626;
@@ -1279,14 +1280,13 @@ body.modern-theme {
     width: 100%;
     min-width: 0;
     max-width: 36rem;
-    display: none;
+    display: flex;
     align-items: center;
     height: 100%;
 }
 
 @media (min-width: 768px) {
     .modern-nav-player {
-        display: flex;
         width: 22rem;
     }
 }
@@ -1311,6 +1311,46 @@ body.modern-theme {
     height: 100%;
     gap: 0.25rem;
     min-width: 0;
+}
+
+@media (max-width: 767.98px) {
+    body.modern-theme.player-active {
+        padding-bottom: 11.5rem;
+    }
+
+    .glass-nav {
+        height: auto;
+        min-height: 5rem;
+        padding: 0.45rem 0 0.35rem;
+    }
+
+    .modern-nav-container,
+    .glass-nav .modern-nav-container {
+        height: auto;
+    }
+
+    .modern-nav-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.35rem;
+    }
+
+    .modern-nav-player {
+        display: flex;
+        width: 100%;
+        max-width: none;
+        height: auto;
+    }
+
+    .modern-nav-items {
+        width: 100%;
+        height: auto;
+    }
+
+    .modern-nav-item {
+        height: 4rem;
+        min-width: 0;
+    }
 }
 
 /* ============================================================

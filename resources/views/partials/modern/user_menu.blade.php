@@ -87,22 +87,6 @@
             </li>
 
             <li>
-                <a href="{{ route('app.user.orders') }}"
-                   class="user-side-menu__link {{ $currentRouteName === 'app.user.orders' ? 'active' : '' }}">
-                    <svg class="user-side-menu__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
-                    My Orders / Mis pedidos
-                </a>
-            </li>
-
-            <li>
-                <a href="{{ route('app.user.payments') }}"
-                   class="user-side-menu__link {{ $currentRouteName === 'app.user.payments' ? 'active' : '' }}">
-                    <svg class="user-side-menu__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
-                    My Payments / Mis pagos
-                </a>
-            </li>
-
-            <li>
                 <a href="{{ route('app.user.subscriptions') }}"
                    class="user-side-menu__link {{ $currentRouteName === 'app.user.subscriptions' ? 'active' : '' }}">
                     <svg class="user-side-menu__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>

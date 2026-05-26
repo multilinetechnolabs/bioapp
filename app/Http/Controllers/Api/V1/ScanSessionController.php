@@ -10,7 +10,7 @@ use Auth;
 use Mail;
 use Illuminate\Support\Facades\Log;
 
-use App\Mail\ScanSessionMail;
+use App\Mail\ScanSessionEmail;
 
 use App\Models\Client;
 use App\Models\ScanSession;
@@ -163,16 +163,30 @@ class ScanSessionController extends BaseController
         $scan_session = ScanSession::findOrFail($id);
 
         if ($scan_session->user_id == Auth::user()->id || Auth::user()->isAdmin()) {
-            $email_to = $scan_session->client->email;
+            $client = $scan_session->client;
+
+            if (empty($client) || empty($client->email)) {
+                return $this->sendErrorResponse('Unable to email the client because no client email is available.');
+            }
+
+            $email_to = $client->email;
             $email_bcc = env('MAIL_FROM_ADDRESS_BCC');
 
             try {
-                Mail::to($email_to)->bcc($email_bcc)->send(new \App\Mail\ScanSessionEmail($scan_session));
+                $mail = Mail::to($email_to);
+
+                if (! empty($email_bcc)) {
+                    $mail->bcc($email_bcc);
+                }
+                $mail->send(new ScanSessionEmail($scan_session));
             } catch (\Throwable $e) {
                 Log::error('Unable to send scan session email.', [
                     'scan_session_id' => $scan_session->id,
                     'client_id' => $scan_session->client_id,
                     'client_email' => $email_to,
+                    'exception_message' => $e->getMessage(),
+                    'exception_file' => $e->getFile(),
+                    'exception_line' => $e->getLine(),
                     'exception' => $e,
                 ]);
 

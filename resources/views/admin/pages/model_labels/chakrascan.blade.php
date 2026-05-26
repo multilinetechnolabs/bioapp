@@ -181,7 +181,7 @@
                 columns: [
                     { data: 'id', name: 'id' },
                     { data: 'target', name: 'target' },
-                    { data: 'point.name', name: 'point_name', searchable: false, orderable: false, defaultContent: '' },
+                    { data: 'point.name', name: 'point.name', defaultContent: '' },
                     { data: 'point_x', name: 'point_x' },
                     { data: 'point_y', name: 'point_y' },
                     { data: 'point_z', name: 'point_z' },
