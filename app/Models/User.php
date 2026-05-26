@@ -149,7 +149,7 @@ class User extends Authenticatable implements Auditable, MustVerifyEmail
 
     public function currentSubscription()
     {
-        return $this->subscriptions->where('ends_at', '>=', \Carbon\Carbon::now())->first();
+        return $this->subscriptions->where('status', 'active')->where('ends_at', '>=', \Carbon\Carbon::now())->first();
     }
 
     public function hasValidSubscription()
@@ -157,7 +157,7 @@ class User extends Authenticatable implements Auditable, MustVerifyEmail
         if ($this->isAdmin()) {
             return true;
         }
-        if (empty($this->subscriptions->all()) || empty($this->currentSubscription())) {
+        if (empty($this->subscriptions->where('status','active')) || empty($this->currentSubscription())) {
             return false;
         }
         return true;

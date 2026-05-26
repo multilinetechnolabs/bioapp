@@ -27,6 +27,8 @@
                                         <th class="align-center">{{ __('Plan') }} / Plan</th>
                                         <th class="align-center">{{ __('Starts At') }} / Fecha de inicio</th>
                                         <th class="align-center">{{ __('Ends At') }} / Fecha de fin</th>
+                                        <th class="align-center">{{ __('Status') }} / Estado</th>
+                                        <th class="align-center">{{ __('Actions') }}</th>
                                     </tr>
                                 </thead>
                             </table>
@@ -74,8 +76,76 @@
                     },
                     { data: 'ends_at',
                         render: function ( data, type, row, meta ) { return new Date(data).toLocaleString(); }
+                    },
+                    { data: 'status',
+                        render: function (data, type, row, meta)
+                        {
+                            if (data === 'active') {
+                                return '<span class="badge badge-success">Active</span>';
+                            }
+                            if (data === 'cancelled') {
+                                return '<span class="badge badge-danger">Cancelled</span>';
+                            }
+
+                            return data;
+                        }
+                    },
+                    {
+                        data: 'id',
+                        orderable: false,
+                        render: function(data, type, row) {
+
+                            if (row.status === 'cancelled' || row.cancelled_at) {
+                                return '';
+                            }
+
+                            var icCancel = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 6L6 18M6 6l12 12"/></svg>';
+
+                            var btn = '<button class="admin-action-btn admin-action-btn--warn editor-cancel" data-id="' + data + '" title="Cancel Subscription">' + icCancel + '</button>';
+
+                            return '<div class="admin-action-group">' + btn + '</div>';
+                        }
                     }
                 ]
+            });
+
+            // Handle cancel click
+            $('#subscriptions').on('click', 'button.editor-cancel', function(e) {
+
+                e.preventDefault();
+
+                var id = $(this).data('id');
+
+                if (!confirm('Are you sure you want to cancel this subscription?')) {
+                    return;
+                }
+
+                $.ajax({
+
+                    url: '/subscriptions/' + id + '/cancel',
+
+                    type: 'POST',
+
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+
+                    success: function(res) {
+
+                        alert(res.message || 'Subscription cancelled successfully');
+
+                        location.reload();
+                    },
+
+                    error: function(xhr) {
+
+                        var msg = xhr.responseJSON && xhr.responseJSON.message
+                            ? xhr.responseJSON.message
+                            : 'Error cancelling subscription';
+
+                        alert(msg);
+                    }
+                });
             });
         });
     </script>

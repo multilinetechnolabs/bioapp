@@ -14,7 +14,7 @@ class Subscription extends Base
      * @var array
      */
     protected $fillable = [
-        'plan_id', 'user_id', 'starts_at', 'ends_at'
+        'plan_id', 'user_id', 'starts_at', 'ends_at', 'status', 'cancelled_at'
     ];
 
     protected $rules = [
@@ -22,6 +22,10 @@ class Subscription extends Base
         'user_id' => 'required|integer|exists:users,id',
         'starts_at' => 'nullable|date|before_or_equal:ends_at',
         'ends_at' => 'nullable|date|after_or_equal:starts_at'
+    ];
+
+    protected $casts = [
+        'cancelled_at' => 'datetime',
     ];
 
     public static function rules($id = null)

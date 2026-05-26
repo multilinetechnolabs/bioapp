@@ -18,6 +18,7 @@
                         <th>{{ __('Plan') }}</th>
                         <th>{{ __('Starts At') }}</th>
                         <th>{{ __('Ends At') }}</th>
+                        <th>{{ __('Status') }}</th>
                         <th class="text-center">{{ __('Actions') }}</th>
                     </tr>
                 </thead>
@@ -115,6 +116,7 @@
 
             var icEdit  = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>';
             var icTrash = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>';
+            var icCancel = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 6L6 18M6 6l12 12"/></svg>';
 
             $('#subscriptions').DataTable({
                 processing: true,
@@ -126,16 +128,76 @@
                     { data: 'plan', orderable: false, searchable: false, render: function(d) { return d.name + ' ($' + parseFloat(d.price).toFixed(2) + ')'; } },
                     { data: 'starts_at', render: function(d) { return new Date(d).toLocaleString(); } },
                     { data: 'ends_at', render: function(d) { return new Date(d).toLocaleString(); } },
-                    {
-                        data: 'id', orderable: false,
-                        render: function(data) {
+                    { data: 'status',
+                        render: function (d)
+                        {
+                            if (d === 'active') {
+                                return '<span class="badge badge-success">Active</span>';
+                            }
+                            if (d === 'cancelled') {
+                                return '<span class="badge badge-danger">Cancelled</span>';
+                            }
+
+                            return data;
+                        }
+                    },
+                   {
+                        data: 'id',
+                        orderable: false,
+                        render: function(data, type, row) {
+
+                            var cancelBtn = '';
+
+                            if (row.status !== 'cancelled' && !row.cancelled_at) {
+                                cancelBtn = '<button class="admin-action-btn admin-action-btn--warn editor-cancel" data-id="' + data + '">' + icCancel + '</button>';
+                            }
+
                             return '<div class="admin-action-group">'
                                 + '<button class="admin-action-btn admin-action-btn--delete editor-remove" data-id="' + data + '">' + icTrash + '</button>'
                                 + '<button class="admin-action-btn admin-action-btn--edit editor-edit" data-toggle="modal" data-target="#subscriptionModal" data-title="Edit Subscription" data-id="' + data + '">' + icEdit + '</button>'
+                                + cancelBtn
                                 + '</div>';
                         }
                     }
                 ]
+            });
+            // Cancel subscription (admin)
+           $('#subscriptions').on('click', 'button.editor-cancel', function(e) {
+
+                e.preventDefault();
+
+                var id = $(this).attr('data-id');
+
+                if (!confirm('Are you sure you want to cancel this subscription?')) {
+                    return;
+                }
+
+                $.ajax({
+
+                    url: '/admin/subscriptions/' + id + '/cancel',
+
+                    type: 'POST',
+
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+
+                    success: function(res) {
+
+                        alert(res.message || 'Subscription cancelled successfully');
+
+                        location.reload();
+                    },
+
+                    error: function(xhr) {
+
+                        var msg = xhr.responseJSON && xhr.responseJSON.message
+                            ? xhr.responseJSON.message
+                            : 'Error cancelling subscription';
+
+                        alert(msg);
+                    }
+                });
             });
         });
     </script>

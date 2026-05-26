@@ -64,6 +64,7 @@ Route::middleware('verified')->group(function () {
     Route::get('/orders', 'HomeController@orders')->name('app.user.orders');
     Route::get('/payments', 'HomeController@payments')->name('app.user.payments');
     Route::get('/subscriptions', 'HomeController@subscriptions')->name('app.user.subscriptions');
+    Route::post('/subscriptions/{id}/cancel', 'SubscriptionController@cancelSubscription')->name('app.user.subscriptions.cancel');
 
     ## Plans — no subscription check (these ARE the payment routes)
     Route::post('/plans/subscribe', 'PlanController@subscribe')->name('app.plans.subscribe');
@@ -213,6 +214,7 @@ Route::prefix('admin')->namespace('Admin')->middleware(['verified', 'auth.admin'
 
     ## Orders
 Route::get('subscriptions', 'SubscriptionController@index')->name('admin.subscriptions');
+    Route::post('subscriptions/{id}/cancel', 'SubscriptionController@cancelSubscription')->name('admin.subscriptions.cancel');
 
     ## Users
     Route::get('users', 'UserController@index');
