@@ -230,7 +230,6 @@
                                                 border="1">
                                                 <thead></thead>
                                                 <tbody>
-                                                    @if (Auth::user()->isAdmin())
                                                         <tr ng-repeat="label in ctrl.model_labels | orderBy: ctrl.orderBy | filter: { point: { id: model_label.point.id, name: model_label.point.name } } track by label.id"
                                                             ng-if="!(ctrl.client | valPresent)">
                                                             <td colspan="2">
@@ -251,6 +250,7 @@
                                                                         ng-click="ctrl.getCoordinates($event, label.id)">
                                                                         Get Coordinates / Obtener coordenadas
                                                                     </button>
+                                                                    @if (Auth::user()->isAdmin())
                                                                     <button type="button"
                                                                         class="modern-btn modern-btn--small modern-btn--outline editor-edit"
                                                                         data-toggle="modal"
