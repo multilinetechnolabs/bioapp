@@ -7,6 +7,34 @@
 
 @section('page-title', 'Chakra Scan')
 
+@push('head')
+    <style>
+    #howToScanModal .modal-body {
+        position: relative;
+        isolation: isolate;
+    }
+
+    #howToScanModal .modal-body::before {
+        content: "";
+        position: absolute;
+        top: 80%;
+        left: 50%;
+        width: min(420px, 80%);
+        aspect-ratio: 1 / 1;
+        background: url("{{ asset('/images/iconimages/load.png') }}") center center / contain no-repeat;
+        opacity: 0.12; /* darker watermark */
+        pointer-events: none;
+        transform: translate(-50%, -50%);
+        z-index: 0;
+    }
+
+    #howToScanModal .modal-body > * {
+        position: relative;
+        z-index: 1;
+    }
+</style>
+@endpush
+
 @section('content')
     @php($target = request()->target ?? 'female')
 

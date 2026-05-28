@@ -198,10 +198,6 @@
 @endphp
 
 <div class="data-cache-help-intro">
-    <h3 class="data-cache-help-title">
-        <span class="data-cache-label-en">Help</span>
-        <span class="data-cache-label-es">Ayuda</span>
-    </h3>
     <p>
         Use the instructions below as the in-app guide for setup, client records, scans, and Bio-Connect.
     </p>

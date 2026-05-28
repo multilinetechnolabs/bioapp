@@ -15,7 +15,17 @@
         <span class="dash-greeting__es">Bienvenido de nuevo.</span>
     </h1>
 
-    <div class="dash-grid">
+    <header class="modern-page-header">
+        <div>
+            <h1 class="modern-page-title">Getting Started & Setup Tips</h1>
+            <p class="modern-page-subtitle">Consejos de inicio y configuración</p>
+        </div>
+        <a href="{{ url('/data_cache/help') }}" class="modern-btn modern-btn--outline">
+            <span aria-hidden="true">?</span> Help / Ayuda
+        </a>
+    </header>
+
+    <div class="dash-grid mt-3">
 
         {{-- Body Scan --}}
         <a href="{{ route('app.bodyscan') }}" class="dash-card" style="--card-color:#10b981;--card-bg:#d1fae5;">

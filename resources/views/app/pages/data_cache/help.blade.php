@@ -12,8 +12,8 @@
     <main class="modern-main-content">
         <header class="modern-page-header">
             <div>
-                <h1 class="modern-page-title">Data Cache Help</h1>
-                <p class="modern-page-subtitle">Caché de datos &mdash; Ayuda</p>
+                <h1 class="modern-page-title">Getting Started & Setup Tips</h1>
+                <p class="modern-page-subtitle">Consejos de inicio y configuración</p>
             </div>
             <a href="{{ route('app.data_cache') }}" class="modern-btn modern-btn--outline">
                 <span aria-hidden="true">&larr;</span> Back to Data Cache / Volver

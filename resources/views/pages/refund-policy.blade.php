@@ -7,11 +7,12 @@
     <h1>Refund Policy / Política de Reembolso</h1>
     <div class="mt-4">
         <h2>English</h2>
-        <p>All Sales Are Final. Due to the immediate digital nature of the Anew Avenue Biomagnetism application, we do not offer refunds once a subscription has been purchased. You may cancel your subscription at any time to prevent future billing, but no partial refunds for the current period will be issued by Anew Avenue Biomagnetism.</p>
+        <p><strong>7-Day Technical Guarantee:</strong>We want you to be fully satisfied. If you encounter a technical bug that makes our application unusable within the first 7 days of purchase, please contact us. If we are unable to resolve the issue, we will issue a full refund. This policy covers technical malfunctions only and does not apply to feature requests, third-party conflicts, or changes of mind.
+        </p>
     </div>
     <div class="mt-4">
         <h2>Español</h2>
-        <p>Todas las ventas son finales. Debido a la naturaleza digital inmediata de la aplicación Anew Avenue Biomagnetism, no ofrecemos reembolsos una vez que se ha comprado una suscripción. Puede cancelar su suscripción en cualquier momento para evitar facturaciones futuras, pero Anew Avenue Biomagnetism no emitirá reembolsos parciales por el período actual.</p>
+         <p><strong>Garantía técnica de 7 días:</strong> Queremos que esté totalmente satisfecho. Si encuentra un error técnico que haga que nuestra aplicación sea inutilizable dentro de los primeros 7 días de compra, contáctenos. Si no podemos resolver el problema, emitiremos un reembolso completo. Esta política cubre únicamente fallos técnicos y no aplica a solicitudes de funciones, conflictos con terceros o cambios de opinión.</p>
     </div>
 </div>
 @endsection

@@ -16,8 +16,8 @@
     <main class="modern-main-content">
         <header class="modern-page-header">
             <div>
-                <h1 class="modern-page-title">Data Cache</h1>
-                <p class="modern-page-subtitle">Caché de datos</p>
+                <h1 class="modern-page-title">Getting Started & Setup Tips</h1>
+                <p class="modern-page-subtitle">Consejos de inicio y configuración</p>
             </div>
             <a href="{{ url('/data_cache/help') }}" class="modern-btn modern-btn--outline">
                 <span aria-hidden="true">?</span> Help / Ayuda
