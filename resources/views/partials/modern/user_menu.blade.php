@@ -53,7 +53,7 @@
             </li>
 
            <li>
-                <a href="{{ route('app.data_cache') }}"
+                <a href="{{ url('/data_cache/help') }}"
                    class="user-side-menu__link {{ request()->routeIs('app.data_cache') ? 'active' : '' }}">
                     <svg class="user-side-menu__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
                     Getting Started & Setup Tips / Consejos de inicio y configuración
