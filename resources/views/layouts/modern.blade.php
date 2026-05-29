@@ -78,19 +78,20 @@
         </small>
         <div class="disclaimer-modal__body">
             <p class="disclaimer-modal__text">
-                <strong>Disclaimer:</strong> This app is for self-education and research purposes only. Biomagnetic pairs are intended as biofeedback to support normal body function and are not a treatment, diagnosis, or prescription for any medical or psychological condition. These statements have not been evaluated by the FDA, and this tool is not intended to support or sustain human life or prevent health impairment. Users with existing medical conditions use this platform at their own risk.FDA, and this tool is not intended to support or sustain human life or prevent health impairment.Do not use magnets if
-                you have electronic medical implants, are pregnant, are currently undergoing chemotherapy or radiation, have active cancer, or suffer from severe low blood pressure.
+                <strong>Disclaimer:</strong> This app is for self-education and research purposes only. Biomagnetic pairs are
+                intended as biofeedback to support normal body function and are not a treatment, diagnosis, or prescription for any medical or psychological condition. These statements have not been evaluated by the FDA, and this tool is not intended to support or sustain human life or prevent health impairment. Users with existing medical conditions use this platform at their own risk.
             </p>
             <hr class="disclaimer-modal__divider">
             <p class="disclaimer-modal__text">
-                <strong>Descargo de responsabilidad:</strong> Esta aplicación es solo para fines de autoeducación e investigación. Los pares biomagnéticos están destinados a ser una bioretroalimentación para apoyar el funcionamiento normal del cuerpo y no son un tratamiento, diagnóstico o prescripción para ninguna condición médica o psicológica. Estas declaraciones no han sido evaluadas por la FDA, y esta herramienta no está destinada a apoyar o sostener la vida humana ni a prevenir el deterioro de la salud. Los usuarios con condiciones médicas existentes utilizan esta plataforma bajo su propio riesgo.No
-                utilice imanes si tiene implantes médicos electrónicos, está embarazada, está recibiendo quimioterapia o radiación, tiene cáncer activo o sufre de presión arterial muy baja.
+                <strong>Important Safety Notice:</strong> Do not use magnets if you have electronic medical implants, are pregnant, are currently undergoing chemotherapy or radiation, have active cancer, or suffer from severe low blood pressure.
             </p>
              <hr class="disclaimer-modal__divider">
-             <p class="disclaimer-modal__text"><strong>Important Safety Notice:</strong> Do not use magnets if you have electronic medical implants, are pregnant, are currently undergoing chemotherapy or radiation, have active cancer, or suffer from severe low blood pressure.Esta aplicación es solo para fines de autoeducación e investigación. Los pares biomagnéticos están destinados a ser una bioretroalimentación para apoyar el funcionamiento normal del cuerpo y no son un tratamiento, diagnóstico o prescripción para ninguna condición médica o psicológica. Estas declaraciones no han sido evaluadas por la FDA, y esta herramienta no está destinada a apoyar o sostener la vida humana ni a prevenir el deterioro de la salud. Los usuarios con condiciones médicas existentes utilizan esta plataforma bajo su propio riesgo.
+             <p class="disclaimer-modal__text">
+                <strong>Aviso legal:</strong> legal: Esta aplicación es solo para fines de autoeducación e investigación. Los pares biomagnéticos están destinados a ser una bioretroalimentación para apoyar el funcionamiento normal del cuerpo y no son un tratamiento, diagnóstico o prescripción para ninguna condición médica o psicológica. Estas declaraciones no han sido evaluadas por la FDA, y esta herramienta no está destinada a apoyar o sostener la vida humana ni a prevenir el deterioro de la salud. Los usuarios con condiciones médicas existentes utilizan esta plataforma bajo su propio riesgo.
             </p>
              <hr class="disclaimer-modal__divider">
-            <p class="disclaimer-modal__text"><strong>Aviso de seguridad importante:</strong> No utilice imanes si tiene implantes médicos electrónicos,está embarazada, está recibiendo quimioterapia o radiación, tiene cáncer activo o sufre de presión arterial muy baja.
+            <p class="disclaimer-modal__text">
+                <strong>Aviso de seguridad importante:</strong>No utilice imanes si tiene implantes médicos electrónicos,está embarazada, está recibiendo quimioterapia o radiación, tiene cáncer activo o sufre de presión arterial muy baja.
             </p>
              <hr class="disclaimer-modal__divider">
              <p><strong>© 2026 Anew Avenue Biomagnetism. All rights reserved.</strong></p>

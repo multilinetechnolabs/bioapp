@@ -14,16 +14,6 @@
 @section('content')
 <div class="dc-page">
     <main class="modern-main-content">
-        <header class="modern-page-header">
-            <div>
-                <h1 class="modern-page-title">Getting Started & Setup Tips</h1>
-                <p class="modern-page-subtitle">Consejos de inicio y configuración</p>
-            </div>
-            <a href="{{ url('/data_cache/help') }}" class="modern-btn modern-btn--outline">
-                <span aria-hidden="true">?</span> Help / Ayuda
-            </a>
-        </header>
-
         <div class="row g-4 modern-data-cache-grid">
             <div class="col-12 col-md-6">
                 <a href="{{ route('app.bodyscan') }}" class="modern-data-cache-tile">

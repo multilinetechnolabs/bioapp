@@ -163,15 +163,15 @@
                 serverSide: true,
                 ajax: { url: '{{ env("APP_WEB_API_URL") }}/{{ env("APP_WEB_API_VERSION") }}/pairs/datatables?scan_type=chakra_scan' },
                 columns: [
-                    { data: 'ref_no', render: function(d) { return d || '-'; } },
-                    { data: 'guided_ref_no', render: function(d) { return d || '-'; } },
-                    { data: 'scan_type', render: function(d) { return d === 'body_scan' ? 'Bio' : d === 'chakra_scan' ? 'Chakra' : d; } },
+                    { data: 'ref_no', orderable: false,searchable: false, render: function(d) { return d || '-'; } },
+                    { data: 'guided_ref_no',orderable: false,searchable: false, render: function(d) { return d || '-'; } },
+                    { data: 'scan_type',orderable: false,searchable: false, render: function(d) { return d === 'body_scan' ? 'Bio' : d === 'chakra_scan' ? 'Chakra' : d; } },
                     { data: 'name', name: 'name' },
-                    { data: 'radical', name: 'radical' },
-                    { data: 'origins', name: 'origins' },
-                    { data: 'symptoms', name: 'symptoms' },
-                    { data: 'paths', name: 'paths' },
-                    { data: 'alternative_routes', name: 'alternative_routes' },
+                    { data: 'radical', name: 'radical',orderable: false,searchable: false},
+                    { data: 'origins', name: 'origins' ,orderable: false,searchable: false},
+                    { data: 'symptoms', name: 'symptoms' ,orderable: false,searchable: false},
+                    { data: 'paths', name: 'paths' ,orderable: false,searchable: false},
+                    { data: 'alternative_routes', name: 'alternative_routes' ,orderable: false,searchable: false},
                     {
                         data: 'id', orderable: false, searchable: false,
                         render: function(data) {
