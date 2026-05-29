@@ -30,10 +30,6 @@
                     <a href="/data_cache/clients/<% ctrl.client.id %>" class="modern-btn modern-btn--outline">
                         <span aria-hidden="true">&larr;</span> Back / Volver
                     </a>
-                    <a href="{{ route('app.scanSessions.payment.request', ['id' => $scan_session_id]) }}"
-                       ng-if="(ctrl.scan_session | valPresent) && !ctrl.scan_session.paid">
-                        <button class="modern-btn modern-btn--primary">Request Payment / Solicitar pago</button>
-                    </a>
                     <button class="modern-btn modern-btn--primary"
                             ng-click="ctrl.markDoneScanSession(ctrl.scan_session)"
                             ng-if="ctrl.scan_session.editable && !(ctrl.scan_session.date_ended | valPresent)">
