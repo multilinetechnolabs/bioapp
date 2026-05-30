@@ -2,6 +2,24 @@ table {
   width: 100%;
 }
 
+/* Fix toolbar select alignment shift while options load */
+.modern-data-cache-toolbar__group--right .modern-data-cache-select {
+  flex: 0 0 240px;
+  width: 240px;
+  min-width: 240px;
+  max-width: 240px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 767.98px) {
+  .modern-data-cache-toolbar__group--right .modern-data-cache-select {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    flex: 1 1 auto;
+  }
+}
+
 table:not(.table-datatable) thead {
   color: #fff;
 }
