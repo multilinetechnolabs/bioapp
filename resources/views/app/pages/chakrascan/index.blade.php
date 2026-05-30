@@ -207,7 +207,7 @@
                             </div>
 
                             <div class="modern-client-row"
-                                ng-if="(ctrl.model_labels.length >= 0)">
+                                ng-if="(ctrl.model_labels.length > 0) && !ctrl.disable_client_selection">
                                 <label class="modern-client-label" ng-if="ctrl.clients | valPresent">Client /
                                     Cliente:</label>
                                 <select class="form-control modern-client-select" id="client_id" name="client_id"
