@@ -172,7 +172,7 @@
                                 ng-if="(ctrl.model_labels.length > 0) && !ctrl.disable_client_selection">
                                 <label class="modern-client-label" ng-if="ctrl.clients | valPresent">Client / Cliente:</label>
                                 <select class="form-control modern-client-select" id="client_id" name="client_id"
-                                    ng-model="ctrl.client" ng-if="ctrl.clients | valPresent">
+                                    ng-model="ctrl.client">
                                     <option ng-value="null">(No client selected / Ningún cliente seleccionado)</option>
                                     <option
                                         ng-repeat="client in ctrl.clients | where: { gender: ctrl.search.params.target, user_id: {{ Auth::user()->id }} } track by client.id"
@@ -187,7 +187,7 @@
                                     class="modern-toolbar-link"><button type="button"
                                         class="modern-btn modern-btn--primary btn-data-cache"
                                         ng-disabled="ctrl.client | valPresent"
-                                        ng-if="ctrl.clients | valPresent">Add / Agregar</button></a>
+                                        >Add / Agregar</button></a>
                             </div>
                             <div class="text-center">
                                 <span style="font-size: 16.5px;"
