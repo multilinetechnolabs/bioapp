@@ -57,21 +57,15 @@ class ClientController extends BaseController
      */
     public function store(Request $request)
     {
-        $condition = Auth::user()->isAdmin() || Auth::user()->isPractitioner() || Auth::user()->isTherapist();
+        $params = $this->normalizedParams($request);
+        $params['user_id'] = Auth::user()->id;
 
-        if ($condition) {
-            $params = $this->normalizedParams($request);
-            $params['user_id'] = Auth::user()->id;
+        $client = new Client($params);
 
-            $client = new Client($params);
-
-            if ($client->save()) {
-                return response()->json($this->findClientRecordOrFail($client->id), Response::HTTP_CREATED);
-            } else {
-                return $this->sendInvalidResponse($client->getErrors());
-            }
+        if ($client->save()) {
+            return response()->json($this->findClientRecordOrFail($client->id), Response::HTTP_CREATED);
         } else {
-            return $this->sendUnauthorizedResponse();
+            return $this->sendInvalidResponse($client->getErrors());
         }
     }
 

@@ -66,7 +66,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="pair in ctrl.pairs | where: { scan_type: ctrl.scan_type } | filter: ctrl.searchText | orderBy: ctrl.sortBy.column track by pair.id">
+                            <tr ng-repeat="pair in ctrl.pairs | where: { scan_type: ctrl.scan_type } | filter:{ name: ctrl.searchText } | orderBy: ctrl.sortBy.column track by pair.id">
                                 <td class="modern-data-cache-cell-actions">
                                     <i class="fa fa-plus-circle fa-2x modern-data-cache-add-icon"
                                        aria-hidden="true"

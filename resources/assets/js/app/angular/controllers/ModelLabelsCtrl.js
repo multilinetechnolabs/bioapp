@@ -392,7 +392,7 @@ function ModelLabelsCtrl($scope, $filter, ModelLabel, ClientPair, Client, ScanSe
         var _this = this
         ModelLabel.get({ id: model_label_id }, function(result) {
             if (result != undefined) {
-                if (_this.search.params.scan_type == 'body_scan' && result.point != undefined) {
+                if (result.point != undefined) {
                     model_labels = $filter('filter')(_this.model_labels, { point: { id: result.point.id, name: result.point.name } })
                     renderCoordinateSelection(result, model_labels)
                 } else {
@@ -415,9 +415,7 @@ function ModelLabelsCtrl($scope, $filter, ModelLabel, ClientPair, Client, ScanSe
             if (result != undefined) {
                 model_labels = $filter('filter')(_this.model_labels, { point: { id: result.point.id, name: result.point.name } })
 
-                angular.forEach(model_labels, function(object) {
-                    renderPoint(object, highlightedObjects, activeColor, model_labels)
-                });
+                renderDefaultCoordinatePair(model_labels)
 
                 removeSceneObjects(tempObjects);
 
@@ -528,6 +526,19 @@ function ModelLabelsCtrl($scope, $filter, ModelLabel, ClientPair, Client, ScanSe
                 pointColor = activeColor
             } else if (selectedIndex == 1 && index == 1) {
                 pointColor = firstCoordinateColor
+            }
+
+            renderPoint(object, highlightedObjects, pointColor, [], false)
+        })
+    }
+
+    function renderDefaultCoordinatePair(points) {
+        removeSceneObjects(highlightedObjects)
+
+        angular.forEach(points, function(object, index) {
+            pointColor = firstCoordinateColor
+            if (index == 0) {
+                pointColor = activeColor
             }
 
             renderPoint(object, highlightedObjects, pointColor, [], false)

@@ -25,11 +25,7 @@ class PlaylistController extends Controller
 
     public function index()
     {
-        if (Auth::user()->isPractitioner() || Auth::user()->isAdmin()) {
-            return view('app.pages.playlist.index');
-        } else {
-            return redirect()->to('/dashboard');
-        }
+        return view('app.pages.playlist.index');
     }
 
     public function show($id)
