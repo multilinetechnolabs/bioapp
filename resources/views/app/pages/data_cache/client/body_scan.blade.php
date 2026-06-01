@@ -141,7 +141,7 @@
                         </thead>
                         <tbody ng-repeat="(radical, pairs) in ctrl.displayed_pairs | where: { scan_type: ctrl.scan_type } | filter:{ name: ctrl.searchText } | orderBy: 'radical' | groupBy: 'radical'">
                             <tr>
-                                <td class="header-radical header-radical-<% $index %>" colspan="6"><% radical %></td>
+                                <td class="header-radical header-radical-<% $index %>"  style="color: #000;" colspan="6"><% radical %></td>
                             </tr>
                             <tr class="plain" ng-repeat="pair in pairs | where: { scan_type: ctrl.scan_type } | filter:{ name: ctrl.searchText }  | orderBy: ctrl.sortBy.column track by pair.id">
                                 <td><% pair.name %></td>
