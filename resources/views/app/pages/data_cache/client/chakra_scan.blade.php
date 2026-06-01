@@ -111,11 +111,11 @@
                          ng-if="!(ctrl.scan_session.date_ended | valPresent)">
                         <input type="text" placeholder="Filter selection"
                                class="modern-data-cache-input"
-                               ng-model="searchTextPair">
+                               ng-model="ctrl.searchTextPair">
                         <select ng-model="pair" ng-disabled="!(ctrl.pairs | valPresent)"
                                 class="modern-data-cache-select">
-                            <option ng-repeat="pair in ctrl.pairs | orderBy: 'name' | filter: { name: searchTextPair } track by pair.id"
-                                    ng-value="<% pair %>" ng-if="pair._selectable"><% pair.name %></option>
+                            <option ng-repeat="pair in ctrl.filteredPairs track by pair.id"
+                                    ng-value="pair"><% pair.name %></option>
                         </select>
                         <button class="modern-btn modern-btn--primary"
                                 ng-click="ctrl.addPair(pair)"
@@ -139,7 +139,7 @@
                                 <th></th>
                             </tr>
                         </thead>
-                        <tbody ng-repeat="(radical, pairs) in ctrl.displayed_pairs | where: { scan_type: ctrl.scan_type } | orderBy: 'radical' | groupBy: 'radical'">
+                        <tbody ng-repeat="(radical, pairs) in ctrl.displayed_pairs | where: { scan_type: ctrl.scan_type } | filter:{ name: ctrl.searchText } | orderBy: 'radical' | groupBy: 'radical'">
                             <tr>
                                 <td class="header-radical header-radical-<% $index %>" colspan="6"><% radical %></td>
                             </tr>

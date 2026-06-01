@@ -1,13 +1,32 @@
 function DataCacheClientShowBioCtrl($scope, $filter, $window, Client, Pair, ScanSession) {
+    var _this = this
+
     this.sortBy = { column: 'name' }
     this.scan_type = 'body_scan'
     this.loaded = false
     this.searchText = ''
+    this.searchTextPair = ''
+    this.pairs = []
+    this.filteredPairs = []
+
+    this.rebuildFilteredPairs = function() {
+        var searchTextPair = _this.searchTextPair || ''
+        var sortedPairs = $filter('orderBy')(_this.pairs || [], 'name')
+        var searchedPairs = $filter('filter')(sortedPairs, { name: searchTextPair })
+
+        _this.filteredPairs = $filter('filter')(searchedPairs, function(pair) {
+            return pair._selectable
+        })
+    }
+
+    $scope.$watch(function() {
+        return _this.searchTextPair
+    }, function() {
+        _this.rebuildFilteredPairs()
+    })
     
     this.scan_session_id = $("#scanSessionId").data("value")
     if (this.scan_session_id != undefined || this.scan_session_id != '') { 
-        _this = this
-        
         ScanSession.get({ id: this.scan_session_id }, function(scan_session){
             _this.scan_session = scan_session
             _this.client = scan_session.client
@@ -21,6 +40,8 @@ function DataCacheClientShowBioCtrl($scope, $filter, $window, Client, Pair, Scan
                         if (!scan_session.pairIds.includes(pair.id)) { pair._selectable = true }
                     });
                 }
+
+                _this.rebuildFilteredPairs()
             })
         })
 
@@ -104,6 +125,8 @@ function DataCacheClientShowBioCtrl($scope, $filter, $window, Client, Pair, Scan
                     if (!_this.scan_session.pairIds.includes(pair.id)) { pair._selectable = true }
                 });
             }
+
+            _this.rebuildFilteredPairs()
         })
     }
 
