@@ -2,6 +2,65 @@ table {
   width: 100%;
 }
 
+/* Fix toolbar searchable pair dropdown alignment shift while options load */
+.modern-data-cache-toolbar__group--right .modern-data-cache-combobox {
+  flex: 0 0 280px;
+  max-width: 280px;
+  min-width: 280px;
+  position: relative;
+  width: 280px;
+}
+
+.modern-data-cache-combobox__input {
+  width: 100%;
+}
+
+.modern-data-cache-combobox__menu {
+  background: #fff;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.14);
+  left: 0;
+  max-height: 260px;
+  overflow-y: auto;
+  position: absolute;
+  right: 0;
+  top: calc(100% + 4px);
+  z-index: 30;
+}
+
+.modern-data-cache-combobox__option {
+  background: #fff;
+  border: 0;
+  color: #0f172a;
+  cursor: pointer;
+  display: block;
+  line-height: 1.3;
+  padding: 9px 12px;
+  text-align: left;
+  width: 100%;
+}
+
+.modern-data-cache-combobox__option:hover,
+.modern-data-cache-combobox__option.is-active {
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+.modern-data-cache-combobox__empty {
+  color: #64748b;
+  padding: 10px 12px;
+}
+
+@media (max-width: 767.98px) {
+  .modern-data-cache-toolbar__group--right .modern-data-cache-combobox {
+    flex: 1 1 auto;
+    max-width: 100%;
+    min-width: 0;
+    width: 100%;
+  }
+}
+
 table:not(.table-datatable) thead {
   color: #fff;
 

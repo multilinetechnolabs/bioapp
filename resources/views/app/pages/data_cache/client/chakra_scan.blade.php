@@ -109,14 +109,36 @@
                     </div>
                     <div class="modern-data-cache-toolbar__group modern-data-cache-toolbar__group--right"
                          ng-if="!(ctrl.scan_session.date_ended | valPresent)">
-                        <input type="text" placeholder="Filter selection"
-                               class="modern-data-cache-input"
-                               ng-model="ctrl.searchTextPair">
-                        <select ng-model="pair" ng-disabled="!(ctrl.pairs | valPresent)"
-                                class="modern-data-cache-select">
-                            <option ng-repeat="pair in ctrl.filteredPairs track by pair.id"
-                                    ng-value="pair"><% pair.name %></option>
-                        </select>
+                        <div class="modern-data-cache-combobox"
+                             ng-class="{ 'is-open': ctrl.pairDropdownOpen }"
+                             tabindex="-1">
+                            <input type="text"
+                                   placeholder="Search pair / Buscar par"
+                                   class="modern-data-cache-input modern-data-cache-combobox__input"
+                                   ng-model="ctrl.searchTextPair"
+                                   ng-focus="ctrl.openPairDropdown()"
+                                   ng-blur="ctrl.closePairDropdownOnBlur()"
+                                   ng-keydown="ctrl.onPairSearchKeydown($event)"
+                                   ng-disabled="!(ctrl.pairs | valPresent)"
+                                   autocomplete="off"
+                                   role="combobox"
+                                   aria-autocomplete="list"
+                                   aria-expanded="<% ctrl.pairDropdownOpen %>">
+                            <div class="modern-data-cache-combobox__menu"
+                                 ng-if="ctrl.pairDropdownOpen">
+                                <button type="button"
+                                        class="modern-data-cache-combobox__option"
+                                        ng-class="{ 'is-active': $index === ctrl.activePairIndex }"
+                                        ng-repeat="pairOption in ctrl.filteredPairs track by pairOption.id"
+                                        ng-mousedown="ctrl.selectPair(pairOption)">
+                                    <% pairOption.name %>
+                                </button>
+                                <div class="modern-data-cache-combobox__empty"
+                                     ng-if="ctrl.filteredPairs.length === 0">
+                                    No matching pairs.
+                                </div>
+                            </div>
+                        </div>
                         <button class="modern-btn modern-btn--primary"
                                 ng-click="ctrl.addPair(pair)"
                                 ng-disabled="!(pair | valPresent)">Add</button>

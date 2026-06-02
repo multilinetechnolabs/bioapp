@@ -1,13 +1,125 @@
-function DataCacheClientShowBioCtrl($scope, $filter, $window, Client, Pair, ScanSession) {
+function DataCacheClientShowBioCtrl($scope, $filter, $timeout, $window, Client, Pair, ScanSession) {
+    var _this = this
+
     this.sortBy = { column: 'name' }
     this.scan_type = 'body_scan'
     this.loaded = false
     this.searchText = ''
+    this.searchTextPair = ''
+    this.pairs = []
+    this.filteredPairs = []
+    this.pairDropdownOpen = false
+    this.activePairIndex = -1
+
+    this.rebuildFilteredPairs = function() {
+        var searchTextPair = _this.searchTextPair || ''
+        if (searchTextPair && $scope.pair && $scope.pair.name === searchTextPair) {
+            searchTextPair = ''
+        }
+
+        var sortedPairs = $filter('orderBy')(_this.pairs || [], 'name')
+        var searchedPairs = $filter('filter')(sortedPairs, { name: searchTextPair })
+        var selectablePairs = $filter('filter')(searchedPairs, function(pair) {
+            return pair._selectable
+        })
+
+        _this.filteredPairs = selectablePairs
+        _this.activePairIndex = _this.filteredPairs.length ? 0 : -1
+    }
+
+    this.openPairDropdown = function() {
+        _this.pairDropdownOpen = true
+        _this.rebuildFilteredPairs()
+    }
+
+    this.closePairDropdown = function(delay) {
+        if (delay) {
+            $timeout(function() {
+                _this.pairDropdownOpen = false
+            }, 150)
+
+            return
+        }
+
+        _this.pairDropdownOpen = false
+    }
+
+    this.closePairDropdownOnBlur = function() {
+        $timeout(function() {
+            var activeElement = document.activeElement
+            var insideDropdown = activeElement && activeElement.closest && activeElement.closest('.modern-data-cache-combobox')
+
+            if (!insideDropdown) {
+                _this.closePairDropdown()
+            }
+        }, 150)
+    }
+
+    this.selectPair = function(pair) {
+        $scope.pair = pair
+        _this.searchTextPair = pair.name
+        _this.closePairDropdown()
+    }
+
+    this.onPairSearchKeydown = function($event) {
+        if (!_this.pairDropdownOpen && ($event.which === 13 || $event.which === 38 || $event.which === 40)) {
+            _this.openPairDropdown()
+        }
+
+        if ($event.which === 40 && _this.filteredPairs.length) {
+            $event.preventDefault()
+            _this.activePairIndex = Math.min(_this.activePairIndex + 1, _this.filteredPairs.length - 1)
+        } else if ($event.which === 38 && _this.filteredPairs.length) {
+            $event.preventDefault()
+            _this.activePairIndex = Math.max(_this.activePairIndex - 1, 0)
+        } else if ($event.which === 13 && _this.activePairIndex >= 0) {
+            $event.preventDefault()
+            _this.selectPair(_this.filteredPairs[_this.activePairIndex])
+        } else if ($event.which === 27) {
+            _this.closePairDropdown()
+        }
+    }
+
+    $scope.$watch(function() {
+        return _this.searchTextPair
+    }, function(newValue) {
+        var pairWasSelected = $scope.pair && $scope.pair.name === newValue
+
+        if (!pairWasSelected) {
+            $scope.pair = null
+        }
+
+        _this.rebuildFilteredPairs()
+
+        if (newValue && !pairWasSelected) {
+            _this.pairDropdownOpen = true
+        }
+    })
+
+    function closePairDropdownOnOutsideClick(event) {
+        var clickedElement = event.target
+
+        if (event.clientX != null && event.clientY != null) {
+            clickedElement = document.elementFromPoint(event.clientX, event.clientY) || clickedElement
+        }
+
+        var clickedInsideDropdown = clickedElement && clickedElement.closest && clickedElement.closest('.modern-data-cache-combobox')
+
+        if (!clickedInsideDropdown) {
+            $scope.$applyAsync(function() {
+                _this.closePairDropdown()
+            })
+        }
+    }
+
+    document.addEventListener('mousedown', closePairDropdownOnOutsideClick)
+
+    $scope.$on('$destroy', function() {
+        document.removeEventListener('mousedown', closePairDropdownOnOutsideClick)
+    })
     
     this.scan_session_id = $("#scanSessionId").data("value")
     if (this.scan_session_id != undefined || this.scan_session_id != '') { 
-        _this = this
-        
         ScanSession.get({ id: this.scan_session_id }, function(scan_session){
             _this.scan_session = scan_session
             _this.client = scan_session.client
@@ -21,6 +133,8 @@ function DataCacheClientShowBioCtrl($scope, $filter, $window, Client, Pair, Scan
                         if (!scan_session.pairIds.includes(pair.id)) { pair._selectable = true }
                     });
                 }
+
+                _this.rebuildFilteredPairs()
             })
         })
 
@@ -42,6 +156,7 @@ function DataCacheClientShowBioCtrl($scope, $filter, $window, Client, Pair, Scan
             scan_session_pair = new ScanSession.prototype.ScanSessionPair({ scan_session_id: _this.scan_session.id, pair_id: pair.id });
             scan_session_pair.$save(function(_scan_session_pair){
                 $scope.pair = null
+                _this.searchTextPair = ''
                 _this.scan_session = _scan_session_pair.scanSession
                 
                 _this.displayed_pairs.push(_scan_session_pair.pair)
@@ -104,6 +219,8 @@ function DataCacheClientShowBioCtrl($scope, $filter, $window, Client, Pair, Scan
                     if (!_this.scan_session.pairIds.includes(pair.id)) { pair._selectable = true }
                 });
             }
+
+            _this.rebuildFilteredPairs()
         })
     }
 
@@ -159,6 +276,6 @@ function DataCacheClientShowBioCtrl($scope, $filter, $window, Client, Pair, Scan
         }
     }
 }
-DataCacheClientShowBioCtrl.$inject = ['$scope', '$filter', '$window', 'Client', 'Pair', 'ScanSession'];
+DataCacheClientShowBioCtrl.$inject = ['$scope', '$filter', '$timeout', '$window', 'Client', 'Pair', 'ScanSession'];
 
 angular.module('AnewApp').controller('DataCacheClientShowBioCtrl', DataCacheClientShowBioCtrl);
