@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ $locale ?? app()->getLocale() }}"@if (!empty($seoPage)) class="notranslate"@endif @if (!empty($useAppShell)) ng-app="AnewApp" @endif>
+<html lang="{{ $locale ?? app()->getLocale() }}"@if (!empty($seoPage) && ($locale ?? 'en') !== 'en') class="notranslate"@endif @if (!empty($useAppShell)) ng-app="AnewApp" @endif>
 
 <head>
     @include('partials.shared.meta')
@@ -35,11 +35,6 @@
     <script>
         window.gtranslateSettings = {
             "default_language": "en",
-            {{-- SEO pages are already server-rendered in the correct locale.
-                 detect_browser_language must be false so GTranslate does not
-                 re-set the googtrans cookie from the OS/browser locale and
-                 overwrite our cookie-clear or trigger a redirect loop on production.
-                 Non-SEO pages keep true so GTranslate translates them normally. --}}
             "detect_browser_language": {{ !empty($seoPage) ? 'false' : 'true' }},
             "languages": ["en", "es", "fr"],
             "wrapper_selector": ".gtranslate_wrapper",
@@ -68,32 +63,42 @@
     }());
     </script>
 
+    {{-- ============================================================================
+         GLOBAL LOCALE PERSISTENCE
+         The single source of truth for the user's chosen language is the private
+         localStorage key `app_locale` ('es' | 'fr' | absent = English). GTranslate
+         never reads or writes this key, so it cannot be clobbered when GTranslate
+         resets its own googtrans cookie on a notranslate SEO page. The googtrans
+         cookie is derived FROM app_locale on every page load so that GTranslate's
+         native auto-translate applies the right language on non-SEO pages.
+         ============================================================================ --}}
     @if (!empty($seoPage))
-    {{-- On SEO pages the content is already server-rendered in the correct locale.
-         class="notranslate" on <html> prevents GTranslate from re-translating it.
-         We do NOT clear the cookie on load — instead we sync the widget flag to the
-         current page locale via _orig() once GTranslate initialises. This keeps the
-         widget showing the right language so clicking a different language actually
-         fires doGTranslate (if the widget already shows EN and the cookie was cleared,
-         clicking EN is a no-op and the user gets stuck). --}}
+    {{-- SEO page: content is server-rendered in the correct locale (notranslate on
+         <html>). We use app_locale to drive widget sync and URL navigation. --}}
     <script>
     (function () {
-        var _clearGT = function () {
-            var exp    = 'expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
-            var secure = location.protocol === 'https:' ? ' Secure;' : '';
-            var host   = location.hostname;
-            var parts  = host.split('.');
-            document.cookie = 'googtrans=; ' + exp + secure;
-            document.cookie = 'googtrans=; ' + exp + ' domain=' + host + ';' + secure;
-            document.cookie = 'googtrans=; ' + exp + ' domain=.' + host + ';' + secure;
-            if (parts.length > 2) {
-                var parent = parts.slice(-2).join('.');
-                document.cookie = 'googtrans=; ' + exp + ' domain=.' + parent + ';' + secure;
-            }
-            try { localStorage.removeItem('googtrans'); } catch (e) {}
-        };
+        var host = location.hostname, parts = host.split('.');
+        var secure = location.protocol === 'https:' ? ' Secure;' : '';
 
-        var _seoPage    = '{{ $seoPage }}';
+        function _writeCookie(val) {
+            var base = 'googtrans=' + val + '; path=/;';
+            document.cookie = base + secure;
+            document.cookie = base + ' domain=' + host + ';' + secure;
+            document.cookie = base + ' domain=.' + host + ';' + secure;
+            if (parts.length > 2) document.cookie = base + ' domain=.' + parts.slice(-2).join('.') + ';' + secure;
+        }
+        function _clearCookie() {
+            var exp = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+            document.cookie = exp + secure;
+            document.cookie = exp + ' domain=' + host + ';' + secure;
+            document.cookie = exp + ' domain=.' + host + ';' + secure;
+            if (parts.length > 2) document.cookie = exp + ' domain=.' + parts.slice(-2).join('.') + ';' + secure;
+        }
+        function _getPref() { try { return localStorage.getItem('app_locale'); } catch (e) { return null; } }
+        function _setPref(v) { try { localStorage.setItem('app_locale', v); } catch (e) {} }
+        function _clrPref() { try { localStorage.removeItem('app_locale'); } catch (e) {} }
+
+        var _seoPage     = '{{ $seoPage }}';
         var _currentLang = '{{ $locale ?? "en" }}';
         var _urls = {
             'home':                { en: '/home',                es: '/es/home',                fr: '/fr/home' },
@@ -102,29 +107,98 @@
             'free-protocol-pairs': { en: '/free-protocol-pairs', es: '/es/free-protocol-pairs', fr: '/fr/free-protocol-pairs' }
         };
 
+        if (_currentLang !== 'en') {
+            // This ES/FR page IS the chosen language — record it and prime the cookie
+            // so any non-SEO page navigated to next auto-translates correctly.
+            _setPref(_currentLang);
+            _writeCookie('/en/' + _currentLang);
+        } else {
+            // English SEO URL. If a non-English global preference exists, go localized.
+            var _pref = _getPref();
+            if (_pref === 'es' || _pref === 'fr') {
+                var _lu = _urls[_seoPage] && _urls[_seoPage][_pref];
+                if (_lu && _lu !== location.pathname) { window.location.replace(_lu); return; }
+            }
+            // Genuinely English — make sure no stale cookie makes GTranslate translate.
+            _clearCookie();
+        }
+
         var _timer = setInterval(function () {
             if (typeof window.doGTranslate !== 'function') return;
             clearInterval(_timer);
             var _orig = window.doGTranslate;
 
-            // Sync the GTranslate widget flag to the current page locale.
-            // notranslate on <html> prevents GTranslate from actually altering
-            // the server-rendered content — this only updates the widget display.
-            _orig('en|' + _currentLang);
+            // Sync the widget flag to the server-rendered locale (notranslate prevents
+            // GTranslate from actually altering the content).
+            if (_currentLang !== 'en') _orig('en|' + _currentLang);
 
             window.doGTranslate = function (pair) {
                 var lang = (pair || '').split('|').pop();
                 var dest = _urls[_seoPage] && _urls[_seoPage][lang];
+                if (lang === 'en') { _clrPref(); _clearCookie(); }
+                else if (lang === 'es' || lang === 'fr') { _setPref(lang); _writeCookie('/en/' + lang); }
+
                 if (dest && dest !== location.pathname) {
-                    _clearGT();
                     window.location.href = dest;
-                } else if (!dest) {
+                } else if (dest && dest === location.pathname) {
+                    _orig('en|' + lang); // already on correct URL — just refresh widget/content
+                } else {
                     _orig(pair);
                 }
-                // dest === location.pathname means already on the correct URL — no-op
             };
         }, 50);
+        setTimeout(function () { clearInterval(_timer); }, 10000);
+    }());
+    </script>
+    @endif
 
+    @if (empty($seoPage))
+    {{-- Non-SEO page: translation is done live by GTranslate. Read the global
+         app_locale preference and prime the googtrans cookie BEFORE GTranslate's
+         deferred bundle loads, so its native auto-translate (detect_browser_language
+         reads the cookie) applies the right language on first paint. --}}
+    <script>
+    (function () {
+        var host = location.hostname, parts = host.split('.');
+        var secure = location.protocol === 'https:' ? ' Secure;' : '';
+
+        function _writeCookie(val) {
+            var base = 'googtrans=' + val + '; path=/;';
+            document.cookie = base + secure;
+            document.cookie = base + ' domain=' + host + ';' + secure;
+            document.cookie = base + ' domain=.' + host + ';' + secure;
+            if (parts.length > 2) document.cookie = base + ' domain=.' + parts.slice(-2).join('.') + ';' + secure;
+        }
+        function _clearCookie() {
+            var exp = 'googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+            document.cookie = exp + secure;
+            document.cookie = exp + ' domain=' + host + ';' + secure;
+            document.cookie = exp + ' domain=.' + host + ';' + secure;
+            if (parts.length > 2) document.cookie = exp + ' domain=.' + parts.slice(-2).join('.') + ';' + secure;
+        }
+
+        var _pref = null;
+        try { _pref = localStorage.getItem('app_locale'); } catch (e) {}
+
+        // Prime the cookie synchronously so GTranslate auto-translates on load.
+        if (_pref === 'es' || _pref === 'fr') _writeCookie('/en/' + _pref);
+
+        var _timer = setInterval(function () {
+            if (typeof window.doGTranslate !== 'function') return;
+            clearInterval(_timer);
+            var _orig = window.doGTranslate;
+
+            // Keep app_locale in sync when the user switches language on a non-SEO page.
+            window.doGTranslate = function (pair) {
+                var lang = (pair || '').split('|').pop();
+                if (lang === 'en') { try { localStorage.removeItem('app_locale'); } catch (e) {} _clearCookie(); }
+                else if (lang === 'es' || lang === 'fr') { try { localStorage.setItem('app_locale', lang); } catch (e) {} }
+                _orig(pair);
+            };
+
+            // Belt-and-suspenders: explicitly apply the stored preference once ready.
+            if (_pref === 'es' || _pref === 'fr') _orig('en|' + _pref);
+        }, 50);
         setTimeout(function () { clearInterval(_timer); }, 10000);
     }());
     </script>
@@ -392,34 +466,68 @@
     @include('partials.shared.analytics')
 
     {{-- Rewrite links to the 4 SEO pages so they respect the active GTranslate locale.
-         Runs on every page: if the googtrans cookie indicates es/fr, any <a> pointing to
-         /home, /pricing, /contact, or /free-protocol-pairs gets the locale prefix added.
-         This ensures brand bar links, bottom nav, and banners always route correctly
-         without requiring a server-side redirect. --}}
+         Runs on every page. Uses readyState check to execute immediately when the DOM
+         is already available, and a MutationObserver to catch links added dynamically
+         by AngularJS after initial render. --}}
     <script>
     (function () {
-        var m = document.cookie.match(/(?:^|;\s*)googtrans=([^;]+)/);
-        if (!m) return;
-        var parts = decodeURIComponent(m[1]).split('/').filter(Boolean);
-        var lang  = parts[parts.length - 1];
+        // Use app_locale (our private source of truth) rather than the googtrans cookie,
+        // which GTranslate may reset on notranslate SEO pages.
+        var lang = null;
+        try { lang = localStorage.getItem('app_locale'); } catch (e) {}
         if (lang !== 'es' && lang !== 'fr') return;
 
         var seoPages = ['/home', '/pricing', '/contact', '/free-protocol-pairs'];
         var pfx = '/' + lang;
 
-        document.addEventListener('DOMContentLoaded', function () {
-            document.querySelectorAll('a[href]').forEach(function (a) {
-                try {
-                    var url = new URL(a.href, location.origin);
-                    if (url.origin !== location.origin) return;
-                    var path = url.pathname;
-                    if (/^\/(es|fr)\//.test(path)) return; // already localized
-                    if (seoPages.indexOf(path) !== -1) {
-                        a.href = pfx + path + url.search + url.hash;
+        function _rewriteLink(a) {
+            try {
+                var url = new URL(a.href, location.origin);
+                if (url.origin !== location.origin) return;
+                var path = url.pathname;
+                if (/^\/(es|fr)\//.test(path)) return;
+                if (seoPages.indexOf(path) !== -1) {
+                    a.href = pfx + path + url.search + url.hash;
+                }
+            } catch (e) {}
+        }
+
+        function _rewriteAll() {
+            document.querySelectorAll('a[href]').forEach(_rewriteLink);
+        }
+
+        // Run immediately if DOM is already parsed; otherwise wait for DOMContentLoaded.
+        if (document.readyState !== 'loading') {
+            _rewriteAll();
+        } else {
+            document.addEventListener('DOMContentLoaded', _rewriteAll);
+        }
+
+        // Watch for links added dynamically by AngularJS templates.
+        var _obs = new MutationObserver(function (mutations) {
+            for (var i = 0; i < mutations.length; i++) {
+                var added = mutations[i].addedNodes;
+                for (var j = 0; j < added.length; j++) {
+                    var node = added[j];
+                    if (node.nodeType !== 1) continue;
+                    if (node.tagName === 'A') {
+                        _rewriteLink(node);
+                    } else if (node.querySelectorAll) {
+                        node.querySelectorAll('a[href]').forEach(_rewriteLink);
                     }
-                } catch (e) {}
-            });
+                }
+            }
         });
+        var _startObs = function () {
+            if (document.body) {
+                _obs.observe(document.body, { childList: true, subtree: true });
+            }
+        };
+        if (document.body) {
+            _startObs();
+        } else {
+            document.addEventListener('DOMContentLoaded', _startObs);
+        }
     }());
     </script>
 </body>
