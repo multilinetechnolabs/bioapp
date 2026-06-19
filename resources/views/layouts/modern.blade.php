@@ -1,14 +1,8 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}"@if (!empty($useAppShell)) ng-app="AnewApp" @endif>
+<html lang="{{ $locale ?? app()->getLocale() }}"@if (!empty($useAppShell)) ng-app="AnewApp" @endif>
 
 <head>
-    @if (!empty($useAppShell))
-        @include('partials.shared.meta')
-    @else
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
-    @endif
+    @include('partials.shared.meta')
 
     @php
         $siteTitle = config('app.title');
@@ -27,9 +21,8 @@
             (!isset($hideBottomNav) || !$hideBottomNav) &&
             (!isset($hidePlayer) || !$hidePlayer);
 
-        $loadFoot = !empty($useAppShell) || $showPlayer || (!empty($isBioconnectRoute) && Auth::check());
+        $loadFoot = !empty($useAppShell) || $showPlayer || (!empty($isBioconnectRoute) && Auth::check()) || isset($seoPage);
     @endphp
-    <title>{{ $pageTitle !== '' ? $pageTitle . ' - ' . $siteTitle : $siteTitle }}</title>
 
     <link href="{{ \App\Support\VersionedAsset::url('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/modern/theme.css') }}" rel="stylesheet">
@@ -43,10 +36,82 @@
         window.gtranslateSettings = {
             "default_language": "en",
             "detect_browser_language": true,
+            "languages": ["en", "es", "fr"],
             "wrapper_selector": ".gtranslate_wrapper",
             "flag_style": "3d"
         }
     </script>
+
+    {{-- DOM filter: hide any language the browser injected that is not in our allowed set.
+         We keep detect_browser_language:true because GTranslate requires it to register
+         doGTranslate on the window. We strip the unwanted entry from the rendered widget. --}}
+    <script>
+    (function () {
+        var _allowed = ['en', 'es', 'fr'];
+        function _filterWidget() {
+            document.querySelectorAll('a[href*="doGTranslate"], a[onclick*="doGTranslate"]').forEach(function (a) {
+                var str = a.getAttribute('href') || a.getAttribute('onclick') || '';
+                var m = str.match(/['"](en\|\w+)['"]/);
+                if (!m) return;
+                var lang = m[1].split('|')[1];
+                if (_allowed.indexOf(lang) === -1) {
+                    var item = a.closest('li') || a.parentElement;
+                    if (item) item.style.display = 'none';
+                }
+            });
+        }
+        var obs = new MutationObserver(_filterWidget);
+        obs.observe(document.documentElement, { childList: true, subtree: true });
+    }());
+    </script>
+
+    @if (!empty($seoPage))
+    {{-- On SEO pages the content is already server-rendered in the correct locale.
+         1. Clear the googtrans cookie immediately so GTranslate's deferred script does
+            not auto-translate content that is already in the right language.
+         2. Poll for doGTranslate, then replace it with URL-based navigation so the
+            widget drives locale switching via clean localized URLs. --}}
+    <script>
+    (function () {
+        var _clearGT = function () {
+            var exp = 'expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+            document.cookie = 'googtrans=; ' + exp;
+            document.cookie = 'googtrans=; ' + exp + ' domain=.' + location.hostname + ';';
+        };
+
+        // Clear cookie immediately — this script is inline so it runs before
+        // the deferred GTranslate bundle reads the cookie.
+        _clearGT();
+
+        var _seoPage = '{{ $seoPage }}';
+        var _urls = {
+            'home':                { en: '/home',                es: '/es/home',                fr: '/fr/home' },
+            'pricing':             { en: '/pricing',             es: '/es/pricing',             fr: '/fr/pricing' },
+            'contact':             { en: '/contact',             es: '/es/contact',             fr: '/fr/contact' },
+            'free-protocol-pairs': { en: '/free-protocol-pairs', es: '/es/free-protocol-pairs', fr: '/fr/free-protocol-pairs' }
+        };
+
+        var _timer = setInterval(function () {
+            if (typeof window.doGTranslate !== 'function') return;
+            clearInterval(_timer);
+            var _orig = window.doGTranslate;
+            window.doGTranslate = function (pair) {
+                var lang = (pair || '').split('|').pop();
+                var dest = _urls[_seoPage] && _urls[_seoPage][lang];
+                if (dest) {
+                    _clearGT();
+                    window.location.href = dest;
+                } else {
+                    _orig(pair);
+                }
+            };
+        }, 50);
+
+        setTimeout(function () { clearInterval(_timer); }, 10000);
+    }());
+    </script>
+    @endif
+
     <script src="https://cdn.gtranslate.net/widgets/latest/float.js" defer></script>
 
     @if (!isset($hideBrandBar) || !$hideBrandBar)
@@ -306,6 +371,39 @@
     @endif
 
     @stack('scripts')
+    @include('partials.shared.analytics')
+
+    {{-- Rewrite links to the 4 SEO pages so they respect the active GTranslate locale.
+         Runs on every page: if the googtrans cookie indicates es/fr, any <a> pointing to
+         /home, /pricing, /contact, or /free-protocol-pairs gets the locale prefix added.
+         This ensures brand bar links, bottom nav, and banners always route correctly
+         without requiring a server-side redirect. --}}
+    <script>
+    (function () {
+        var m = document.cookie.match(/(?:^|;\s*)googtrans=([^;]+)/);
+        if (!m) return;
+        var parts = decodeURIComponent(m[1]).split('/').filter(Boolean);
+        var lang  = parts[parts.length - 1];
+        if (lang !== 'es' && lang !== 'fr') return;
+
+        var seoPages = ['/home', '/pricing', '/contact', '/free-protocol-pairs'];
+        var pfx = '/' + lang;
+
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('a[href]').forEach(function (a) {
+                try {
+                    var url = new URL(a.href, location.origin);
+                    if (url.origin !== location.origin) return;
+                    var path = url.pathname;
+                    if (/^\/(es|fr)\//.test(path)) return; // already localized
+                    if (seoPages.indexOf(path) !== -1) {
+                        a.href = pfx + path + url.search + url.hash;
+                    }
+                } catch (e) {}
+            });
+        });
+    }());
+    </script>
 </body>
 
 </html>

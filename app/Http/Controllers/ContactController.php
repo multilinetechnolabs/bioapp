@@ -9,6 +9,18 @@ use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
+    public function show()
+    {
+        $locale = $this->detectLocale();
+
+        if ($locale === 'en' && $redirect = $this->localeRedirect('/contact')) {
+            return $redirect;
+        }
+
+        $seoData = config("seo.{$locale}.contact", []);
+        return view('app.pages.contact.index', ['locale' => $locale, 'seoPage' => 'contact', 'seoData' => $seoData]);
+    }
+
     public function store(Request $request)
     {
         $data = $request->validate([
@@ -52,5 +64,20 @@ class ContactController extends Controller
 
         return redirect()->back()
             ->with('contact.success', 'Your message has been received. We\'ll get back to you soon!');
+    }
+
+    private function detectLocale(): string
+    {
+        $seg = request()->segment(1);
+        return in_array($seg, ['es', 'fr'], true) ? $seg : 'en';
+    }
+
+    private function localeRedirect(string $enPath)
+    {
+        $gt    = $_COOKIE['googtrans'] ?? '';
+        $parts = array_values(array_filter(explode('/', $gt)));
+        $lang  = end($parts);
+        if (!in_array($lang, ['es', 'fr'], true)) return null;
+        return redirect("/{$lang}{$enPath}");
     }
 }

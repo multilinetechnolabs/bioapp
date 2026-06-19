@@ -5,28 +5,31 @@
     // Fallback prices if plans not in DB yet
     $monthlyPrice = $monthlyPlan ? number_format($monthlyPlan->price, 2) : '4.99';
     $yearlyPrice  = $yearlyPlan  ? number_format($yearlyPlan->price, 2)  : '44.99';
+
+    $pl = $locale ?? 'en';
 @endphp
 
 <div class="pricing-toggle-wrap">
 
     {{-- Toggle --}}
     <div class="pricing-toggle" role="group" aria-label="Billing period">
-        <span class="pricing-toggle__label" id="ptLabelMonthly">Monthly</span>
+        <span class="pricing-toggle__label" id="ptLabelMonthly">{{ $pl === 'es' ? 'Mensual' : ($pl === 'fr' ? 'Mensuel' : 'Monthly') }}</span>
         <button class="pricing-toggle__switch" id="pricingToggle"
-                role="switch" aria-checked="false" aria-label="Switch to yearly billing">
+                role="switch" aria-checked="false"
+                aria-label="{{ $pl === 'es' ? 'Cambiar a facturación anual' : ($pl === 'fr' ? 'Passer à la facturation annuelle' : 'Switch to yearly billing') }}">
             <span class="pricing-toggle__thumb"></span>
         </button>
-        <span class="pricing-toggle__label" id="ptLabelYearly">Yearly</span>
+        <span class="pricing-toggle__label" id="ptLabelYearly">{{ $pl === 'es' ? 'Anual' : ($pl === 'fr' ? 'Annuel' : 'Yearly') }}</span>
     </div>
 
     {{-- Monthly card --}}
     <div class="pricing-card-single" id="ptCardMonthly">
-        <div class="pricing-card-single__name">Monthly</div>
+        <div class="pricing-card-single__name">{{ $pl === 'es' ? 'Mensual' : ($pl === 'fr' ? 'Mensuel' : 'Monthly') }}</div>
         <div class="pricing-card-single__price">
             <span class="pricing-card-single__currency">$</span>
             <span class="pricing-card-single__amount">{{ $monthlyPrice }}</span>
         </div>
-        <p class="pricing-card-single__period">Per Month</p>
+        <p class="pricing-card-single__period">{{ $pl === 'es' ? 'Por Mes' : ($pl === 'fr' ? 'Par Mois' : 'Per Month') }}</p>
         @if($monthlyPlan && !empty($monthlyPlan->description))
             <p class="pricing-card-single__desc">{{ $monthlyPlan->description }}</p>
         @endif
@@ -35,23 +38,23 @@
                 <form class="freemiusCheckoutForm">
                     @csrf
                     <input type="hidden" name="plan_id" value="{{ $monthlyPlan->id }}">
-                    <button type="submit" class="pricing-card-single__btn">Get Started</button>
+                    <button type="submit" class="pricing-card-single__btn" data-plan="monthly" data-plan-price="{{ $monthlyPrice }}">{{ $pl === 'es' ? 'Comenzar' : ($pl === 'fr' ? 'Commencer' : 'Get Started') }}</button>
                 </form>
             @else
-                <a href="{{ route('register', ['plan_id' => $monthlyPlan ? $monthlyPlan->id : '']) }}" class="pricing-card-single__btn">Get Started</a>
+                <a href="{{ route('register', ['plan_id' => $monthlyPlan ? $monthlyPlan->id : '']) }}" class="pricing-card-single__btn" data-plan="monthly" data-plan-price="{{ $monthlyPrice }}">{{ $pl === 'es' ? 'Comenzar' : ($pl === 'fr' ? 'Commencer' : 'Get Started') }}</a>
             @endauth
         </div>
     </div>
 
     {{-- Yearly card --}}
     <div class="pricing-card-single pricing-card-single--hidden" id="ptCardYearly">
-        <div class="pricing-card-single__badge">Best Value</div>
-        <div class="pricing-card-single__name">Yearly</div>
+        <div class="pricing-card-single__badge">{{ $pl === 'es' ? 'Mejor Valor' : ($pl === 'fr' ? 'Meilleure Offre' : 'Best Value') }}</div>
+        <div class="pricing-card-single__name">{{ $pl === 'es' ? 'Anual' : ($pl === 'fr' ? 'Annuel' : 'Yearly') }}</div>
         <div class="pricing-card-single__price">
             <span class="pricing-card-single__currency">$</span>
             <span class="pricing-card-single__amount">{{ $yearlyPrice }}</span>
         </div>
-        <p class="pricing-card-single__period">Per Year</p>
+        <p class="pricing-card-single__period">{{ $pl === 'es' ? 'Por Año' : ($pl === 'fr' ? 'Par An' : 'Per Year') }}</p>
         @if($yearlyPlan && !empty($yearlyPlan->description))
             <p class="pricing-card-single__desc">{{ $yearlyPlan->description }}</p>
         @endif
@@ -60,10 +63,10 @@
                 <form class="freemiusCheckoutForm">
                     @csrf
                     <input type="hidden" name="plan_id" value="{{ $yearlyPlan->id }}">
-                    <button type="submit" class="pricing-card-single__btn">Get Started</button>
+                    <button type="submit" class="pricing-card-single__btn" data-plan="yearly" data-plan-price="{{ $yearlyPrice }}">{{ $pl === 'es' ? 'Comenzar' : ($pl === 'fr' ? 'Commencer' : 'Get Started') }}</button>
                 </form>
             @else
-                <a href="{{ route('register', ['plan_id' => $yearlyPlan ? $yearlyPlan->id : '']) }}" class="pricing-card-single__btn">Get Started</a>
+                <a href="{{ route('register', ['plan_id' => $yearlyPlan ? $yearlyPlan->id : '']) }}" class="pricing-card-single__btn" data-plan="yearly" data-plan-price="{{ $yearlyPrice }}">{{ $pl === 'es' ? 'Comenzar' : ($pl === 'fr' ? 'Commencer' : 'Get Started') }}</a>
             @endauth
         </div>
     </div>

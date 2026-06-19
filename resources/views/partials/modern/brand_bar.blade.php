@@ -8,18 +8,19 @@
             </div>
         </a>
 
+        @php
+            $__navLocale = $locale ?? 'en';
+            $__localePfx = $__navLocale === 'en' ? '' : "/{$__navLocale}";
+        @endphp
+
         <div class="d-flex align-items-center gap-2">
             {{-- Pills visible on md+ --}}
-            <a href="{{ url('/#pricing') }}" class="brand-nav__pill d-none d-md-inline-flex">Pricing</a>
-            <a href="{{ url('/#contact') }}" class="brand-nav__pill d-none d-md-inline-flex">Contact Us</a>
-
-            {{-- Disclaimer button --}}
-            <!-- <button type="button" class="brand-disclaimer-btn" id="disclaimerNavBtn" aria-label="View disclaimer">
-                <svg width="17" height="17" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
-                </svg>
-                <span class="d-none d-md-inline">Disclaimer</span>
-            </button> -->
+            <a href="{{ url($__localePfx . '/pricing') }}" class="brand-nav__pill d-none d-md-inline-flex">
+                {{ $__navLocale === 'es' ? 'Precios' : ($__navLocale === 'fr' ? 'Tarifs' : 'Pricing') }}
+            </a>
+            <a href="{{ url($__localePfx . '/contact') }}" class="brand-nav__pill d-none d-md-inline-flex">
+                {{ $__navLocale === 'es' ? 'Contacto' : ($__navLocale === 'fr' ? 'Contact' : 'Contact Us') }}
+            </a>
 
             {{-- Nav hamburger: guests only on small screens --}}
             @guest
@@ -45,8 +46,12 @@
 
     {{-- Mobile nav dropdown --}}
     <div class="brand-nav-mobile" id="brandNavMobile" aria-hidden="true">
-        <a href="#pricing" class="brand-nav-mobile__link" id="brandNavPricing">Pricing</a>
-        <a href="#contact" class="brand-nav-mobile__link" id="brandNavContact">Contact Us</a>
+        <a href="{{ url($__localePfx . '/pricing') }}" class="brand-nav-mobile__link" id="brandNavPricing">
+            {{ $__navLocale === 'es' ? 'Precios' : ($__navLocale === 'fr' ? 'Tarifs' : 'Pricing') }}
+        </a>
+        <a href="{{ url($__localePfx . '/contact') }}" class="brand-nav-mobile__link" id="brandNavContact">
+            {{ $__navLocale === 'es' ? 'Contacto' : ($__navLocale === 'fr' ? 'Contact' : 'Contact Us') }}
+        </a>
     </div>
 </header>
 

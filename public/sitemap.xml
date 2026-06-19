@@ -1,57 +1,172 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset
-      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+    xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
-<url>
-  <loc>https://biomagnetism.app</loc>
-</url>
-<url>
-  <loc>https://biomagnetism.app/signup</loc>
-</url>
-<url>
-  <loc>https://biomagnetism.app/home</loc>
-</url>
-<url>
-  <loc>https://biomagnetism.app/dashboard</loc>
-</url>
-<url>
-  <loc>https://biomagnetism.app/bodyscan/info</loc>
-</url>
-<url>
-  <loc>https://biomagnetism.app/chakrascan/info</loc>
-</url>
-<url>
-  <loc>https://biomagnetism.app/data_cache/info</loc>
-</url>
-<url>
-  <loc>https://biomagnetism.app/bioconnect</loc>
-</url>
-<url>
-  <loc>https://biomagnetism.app/bioconnect/info</loc>
-</url>
-<url>
-  <loc>https://biomagnetism.app/bioconnect/groups</loc>
-</url>
-<url>
-  <loc>https://biomagnetism.app/products</loc>
-</url>
-<url>
-  <loc>https://biomagnetism.app/products/bio</loc>
-</url>
-<url>
-  <loc>https://biomagnetism.app/products/chakra</loc>
-</url>
-<url>
-  <loc>https://biomagnetism.app/login</loc>
-</url>
-<url>
-  <loc>https://biomagnetism.app/register</loc>
-</url>
-<url>
-  <loc>https://biomagnetism.app/password/reset</loc>
-</url>
+  <!-- ═══ HOME ══════════════════════════════════════════════════════════════ -->
+  <url>
+    <loc>https://biomagnetism.app/home</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://biomagnetism.app/home"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://biomagnetism.app/es/home"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://biomagnetism.app/fr/home"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://biomagnetism.app/home"/>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://biomagnetism.app/es/home</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://biomagnetism.app/home"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://biomagnetism.app/es/home"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://biomagnetism.app/fr/home"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://biomagnetism.app/home"/>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://biomagnetism.app/fr/home</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://biomagnetism.app/home"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://biomagnetism.app/es/home"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://biomagnetism.app/fr/home"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://biomagnetism.app/home"/>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- ═══ PRICING ═══════════════════════════════════════════════════════════ -->
+  <url>
+    <loc>https://biomagnetism.app/pricing</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://biomagnetism.app/pricing"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://biomagnetism.app/es/pricing"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://biomagnetism.app/fr/pricing"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://biomagnetism.app/pricing"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://biomagnetism.app/es/pricing</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://biomagnetism.app/pricing"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://biomagnetism.app/es/pricing"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://biomagnetism.app/fr/pricing"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://biomagnetism.app/pricing"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://biomagnetism.app/fr/pricing</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://biomagnetism.app/pricing"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://biomagnetism.app/es/pricing"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://biomagnetism.app/fr/pricing"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://biomagnetism.app/pricing"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- ═══ CONTACT ═══════════════════════════════════════════════════════════ -->
+  <url>
+    <loc>https://biomagnetism.app/contact</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://biomagnetism.app/contact"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://biomagnetism.app/es/contact"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://biomagnetism.app/fr/contact"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://biomagnetism.app/contact"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://biomagnetism.app/es/contact</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://biomagnetism.app/contact"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://biomagnetism.app/es/contact"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://biomagnetism.app/fr/contact"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://biomagnetism.app/contact"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://biomagnetism.app/fr/contact</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://biomagnetism.app/contact"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://biomagnetism.app/es/contact"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://biomagnetism.app/fr/contact"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://biomagnetism.app/contact"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- ═══ FREE PROTOCOL PAIRS ═══════════════════════════════════════════════ -->
+  <url>
+    <loc>https://biomagnetism.app/free-protocol-pairs</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://biomagnetism.app/free-protocol-pairs"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://biomagnetism.app/es/free-protocol-pairs"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://biomagnetism.app/fr/free-protocol-pairs"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://biomagnetism.app/free-protocol-pairs"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://biomagnetism.app/es/free-protocol-pairs</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://biomagnetism.app/free-protocol-pairs"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://biomagnetism.app/es/free-protocol-pairs"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://biomagnetism.app/fr/free-protocol-pairs"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://biomagnetism.app/free-protocol-pairs"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://biomagnetism.app/fr/free-protocol-pairs</loc>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://biomagnetism.app/free-protocol-pairs"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://biomagnetism.app/es/free-protocol-pairs"/>
+    <xhtml:link rel="alternate" hreflang="fr"        href="https://biomagnetism.app/fr/free-protocol-pairs"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://biomagnetism.app/free-protocol-pairs"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- ═══ Other public pages ════════════════════════════════════════════════ -->
+  <url>
+    <loc>https://biomagnetism.app</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://biomagnetism.app/signup</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://biomagnetism.app/bodyscan/info</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://biomagnetism.app/chakrascan/info</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://biomagnetism.app/data_cache/info</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://biomagnetism.app/bioconnect/info</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://biomagnetism.app/products</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://biomagnetism.app/products/bio</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://biomagnetism.app/products/chakra</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
 
 </urlset>

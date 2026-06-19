@@ -31,6 +31,26 @@ Route::get('/data_cache/info', 'DataCacheController@info')->name('app.data_cache
 
 Route::get('/free-protocol-pairs', 'DrGoizPairController@index')->name('app.dr_goiz_pairs');
 
+Route::get('/contact', 'ContactController@show')->name('app.contact');
+
+// Spanish locale routes
+Route::prefix('es')->group(function () {
+    Route::get('/home', 'DashboardController@landing')->name('app.home.es');
+    Route::get('/pricing', 'HomeController@pricing')->name('app.pricing.es');
+    Route::get('/contact', 'ContactController@show')->name('app.contact.es');
+    Route::get('/free-protocol-pairs', 'DrGoizPairController@index')->name('app.dr_goiz_pairs.es');
+    Route::post('/contact', 'ContactController@store')->name('contact.store.es');
+});
+
+// French locale routes
+Route::prefix('fr')->group(function () {
+    Route::get('/home', 'DashboardController@landing')->name('app.home.fr');
+    Route::get('/pricing', 'HomeController@pricing')->name('app.pricing.fr');
+    Route::get('/contact', 'ContactController@show')->name('app.contact.fr');
+    Route::get('/free-protocol-pairs', 'DrGoizPairController@index')->name('app.dr_goiz_pairs.fr');
+    Route::post('/contact', 'ContactController@store')->name('contact.store.fr');
+});
+
 Route::get('/products', 'ProductController@index')->name('app.products.index');
 Route::get('/products/bio', 'ProductController@bio')->name('app.products.bio');
 Route::get('/products/chakra', 'ProductController@chakra')->name('app.products.chakra');
