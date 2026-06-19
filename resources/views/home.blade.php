@@ -12,7 +12,7 @@
     <main class="modern-main-content">
         <section class="mb-5">
             <h3 class="eyebrow mb-4">
-                {{ $l === 'es' ? 'Alineación Iónica Positiva y Negativa' : ($l === 'fr' ? 'Alignement Ionique Positif et Négatif' : 'Ion Positive &amp; Negative Alignment') }}
+                {{ $l === 'es' ? 'Alineación Iónica Positiva y Negativa' : ($l === 'fr' ? 'Alignement Ionique Positif et Négatif' : 'Ion Positive & Negative Alignment') }}
             </h3>
             <h2 class="hero-heading mb-4">
                 @if($l === 'es')
@@ -174,7 +174,7 @@
 
         <section id="pricing" class="mb-5">
             <h4 class="section-eyebrow mb-4">
-                {{ $l === 'es' ? 'Planes y Precios' : ($l === 'fr' ? 'Plans et Tarifs' : 'Plans &amp; Pricing') }}
+                {{ $l === 'es' ? 'Planes y Precios' : ($l === 'fr' ? 'Plans et Tarifs' : 'Plans & Pricing') }}
             </h4>
             @include('partials.modern.pricing')
         </section>

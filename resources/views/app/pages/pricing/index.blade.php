@@ -13,7 +13,7 @@
         <div class="modern-data-cache-wrap">
             <header class="modern-page-header">
                 <div>
-                    <h1 class="modern-page-title">{{ $pl === 'es' ? 'Planes y Precios' : ($pl === 'fr' ? 'Plans et Tarifs' : 'Plans &amp; Pricing') }}</h1>
+                    <h1 class="modern-page-title">{{ $pl === 'es' ? 'Planes y Precios' : ($pl === 'fr' ? 'Plans et Tarifs' : 'Plans & Pricing') }}</h1>
                     <p class="modern-page-subtitle">{{ $pl === 'es' ? 'Elige el plan que mejor se adapta a ti' : ($pl === 'fr' ? 'Choisissez le plan qui vous convient' : 'Choose the plan that works for you') }}</p>
                 </div>
             </header>
