@@ -191,8 +191,18 @@
             // Keep app_locale in sync when the user switches language on a non-SEO page.
             window.doGTranslate = function (pair) {
                 var lang = (pair || '').split('|').pop();
-                if (lang === 'en') { try { localStorage.removeItem('app_locale'); } catch (e) {} _clearCookie(); }
-                else if (lang === 'es' || lang === 'fr') { try { localStorage.setItem('app_locale', lang); } catch (e) {} }
+                if (lang === 'en') {
+                    // Google Translate has already rewritten the DOM to es/fr; calling
+                    // doGTranslate('en|en') won't restore the original text. The reliable
+                    // revert is to force English in the cookie and reload the page.
+                    // Writing /en/en (not clearing) stops detect_browser_language from
+                    // re-translating to the browser locale after reload.
+                    try { localStorage.removeItem('app_locale'); } catch (e) {}
+                    _writeCookie('/en/en');
+                    window.location.reload();
+                    return;
+                }
+                if (lang === 'es' || lang === 'fr') { try { localStorage.setItem('app_locale', lang); } catch (e) {} }
                 _orig(pair);
             };
 
