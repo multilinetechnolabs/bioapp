@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ $locale ?? app()->getLocale() }}"@if (!empty($seoPage)) class="notranslate"@endif@if (!empty($useAppShell)) ng-app="AnewApp" @endif>
+<html lang="{{ $locale ?? app()->getLocale() }}"@if (!empty($seoPage)) class="notranslate"@endif @if (!empty($useAppShell)) ng-app="AnewApp" @endif>
 
 <head>
     @include('partials.shared.meta')
