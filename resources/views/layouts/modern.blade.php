@@ -35,16 +35,19 @@
     <script>
         window.gtranslateSettings = {
             "default_language": "en",
-            "detect_browser_language": true,
+            {{-- SEO pages are already server-rendered in the correct locale.
+                 detect_browser_language must be false so GTranslate does not
+                 re-set the googtrans cookie from the OS/browser locale and
+                 overwrite our cookie-clear or trigger a redirect loop on production.
+                 Non-SEO pages keep true so GTranslate translates them normally. --}}
+            "detect_browser_language": {{ !empty($seoPage) ? 'false' : 'true' }},
             "languages": ["en", "es", "fr"],
             "wrapper_selector": ".gtranslate_wrapper",
             "flag_style": "3d"
         }
     </script>
 
-    {{-- DOM filter: hide any language the browser injected that is not in our allowed set.
-         We keep detect_browser_language:true because GTranslate requires it to register
-         doGTranslate on the window. We strip the unwanted entry from the rendered widget. --}}
+    {{-- DOM filter: hide any language the browser injected that is not in our allowed set. --}}
     <script>
     (function () {
         var _allowed = ['en', 'es', 'fr'];

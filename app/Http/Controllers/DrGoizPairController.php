@@ -31,7 +31,7 @@ class DrGoizPairController extends Controller
 
     private function localeRedirect(string $enPath)
     {
-        $gt    = $_COOKIE['googtrans'] ?? '';
+        $gt    = urldecode($_COOKIE['googtrans'] ?? '');
         $parts = array_values(array_filter(explode('/', $gt)));
         $lang  = end($parts);
         if (!in_array($lang, ['es', 'fr'], true)) return null;
