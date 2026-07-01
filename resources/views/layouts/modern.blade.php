@@ -36,31 +36,10 @@
         window.gtranslateSettings = {
             "default_language": "en",
             "detect_browser_language": {{ !empty($seoPage) ? 'false' : 'true' }},
-            "languages": ["en", "es", "fr"],
+            "languages": ["en","af","sq","am","ar","hy","az","eu","be","bn","bs","bg","ca","ceb","zh-CN","zh-TW","co","hr","cs","da","nl","eo","et","tl","fi","fr","fy","gl","ka","de","el","gu","ht","ha","haw","he","hi","hmn","hu","is","ig","id","ga","it","ja","jv","kn","kk","km","ko","ku","ky","lo","la","lv","lt","lb","mk","mg","ms","ml","mt","mi","mr","mn","my","ne","no","ny","ps","fa","pl","pt","pa","ro","ru","sm","gd","sr","st","sn","sd","si","sk","sl","so","es","su","sw","sv","tg","ta","te","th","tr","uk","ur","uz","vi","cy","xh","yi","yo","zu"],
             "wrapper_selector": ".gtranslate_wrapper",
             "flag_style": "3d"
         }
-    </script>
-
-    {{-- DOM filter: hide any language the browser injected that is not in our allowed set. --}}
-    <script>
-    (function () {
-        var _allowed = ['en', 'es', 'fr'];
-        function _filterWidget() {
-            document.querySelectorAll('a[href*="doGTranslate"], a[onclick*="doGTranslate"]').forEach(function (a) {
-                var str = a.getAttribute('href') || a.getAttribute('onclick') || '';
-                var m = str.match(/['"](en\|\w+)['"]/);
-                if (!m) return;
-                var lang = m[1].split('|')[1];
-                if (_allowed.indexOf(lang) === -1) {
-                    var item = a.closest('li') || a.parentElement;
-                    if (item) item.style.display = 'none';
-                }
-            });
-        }
-        var obs = new MutationObserver(_filterWidget);
-        obs.observe(document.documentElement, { childList: true, subtree: true });
-    }());
     </script>
 
     {{-- ============================================================================
@@ -108,19 +87,23 @@
         };
 
         if (_currentLang !== 'en') {
-            // This ES/FR page IS the chosen language — record it and prime the cookie
-            // so any non-SEO page navigated to next auto-translates correctly.
+            // ES/FR page: record preference + prime cookie for non-SEO pages that come next.
             _setPref(_currentLang);
             _writeCookie('/en/' + _currentLang);
         } else {
-            // English SEO URL. If a non-English global preference exists, go localized.
+            // English SEO URL.
             var _pref = _getPref();
             if (_pref === 'es' || _pref === 'fr') {
+                // Redirect to the server-rendered locale URL.
                 var _lu = _urls[_seoPage] && _urls[_seoPage][_pref];
                 if (_lu && _lu !== location.pathname) { window.location.replace(_lu); return; }
+            } else if (_pref && _pref !== 'en') {
+                // Any other language: prime cookie so GTranslate translates this English page.
+                _writeCookie('/en/' + _pref);
+            } else {
+                // Genuinely English — clear any stale cookie.
+                _clearCookie();
             }
-            // Genuinely English — make sure no stale cookie makes GTranslate translate.
-            _clearCookie();
         }
 
         var _timer = setInterval(function () {
@@ -128,22 +111,57 @@
             clearInterval(_timer);
             var _orig = window.doGTranslate;
 
-            // Sync the widget flag to the server-rendered locale (notranslate prevents
-            // GTranslate from actually altering the content).
-            if (_currentLang !== 'en') _orig('en|' + _currentLang);
+            if (_currentLang !== 'en') {
+                // Sync widget flag; notranslate on <html> blocks actual DOM translation.
+                _orig('en|' + _currentLang);
+            } else {
+                // EN URL with a non-es/fr language preference: translate the English content.
+                var _timerPref = _getPref();
+                if (_timerPref && _timerPref !== 'en' && _timerPref !== 'es' && _timerPref !== 'fr') {
+                    _orig('en|' + _timerPref);
+                }
+            }
 
             window.doGTranslate = function (pair) {
                 var lang = (pair || '').split('|').pop();
-                var dest = _urls[_seoPage] && _urls[_seoPage][lang];
-                if (lang === 'en') { _clrPref(); _clearCookie(); }
-                else if (lang === 'es' || lang === 'fr') { _setPref(lang); _writeCookie('/en/' + lang); }
 
-                if (dest && dest !== location.pathname) {
-                    window.location.href = dest;
-                } else if (dest && dest === location.pathname) {
-                    _orig('en|' + lang); // already on correct URL — just refresh widget/content
+                if (lang === 'en') {
+                    var _hadPref = _getPref();
+                    _clrPref();
+                    _clearCookie();
+                    var _enUrl = _urls[_seoPage] && _urls[_seoPage]['en'];
+                    if (_enUrl && _enUrl !== location.pathname) {
+                        window.location.href = _enUrl;
+                    } else if (_hadPref && _hadPref !== 'en') {
+                        // Was showing translated content — reload to restore original English.
+                        window.location.reload();
+                    } else {
+                        _orig(pair);
+                    }
+                    return;
+                }
+
+                if (lang === 'es' || lang === 'fr') {
+                    _setPref(lang);
+                    _writeCookie('/en/' + lang);
+                    var _dest = _urls[_seoPage] && _urls[_seoPage][lang];
+                    if (_dest && _dest !== location.pathname) {
+                        window.location.href = _dest;
+                    } else {
+                        _orig('en|' + lang); // already on correct locale URL
+                    }
+                    return;
+                }
+
+                // Any other language: translate the English URL in-place; navigate there first
+                // if currently on an ES/FR locale URL.
+                _setPref(lang);
+                _writeCookie('/en/' + lang);
+                var _enUrl = _urls[_seoPage] && _urls[_seoPage]['en'];
+                if (_enUrl && _enUrl !== location.pathname) {
+                    window.location.href = _enUrl; // go to EN URL, page load will apply cookie
                 } else {
-                    _orig(pair);
+                    _orig(pair); // already on EN URL, translate in-place
                 }
             };
         }, 50);
@@ -180,34 +198,30 @@
         var _pref = null;
         try { _pref = localStorage.getItem('app_locale'); } catch (e) {}
 
-        // Prime the cookie synchronously so GTranslate auto-translates on load.
-        if (_pref === 'es' || _pref === 'fr') _writeCookie('/en/' + _pref);
+        // Prime the cookie synchronously BEFORE GTranslate loads for any non-English preference.
+        if (_pref && _pref !== 'en') _writeCookie('/en/' + _pref);
 
         var _timer = setInterval(function () {
             if (typeof window.doGTranslate !== 'function') return;
             clearInterval(_timer);
             var _orig = window.doGTranslate;
 
-            // Keep app_locale in sync when the user switches language on a non-SEO page.
             window.doGTranslate = function (pair) {
                 var lang = (pair || '').split('|').pop();
                 if (lang === 'en') {
-                    // Google Translate has already rewritten the DOM to es/fr; calling
-                    // doGTranslate('en|en') won't restore the original text. The reliable
-                    // revert is to force English in the cookie and reload the page.
-                    // Writing /en/en (not clearing) stops detect_browser_language from
-                    // re-translating to the browser locale after reload.
+                    // GTranslate rewrites DOM in-place with no built-in undo; reload with
+                    // /en/en cookie so detect_browser_language doesn't re-translate.
                     try { localStorage.removeItem('app_locale'); } catch (e) {}
                     _writeCookie('/en/en');
                     window.location.reload();
                     return;
                 }
-                if (lang === 'es' || lang === 'fr') { try { localStorage.setItem('app_locale', lang); } catch (e) {} }
+                try { localStorage.setItem('app_locale', lang); } catch (e) {}
                 _orig(pair);
             };
 
-            // Belt-and-suspenders: explicitly apply the stored preference once ready.
-            if (_pref === 'es' || _pref === 'fr') _orig('en|' + _pref);
+            // Belt-and-suspenders: apply stored preference once GTranslate is ready.
+            if (_pref && _pref !== 'en') _orig('en|' + _pref);
         }, 50);
         setTimeout(function () { clearInterval(_timer); }, 10000);
     }());
