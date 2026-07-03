@@ -149,7 +149,14 @@ class User extends Authenticatable implements Auditable, MustVerifyEmail
 
     public function currentSubscription()
     {
-        return $this->subscriptions->where('status', 'active')->where('ends_at', '>=', \Carbon\Carbon::now())->first();
+        // Access is gated by the paid period (ends_at), which mirrors the Freemius
+        // license expiration. A 'cancelled' subscription only means it won't renew,
+        // so it must keep access until ends_at — same as Freemius keeps the license
+        // active until expiration.
+        return $this->subscriptions
+            ->whereIn('status', ['active', 'cancelled'])
+            ->where('ends_at', '>=', \Carbon\Carbon::now())
+            ->first();
     }
 
     public function hasValidSubscription()
@@ -157,10 +164,7 @@ class User extends Authenticatable implements Auditable, MustVerifyEmail
         if ($this->isAdmin()) {
             return true;
         }
-        if (empty($this->subscriptions->where('status','active')) || empty($this->currentSubscription())) {
-            return false;
-        }
-        return true;
+        return ! empty($this->currentSubscription());
     }
 
     public function friendRequests()
