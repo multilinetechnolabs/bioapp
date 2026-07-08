@@ -8,6 +8,30 @@ use Auth;
 class CourseController extends Controller
 {
     const SESSION_KEY = 'course_preview.completed';
+    const PAID_KEY = 'course_preview.paid';
+
+    public function checkout()
+    {
+        return view('app.pages.course.checkout', [
+            'alreadyPaid' => (bool) session(self::PAID_KEY),
+            'status' => request('status'),
+        ]);
+    }
+
+    public function pay()
+    {
+        session([
+            self::PAID_KEY => true,
+            'course_preview.purchased_at' => now()->toDateTimeString(),
+        ]);
+
+        return redirect()->route('course.checkout', ['status' => 'success']);
+    }
+
+    public function payFailed()
+    {
+        return redirect()->route('course.checkout', ['status' => 'failed']);
+    }
 
     public function index()
     {
@@ -160,6 +184,13 @@ class CourseController extends Controller
         session()->forget(self::SESSION_KEY);
 
         return redirect()->route('course.index');
+    }
+
+    public function removeAccess()
+    {
+        session()->forget([self::PAID_KEY, 'course_preview.purchased_at']);
+
+        return redirect()->route('course.checkout');
     }
 
     protected function completedLessons(): array

@@ -15,8 +15,6 @@
     <div class="course-shell">
         <div class="course-container">
 
-            <div class="course-demo-flag">Design preview &mdash; content &amp; progress not yet connected to purchase</div>
-
             <div class="course-hero">
                 <div>
                     <h1 class="course-hero__title">Anew Avenue Biomagnetism<br>Certification Course</h1>
@@ -24,7 +22,11 @@
                     <div class="course-hero__reset">
                         <form action="{{ route('course.reset') }}" method="POST" onsubmit="return confirm('Reset your demo progress? This clears all Mark Complete checkpoints so you can replay the course from the start.');">
                             @csrf
-                            <button type="submit">Reset demo progress / Reiniciar progreso de la demostración</button>
+                            <button type="submit">Reset demo progress / Reiniciar progreso</button>
+                        </form>
+                        <form action="{{ route('course.removeAccess') }}" method="POST" onsubmit="return confirm('Remove course access? You will need to pay again to re-enter.');" style="margin-top:4px;">
+                            @csrf
+                            <button type="submit">Remove access (test re-pay) / Quitar acceso</button>
                         </form>
                     </div>
                 </div>

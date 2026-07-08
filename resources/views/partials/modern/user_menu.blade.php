@@ -87,6 +87,14 @@
             </li>
 
             <li>
+                <a href="{{ route('course.index') }}"
+                   class="user-side-menu__link {{ \Illuminate\Support\Str::startsWith($currentRouteName, 'course.') ? 'active' : '' }}">
+                    <svg class="user-side-menu__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0v7m-7-4.5V15c0 1.657 3.134 3 7 3s7-1.343 7-3v-2.5"/></svg>
+                    Course / Curso
+                </a>
+            </li>
+
+            <li>
                 <a href="{{ route('app.home') }}#contact" id="sidebarContactLink"
                    class="user-side-menu__link">
                     <svg class="user-side-menu__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
