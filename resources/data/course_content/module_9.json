@@ -1,0 +1,94 @@
+{
+  "module_number": 9,
+  "module_title": "Professional Practice, Pricing & Safety Protocols",
+  "slides": [
+    {
+      "index": 1,
+      "heading": "Professional Practice, Pricing & Safety Protocols",
+      "body": null,
+      "type": "title",
+      "image_source": null,
+      "video_files": null
+    },
+    {
+      "index": 2,
+      "heading": "Transitioning from a student to a professional practitioner requires more than just knowing where to place magnets.",
+      "body": "It requires a solid foundation in safety, ethical boundaries, and efficient session management. In this module, we will troubleshoot common pitfalls, lay out physical safety guidelines for your workspace, and clarify standard pricing structures alongside the exact tools built into your app to keep your practice compliant and organized.",
+      "type": "text",
+      "image_source": null,
+      "video_files": null
+    },
+    {
+      "index": 3,
+      "heading": "Time Investment & Industry Standard Pricing",
+      "body": null,
+      "type": "title",
+      "image_source": null,
+      "video_files": null
+    },
+    {
+      "index": 4,
+      "heading": "One of the most frequent mistakes new practitioners make is underestimating the time a proper session takes or undercharging for their expertise.",
+      "body": "- Session Duration: A comprehensive session—including intake confirmation, full kinesiology scan, magnet placement, and resting time—takes approximately 1 hour to 1.5 hours to complete correctly. Never rush this process; the body requires time to process the adjustments.\n- The US Going Rate: The established professional standard in the United States is $150.00 per session.\n- Pricing Consistency: This $150.00 rate should be your standard benchmark across the board. Whether you are running a full biological biomagnetism scan or a dedicated chakra session, charge the same standard rate. Your time, energy tracking, and clinical expertise are equally valuable regardless of which module you are deploying for the client.",
+      "type": "text",
+      "image_source": null,
+      "video_files": null
+    },
+    {
+      "index": 5,
+      "heading": "Physical Safety & Workplace Security",
+      "body": null,
+      "type": "title",
+      "image_source": null,
+      "video_files": null
+    },
+    {
+      "index": 6,
+      "heading": "Administering a professional practice means keeping precise, secure records.",
+      "body": "You don't need paper filing cabinets; everything you need is streamlined directly inside biomagnetism.app.\n\n- Intake & Liability Forms: Before you ever place a magnet, you must have legal permission. The app allows you to digitally scan your client's Intake Form and Protective Liability Form. This ensures you have their informed consent safely documented before the session begins.\n- The Client Add List: Inside the app, you can build a permanent profile for each individual. During a session, use the Client Add List to log every specific pair found during your scan.\n- Tracking and Sharing: The app stores these charts over time, allowing you to refer back to past sessions at any moment to track patterns. Once the session is complete, you can instantly print the session summary or email it directly to the client for their own records.\n- HIPAA & Privacy Compliance: All medical notes and scan findings must be kept strictly confidential. The app securely stores these charts to protect your client's privacy rights, aligning with HIPAA standards for handling personal health information. Never discuss a client's charts or data with anyone else.",
+      "type": "text",
+      "image_source": null,
+      "video_files": null
+    },
+    {
+      "index": 7,
+      "heading": "Magnet Selection, Tape, and Client Skin Care",
+      "body": null,
+      "type": "title",
+      "image_source": null,
+      "video_files": null
+    },
+    {
+      "index": 8,
+      "heading": "A common pitfall in this industry involves the tape and materials used to secure magnets.",
+      "body": "Traditional training often suggests using standard masking tape. This is a highly problematic practice.\n\nThe Masking Tape Pitfall: Masking tape leaves a sticky, chemical residue that transfers directly onto the patient's skin and clothes. This residue is incredibly difficult to clean off the magnets themselves. Worse, masking tape adhesive is highly aggressive and frequently causes skin irritation, allergic reactions, and severe skin breakdown—especially in elderly clients with fragile skin.\n\n- The Skin-Safe Alternative: Only use professional, hypoallergenic paper or medical tape that is specifically cleared for direct skin contact.\n- Leather vs. Vinyl Magnets: When investing in your tools, look at longevity and sanitation. Vinyl casings eventually dry out, crack, and flake small pieces of plastic onto your clients. High-quality leather lasts, does not break down, and provides a much better professional experience.",
+      "type": "text",
+      "image_source": null,
+      "video_files": null
+    },
+    {
+      "index": 9,
+      "heading": "The Bag Technique & DIY Leather Magnets",
+      "body": "- The Bag Technique: To completely protect your magnets from tape residue and maximize sanitation, use the bag technique. Place your leather magnet inside a low-cost, disposable plastic baggie, and apply your medical tape over the bag to secure it to the client. After the session, discard the bag. Your magnet casing remains entirely clean, sterile, and free of adhesive gunk.\n- DIY Leather Magnets: You do not need to spend a fortune purchasing pre-made leather magnets. I have put together a comprehensive DIY video showing you exactly how to manufacture your own custom leather magnets for a fraction of the retail cost. If you are interested in making your own, send me an email and I will personally reply with the video link.",
+      "type": "text",
+      "image_source": null,
+      "video_files": null
+    },
+    {
+      "index": 10,
+      "heading": "Bag Technique: Magnet Hygiene",
+      "body": null,
+      "type": "image",
+      "image_source": "public/figma/cropped/Module_9/Screenshot_10.png",
+      "video_files": null
+    },
+    {
+      "index": 11,
+      "heading": "Conclusion",
+      "body": "By protecting your physical space, keeping meticulous digital charts, valuing your time at the standard $150 rate, and treating your client's skin with professional-grade care, you elevate your practice from a hobby to a secure, respected clinical business. Keep your standards high and take care of the practitioner first.",
+      "type": "text",
+      "image_source": null,
+      "video_files": null
+    }
+  ]
+}

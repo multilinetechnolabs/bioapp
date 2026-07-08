@@ -1,0 +1,102 @@
+{
+  "module_number": 7,
+  "module_title": "The Magnet Protocol & Polarity Mechanics",
+  "slides": [
+    {
+      "index": 1,
+      "heading": "The Magnet Protocol & Polarity Mechanics",
+      "body": null,
+      "type": "title",
+      "image_source": null,
+      "video_files": null
+    },
+    {
+      "index": 2,
+      "heading": "Fundamentals of Polarity",
+      "body": "Every biomagnetic correction relies on identifying an energetic distortion and neutralizing it using opposing charges.\n\n- The Negative Pole (Black): The diagnostic tool. It is always used first to scan, probe, and locate areas of blockages, alkaline or acidic imbalance.\n- The Positive Pole (Red): The neutralizing tool. It is placed on the resonance point to close the circuit and restore the body's natural ion/pH equilibrium or start the flow in the blockage.\n- The Goiz Reflex: The physiological biofeedback mechanism. Imbalances present visually as a temporary alteration in the muscular symmetry of the right extremity (typically the right leg).",
+      "type": "text",
+      "image_source": null,
+      "video_files": null
+    },
+    {
+      "index": 3,
+      "heading": "The Initial Scan & The Alignment Pair",
+      "body": "Before scanning specific chakras, or body locations, a one must ensure the body isn't starting in a state of baseline distortion.\n\nObserve either the heels or thumbs (one site only, which one of choice to monitor) of the right and left extremities. If they are unequal before you even begin scanning, the client's polarities are already disoriented.",
+      "type": "text",
+      "image_source": null,
+      "video_files": null
+    },
+    {
+      "index": 4,
+      "heading": "The Foundation Reset: Temple / Kidney",
+      "body": "To clear baseline distortions and establish a clean biofeedback link, apply the initial balancing pair:\n\n- Temple (Affected Side) — Placement Point; Magnet Polarity: Negative (Black); Purpose: Targets the master regulatory center in the brain.\n- Kidney (Contralateral/Opposite Side) — Placement Point; Magnet Polarity: Positive (Red); Purpose: Grounds and opens the excretory and energetic clearing pathways.\n\nInstructional Note: Leave this pair in place while performing the initial alignment checks. Once the extremities equalize, you have a stable baseline for detailed testing.",
+      "type": "mixed",
+      "image_source": "public/figma/cropped/Module_7/Screenshot_4.png",
+      "video_files": null
+    },
+    {
+      "index": 5,
+      "heading": "Step-by-Step Biofeedback Protocol",
+      "body": null,
+      "type": "title",
+      "image_source": null,
+      "video_files": null
+    },
+    {
+      "index": 6,
+      "heading": "Teach students to execute the scanning sequence with precision.",
+      "body": "The reaction of the right side determines your next move.\n\n1. The Initial Placement: Negative Testing. Place the Negative (Black) side of your testing magnet on the specific anatomical point you want to screen.\n\n2. Observe the Right Extremity: Biofeedback Reading. Gently hold and read the heels/extremities. Look specifically for a shift in length on the right side.\n\n3. Execute the Polarity Pivot: Length-Dependent Rule. Apply the foundational polarity adjustment rule based on what you see:\n- If the right extremity shortens: Keep the negative magnet in place. It has found an alkaline/acidic pocket. Proceed to find the matching positive pair.\n- If the right extremity lengthens: Turn the testing magnet over immediately so the Positive (Red) side faces the body.",
+      "type": "text",
+      "image_source": null,
+      "video_files": null
+    },
+    {
+      "index": 7,
+      "heading": "Anchor the Resonance Pair: Balancing the Circuit",
+      "body": "4. Anchor the Resonance Pair: Balancing the Circuit. Once the primary magnet's polarity is established based on Step 3, scan for the matching resonance point using the opposite polarity magnet until the right extremity returns to perfect, equal length.",
+      "type": "text",
+      "image_source": null,
+      "video_files": null
+    },
+    {
+      "index": 8,
+      "heading": "Place the negative side on the point.",
+      "body": null,
+      "type": "video",
+      "image_source": null,
+      "video_files": ["93b9e3a54a58b39809ccadc3298fee6aa175adb3.mp4"]
+    },
+    {
+      "index": 9,
+      "heading": "Advanced Troubleshooting: Homologous Polarity Pairs",
+      "body": "There will be instances where standard negative-to-positive pairing fails to bring the right extremity back to balance. When neither standard configuration works, you must test for a homologous (same-sign) pair:\n\n- Negative / Negative Pairs: Occur when both tracking points present an identical alkaline distortion.\n- Positive / Positive Pairs: Occur when both resonance points present an identical acidic distortion.\n\nInstructional Note: If the extremity remains uneven after testing opposite polarities, do not force the placement. Immediately test double negative or double positive configurations until the biofeedback signals a flat, equalized baseline.",
+      "type": "text",
+      "image_source": null,
+      "video_files": null
+    },
+    {
+      "index": 10,
+      "heading": "Correcting Specific Imbalances",
+      "body": null,
+      "type": "title",
+      "image_source": null,
+      "video_files": null
+    },
+    {
+      "index": 11,
+      "heading": "Wrap up the module by reinforcing the core logic of Biomagnetic Pairs.",
+      "body": "Resonance Over Isolation: A single magnet does not heal; it only highlights or shifts a local charge. True correction happens when the negative and positive poles communicate across the body, forcing the ions or pH back into its tight, healthy neutral window.\n\nThe Neutralization Window: Once a pair balances the extremity perfectly, the magnets must remain in position for the required session duration (typically 15 to 30 minutes, depending on the client's distance from the equator) to lock the physiological shift into place.",
+      "type": "text",
+      "image_source": null,
+      "video_files": null
+    },
+    {
+      "index": 12,
+      "heading": "Resonance Over Isolation & The Neutralization Window",
+      "body": null,
+      "type": "image",
+      "image_source": "public/figma/cropped/Module_7/Screenshot_12.png",
+      "video_files": null
+    }
+  ]
+}

@@ -16,6 +16,10 @@ return [
     'name' => env('APP_NAME', 'Laravel'),
     'title' => env('APP_TITLE', env('APP_NAME', 'Laravel')),
 
+    // Optional whole-site password gate for staging/testing replicas.
+    // Leave SITE_ACCESS_PASSWORD unset (default) to disable — must stay unset in production.
+    'site_access_password' => env('SITE_ACCESS_PASSWORD'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment

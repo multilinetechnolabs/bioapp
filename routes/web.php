@@ -11,6 +11,9 @@
 |
 */
 
+// Whole-site password gate (staging/testing only — see SiteAccessGate middleware)
+Route::post('/site-access/verify', 'SiteAccessController@verify')->name('site-access.verify');
+
 Auth::routes(['verify' => true]);
 
 Route::get('/phpinfo', function () {
@@ -90,6 +93,16 @@ Route::middleware('verified')->group(function () {
     Route::post('/plans/subscribe', 'PlanController@subscribe')->name('app.plans.subscribe');
     Route::post('/plans/success', 'PlanController@success')->name('app.plans.success');
     Route::post('/plans/failed', 'PlanController@failed')->name('app.plans.failed');
+
+    // Course — design preview (mock content + session-based progress, no purchase gate yet)
+    Route::prefix('course')->name('course.')->group(function () {
+        Route::get('/', 'CourseController@index')->name('index');
+        Route::get('/module/{module}', 'CourseController@module')->where('module', '[0-9]+')->name('module');
+        Route::get('/module/{module}/lesson/{lesson}', 'CourseController@lesson')->where(['module' => '[0-9]+', 'lesson' => '[0-9]+'])->name('lesson');
+        Route::post('/module/{module}/lesson/{lesson}/complete', 'CourseController@markComplete')->where(['module' => '[0-9]+', 'lesson' => '[0-9]+'])->name('lesson.complete');
+        Route::get('/certificate', 'CourseController@certificate')->name('certificate');
+        Route::post('/reset-progress', 'CourseController@resetProgress')->name('reset');
+    });
 
     // All feature routes require an active subscription
     Route::middleware('subscriber')->group(function () {
