@@ -172,6 +172,45 @@
             </div>
         </section>
 
+        <section id="course-banner" class="mb-5">
+            <style>
+                #course-banner .cb-box{background:linear-gradient(135deg,#0f766e,#0d9488);border-radius:18px;padding:26px 28px;color:#fff;cursor:pointer;display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between}
+                #course-banner .cb-box h3{font-family:Georgia,serif;margin:0 0 6px;font-size:1.4rem}
+                #course-banner .cb-box p{margin:0;opacity:.9;font-size:.92rem}
+                #course-banner .cb-btn{background:#fff;color:#0f766e;font-weight:700;border:none;border-radius:999px;padding:11px 22px;font-size:.9rem;cursor:pointer;white-space:nowrap}
+                #cbModalBackdrop{display:none;position:fixed;inset:0;background:rgba(15,23,42,.55);z-index:2000;align-items:center;justify-content:center;padding:20px}
+                #cbModal{background:#fff;border-radius:16px;max-width:440px;width:100%;padding:28px;text-align:center}
+                #cbModal h3{font-family:Georgia,serif;color:#0f766e;margin-top:0}
+                #cbModal ul{text-align:left;color:#475569;font-size:.9rem;line-height:1.8;max-width:300px;margin:16px auto}
+                #cbModal .cb-price{font-size:2rem;font-family:Georgia,serif;color:#0f766e;margin:10px 0}
+                #cbModal .cb-close{position:absolute;top:14px;right:18px;background:none;border:none;font-size:1.3rem;cursor:pointer;color:#94a3b8}
+            </style>
+            <div class="cb-box" id="cbOpen">
+                <div>
+                    <h3>New: Biomagnetism Certification Course</h3>
+                    <p>9 modules, guided lessons and a certificate — available as a one-time purchase, separate from your app subscription.</p>
+                </div>
+                <a href="{{ route('course.checkout') }}" class="cb-btn" onclick="event.stopPropagation()">Purchase Now</a>
+            </div>
+        </section>
+
+        <div id="cbModalBackdrop">
+            <div id="cbModal" style="position:relative">
+                <button type="button" class="cb-close" onclick="document.getElementById('cbModalBackdrop').style.display='none'">&times;</button>
+                <h3>Biomagnetism Certification Course</h3>
+                <div class="cb-price">$197 <span style="font-size:.9rem;color:#94a3b8;">one-time</span></div>
+                <ul>
+                    <li>&#10003; All 9 modules &amp; completion certificate</li>
+                    <li>&#10003; Body Scan &amp; Chakra Scan tool access</li>
+                    <li>&#10003; 1 year of full access</li>
+                </ul>
+                <a href="{{ route('course.checkout') }}" class="cb-btn" style="display:block;background:#0d9488;color:#fff;">Purchase Now</a>
+            </div>
+        </div>
+        <script>
+            document.getElementById('cbOpen').addEventListener('click', function(){ document.getElementById('cbModalBackdrop').style.display='flex'; });
+        </script>
+
         <section id="pricing" class="mb-5">
             <h4 class="section-eyebrow mb-4">
                 {{ $l === 'es' ? 'Planes y Precios' : ($l === 'fr' ? 'Plans et Tarifs' : 'Plans & Pricing') }}

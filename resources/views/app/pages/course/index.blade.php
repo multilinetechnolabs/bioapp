@@ -22,17 +22,17 @@
                     <div class="course-hero__reset">
                         <form action="{{ route('course.reset') }}" method="POST" onsubmit="return confirm('Reset your demo progress? This clears all Mark Complete checkpoints so you can replay the course from the start.');">
                             @csrf
-                            <button type="submit">Reset demo progress / Reiniciar progreso</button>
+                            <button type="submit">Reset demo progress</button>
                         </form>
                         <form action="{{ route('course.removeAccess') }}" method="POST" onsubmit="return confirm('Remove course access? You will need to pay again to re-enter.');" style="margin-top:4px;">
                             @csrf
-                            <button type="submit">Remove access (test re-pay) / Quitar acceso</button>
+                            <button type="submit">Remove access (test re-pay)</button>
                         </form>
                     </div>
                 </div>
                 <div class="course-hero__progress">
                     <div class="course-hero__progress-label">
-                        <span>Overall progress / Progreso general</span>
+                        <span>Overall progress</span>
                         <span>{{ $totalCompleted }} / {{ $totalLessons }} ({{ $overallPercent }}%)</span>
                     </div>
                     <div class="course-progress">
@@ -64,15 +64,15 @@
                         <div class="course-progress">
                             <div class="course-progress__fill" style="width: {{ $m['progress_percent'] }}%;"></div>
                         </div>
-                        <div class="course-module-card__meta">{{ $m['lesson_count'] }} lessons / lecciones</div>
+                        <div class="course-module-card__meta">{{ $m['lesson_count'] }} lessons</div>
                         <div class="course-module-card__cta">
                             @if (!$m['unlocked'])
                                 <button class="course-btn course-btn--outline course-btn--block" disabled>
-                                    <i class="fa fa-lock" aria-hidden="true"></i> Locked / Bloqueado
+                                    <i class="fa fa-lock" aria-hidden="true"></i> Locked
                                 </button>
                             @else
                                 <a href="{{ $firstLessonUrl }}" class="course-btn course-btn--primary course-btn--block">
-                                    {{ $m['completed'] ? 'Review / Revisar' : ($m['completed_count'] > 0 ? 'Continue / Continuar' : 'Start / Empezar') }}
+                                    {{ $m['completed'] ? 'Review' : ($m['completed_count'] > 0 ? 'Continue' : 'Start') }}
                                 </a>
                             @endif
                         </div>
@@ -86,9 +86,13 @@
                     <p>{{ $courseComplete ? 'Congratulations — your certificate is ready.' : 'Finish every module to unlock your certificate.' }}</p>
                 </div>
                 <a href="{{ route('course.certificate') }}" class="course-btn course-btn--outline">
-                    {{ $courseComplete ? 'View Certificate / Ver certificado' : 'View Progress / Ver progreso' }}
+                    {{ $courseComplete ? 'View Certificate' : 'View Progress' }}
                 </a>
             </div>
+
+            <p style="text-align:center;font-size:.72rem;color:var(--course-ink-soft);margin-top:18px;">
+                &copy; {{ date('Y') }} Anew Avenue Biomagnetism. All rights reserved. For personal educational use only.
+            </p>
 
         </div>
     </div>

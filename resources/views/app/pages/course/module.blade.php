@@ -16,7 +16,7 @@
         <div class="course-container">
 
             <div class="course-breadcrumb">
-                <a href="{{ route('course.index') }}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Course / Curso</a>
+                <a href="{{ route('course.index') }}"><i class="fa fa-arrow-left" aria-hidden="true"></i> Course</a>
                 <span>&rsaquo;</span>
                 <span>Module {{ $moduleNumber }}</span>
             </div>
@@ -29,7 +29,7 @@
                     </div>
                     @if ($moduleUnlocked && !empty($lessons))
                         <a href="{{ route('course.lesson', [$moduleNumber, 1]) }}" class="course-btn course-btn--primary">
-                            Start Module / Empezar módulo
+                            Start Module
                         </a>
                     @endif
                 </div>
@@ -37,11 +37,11 @@
                 @if (!$moduleUnlocked)
                     <div class="course-locked-state">
                         <div class="course-locked-state__icon"><i class="fa fa-lock" aria-hidden="true"></i></div>
-                        <h2>This module is locked / Este módulo está bloqueado</h2>
-                        <p>Complete every lesson in the previous module to unlock this one.<br>Completa todas las lecciones del módulo anterior para desbloquear este.</p>
+                        <h2>This module is locked</h2>
+                        <p>Complete every lesson in the previous module to unlock this one.</p>
                         @if ($prevModule)
                             <a href="{{ route('course.module', $prevModule) }}" class="course-btn course-btn--outline">
-                                Go to Module {{ $prevModule }} / Ir al módulo {{ $prevModule }}
+                                Go to Module {{ $prevModule }}
                             </a>
                         @endif
                     </div>
@@ -72,7 +72,7 @@
                                         <span class="course-lesson-row__icon"><i class="fa fa-lock" aria-hidden="true"></i></span>
                                         <span class="course-lesson-row__body">
                                             <div class="course-lesson-row__title">{{ $rowLabel }}</div>
-                                            <div class="course-lesson-row__type">Locked / Bloqueado</div>
+                                            <div class="course-lesson-row__type">Locked</div>
                                         </span>
                                     </span>
                                 @endif
@@ -81,6 +81,10 @@
                     </ul>
                 @endif
             </div>
+
+            <p style="text-align:center;font-size:.72rem;color:var(--course-ink-soft);margin-top:18px;">
+                &copy; {{ date('Y') }} Anew Avenue Biomagnetism. All rights reserved. For personal educational use only.
+            </p>
 
         </div>
     </div>

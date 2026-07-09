@@ -86,13 +86,15 @@
                 </a>
             </li>
 
+            @if (session('course_preview.paid'))
             <li>
                 <a href="{{ route('course.index') }}"
                    class="user-side-menu__link {{ \Illuminate\Support\Str::startsWith($currentRouteName, 'course.') ? 'active' : '' }}">
                     <svg class="user-side-menu__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0v7m-7-4.5V15c0 1.657 3.134 3 7 3s7-1.343 7-3v-2.5"/></svg>
-                    Course / Curso
+                    Course
                 </a>
             </li>
+            @endif
 
             <li>
                 <a href="{{ route('app.home') }}#contact" id="sidebarContactLink"
