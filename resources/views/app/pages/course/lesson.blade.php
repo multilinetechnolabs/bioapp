@@ -65,7 +65,7 @@
                             <div class="course-lesson-content__body">{{ $lesson['body'] }}</div>
                         @endif
 
-                        @if (in_array($lesson['type'], ['image', 'mixed'], true) && !empty($lesson['image_source']))
+                        @if (!empty($lesson['image_source']))
                             <div class="course-lesson-media">
                                 <img
                                     src="{{ asset(ltrim(str_replace('public/', '', $lesson['image_source']), '/')) }}"
@@ -77,7 +77,7 @@
                             </div>
                         @endif
 
-                        @if ($lesson['type'] === 'video' && !empty($lesson['video_files']))
+                        @if (!empty($lesson['video_files']))
                             <div class="course-lesson-media">
                                 <div class="course-lesson-videos {{ count($lesson['video_files']) > 1 ? 'course-lesson-videos--multi' : '' }}">
                                     @foreach ($lesson['video_files'] as $vi => $videoFile)

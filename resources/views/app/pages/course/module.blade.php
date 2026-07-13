@@ -49,7 +49,10 @@
                     <ul class="course-lesson-list">
                         @foreach ($lessons as $lesson)
                             @php
-                                $typeIcon = ['title' => 'fa-align-left', 'text' => 'fa-align-left', 'image' => 'fa-picture-o', 'mixed' => 'fa-picture-o', 'video' => 'fa-play-circle-o'][$lesson['type']] ?? 'fa-align-left';
+                                $hasVideo = !empty($lesson['video_files']);
+                                $hasImage = !empty($lesson['image_source']);
+                                $typeIcon = $hasVideo ? 'fa-play-circle-o' : ($hasImage ? 'fa-picture-o' : 'fa-align-left');
+                                $typeLabel = $hasVideo ? 'video' : ($hasImage ? 'image' : 'text');
                                 $rowLabel = trim(str_replace("\n", ' ', $lesson['heading'] ?? 'Lesson ' . $lesson['index']));
                             @endphp
                             <li>
@@ -64,7 +67,7 @@
                                         </span>
                                         <span class="course-lesson-row__body">
                                             <div class="course-lesson-row__title">{{ $rowLabel }}</div>
-                                            <div class="course-lesson-row__type"><i class="fa {{ $typeIcon }}" aria-hidden="true"></i> {{ $lesson['type'] }}</div>
+                                            <div class="course-lesson-row__type"><i class="fa {{ $typeIcon }}" aria-hidden="true"></i> {{ $typeLabel }}</div>
                                         </span>
                                     </a>
                                 @else

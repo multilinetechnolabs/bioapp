@@ -27,14 +27,6 @@
             <label>Body Text</label>
             <textarea name="body" class="form-control" rows="6">{{ old('body', $lesson->body) }}</textarea>
         </div>
-        <div class="form-group">
-            <label>Type</label>
-            <select name="type" class="form-control">
-                @foreach (['title', 'text', 'image', 'mixed', 'video'] as $t)
-                    <option value="{{ $t }}" {{ old('type', $lesson->type ?? 'text') === $t ? 'selected' : '' }}>{{ ucfirst($t) }}</option>
-                @endforeach
-            </select>
-        </div>
         @if ($lesson->exists)
         <div class="form-group">
             <label>Order</label>
@@ -46,6 +38,7 @@
 
     @if ($lesson->exists)
         <hr>
+        <p class="text-muted">Title and body text always show. Add an image and/or a video below and it'll show on the course page too — add both and the lesson shows all of it.</p>
         <h3>Images (one per language)</h3>
         <table class="table table-bordered">
             <thead><tr><th>Language</th><th>Preview</th><th class="text-center">Actions</th></tr></thead>

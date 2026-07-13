@@ -30,7 +30,6 @@ class CourseLessonController extends Controller
         $data = $request->validate([
             'title' => 'nullable|string|max:255',
             'body' => 'nullable|string',
-            'type' => 'required|in:title,text,image,mixed,video',
         ]);
         $data['order'] = $module->lessons()->max('order') + 1;
         $lesson = $module->lessons()->create($data);
@@ -53,7 +52,6 @@ class CourseLessonController extends Controller
         $lesson->update($request->validate([
             'title' => 'nullable|string|max:255',
             'body' => 'nullable|string',
-            'type' => 'required|in:title,text,image,mixed,video',
             'order' => 'nullable|integer',
         ]));
 
