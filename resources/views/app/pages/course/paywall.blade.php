@@ -17,11 +17,19 @@
             <div class="course-panel">
                 <div class="course-locked-state">
                     <div class="course-locked-state__icon"><i class="fa fa-lock" aria-hidden="true"></i></div>
-                    <h2>Purchase Required</h2>
-                    <p>Get access to the Biomagnetism Certification Course to start learning.</p>
-                    <a href="{{ route('course.checkout') }}" class="course-btn course-btn--primary">
-                        <i class="fa fa-lock" aria-hidden="true"></i> Pay &amp; Unlock Course
-                    </a>
+                    @if ($expired ?? false)
+                        <h2>Your Course Access Has Expired</h2>
+                        <p>Your 1-year access to the {{ $course->title ?? 'course' }} has ended. Purchase again to continue.</p>
+                        <a href="{{ route('course.checkout') }}" class="course-btn course-btn--primary">
+                            <i class="fa fa-lock" aria-hidden="true"></i> Renew Access
+                        </a>
+                    @else
+                        <h2>Purchase Required</h2>
+                        <p>Get access to the {{ $course->title ?? 'course' }} to start learning.</p>
+                        <a href="{{ route('course.checkout') }}" class="course-btn course-btn--primary">
+                            <i class="fa fa-lock" aria-hidden="true"></i> Pay &amp; Unlock Course
+                        </a>
+                    @endif
                 </div>
             </div>
         </div>

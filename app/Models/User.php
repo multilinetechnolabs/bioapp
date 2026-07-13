@@ -147,6 +147,11 @@ class User extends Authenticatable implements Auditable, MustVerifyEmail
         return $this->hasMany(Subscription::class);
     }
 
+    public function courseSubscriptions()
+    {
+        return $this->hasMany(CoursePurchase::class);
+    }
+
     public function currentSubscription()
     {
         // Access is gated by the paid period (ends_at), which mirrors the Freemius
@@ -159,12 +164,47 @@ class User extends Authenticatable implements Auditable, MustVerifyEmail
             ->first();
     }
 
+    public function currentCoursePurchase()
+    {
+        return $this->courseSubscriptions
+            ->whereIn('status', ['active', 'cancelled'])
+            ->where('ends_at', '>=', \Carbon\Carbon::now())
+            ->first();
+    }
+
+    // TESTING SITE ONLY — see BYPASS_EMAIL_VERIFICATION in config/app.php. When unset
+    // (the default), this behaves exactly like Laravel's normal hasVerifiedEmail().
+    // When enabled, every user is treated as already verified: this also stops
+    // Laravel's own SendEmailVerificationNotification listener from firing at all
+    // (it already checks hasVerifiedEmail() before sending), so registration no
+    // longer breaks on environments where outgoing mail isn't working. Must never
+    // be set on the live production site — see config/app.php for why.
+    public function hasVerifiedEmail()
+    {
+        if (config('app.bypass_email_verification')) {
+            return true;
+        }
+
+        return ! is_null($this->email_verified_at);
+    }
+
+    // App-wide feature access (Body Scan, Chakra Scan, BioConnect, Data Cache, Media,
+    // Playlist, Posts, Scan Sessions — everything behind the `subscriber` middleware).
+    // Either a valid app Subscription OR a valid course purchase unlocks all of it.
+    // This is intentionally NOT the same gate as course access itself — a plain app
+    // Subscription must never unlock the course; only CoursePaymentGate controls that,
+    // checking CoursePurchase alone.
     public function hasValidSubscription()
     {
         if ($this->isAdmin()) {
             return true;
         }
-        return ! empty($this->currentSubscription());
+
+        if (! empty($this->currentSubscription())) {
+            return true;
+        }
+
+        return ! empty($this->currentCoursePurchase());
     }
 
     public function friendRequests()

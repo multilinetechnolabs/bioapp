@@ -53,4 +53,9 @@ class HomeController extends Controller
     {
         return view('app.pages.users.subscriptions');
     }
+
+    public function courseSubscriptions()
+    {
+        return view('app.pages.users.course_subscriptions');
+    }
 }

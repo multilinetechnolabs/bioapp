@@ -15,9 +15,19 @@
     <div class="course-shell">
         <div class="course-container">
 
+            @if (!$hasCourse)
+                <div class="course-panel">
+                    <div class="course-locked-state">
+                        <div class="course-locked-state__icon"><i class="fa fa-graduation-cap" aria-hidden="true"></i></div>
+                        <h2>No Course Available Yet</h2>
+                        <p>We're still setting things up here. Please check back soon.</p>
+                        <a href="{{ route('app.dashboard') }}" class="course-btn course-btn--outline">Back to Dashboard</a>
+                    </div>
+                </div>
+            @else
             <div class="course-hero">
                 <div>
-                    <h1 class="course-hero__title">Anew Avenue Biomagnetism<br>Certification Course</h1>
+                    <h1 class="course-hero__title">{{ $courseTitle }}</h1>
                     <p class="course-hero__subtitle">Master advanced Chakra Mapping and Biomagnetic Pair protocols across {{ count($moduleStates) }} modules. Complete each module in order to unlock the next, and earn your certificate at the end.</p>
                     <div class="course-hero__reset">
                         <form action="{{ route('course.reset') }}" method="POST" onsubmit="return confirm('Reset your demo progress? This clears all Mark Complete checkpoints so you can replay the course from the start.');">
@@ -45,7 +55,7 @@
                 @foreach ($moduleStates as $m)
                     @php
                         $statusClass = $m['completed'] ? 'complete' : ($m['completed_count'] > 0 ? 'in-progress' : 'locked');
-                        $firstLessonUrl = route('course.lesson', [$m['number'], 1]);
+                        $firstLessonUrl = route('course.lesson', [$m['number'], $m['resume_lesson']]);
                     @endphp
                     <div class="course-module-card {{ !$m['unlocked'] ? 'course-module-card--locked' : '' }}">
                         <div class="course-module-card__top">
@@ -93,6 +103,7 @@
             <p style="text-align:center;font-size:.72rem;color:var(--course-ink-soft);margin-top:18px;">
                 &copy; {{ date('Y') }} Anew Avenue Biomagnetism. All rights reserved. For personal educational use only.
             </p>
+            @endif
 
         </div>
     </div>

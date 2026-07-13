@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Course;
+use App\Models\CoursePurchase;
 use Illuminate\Http\Request;
 
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -53,6 +55,16 @@ class LoginController extends Controller
         if (method_exists($user, 'hasVerifiedEmail') && ! $user->hasVerifiedEmail()) {
             return redirect()->route('verification.notice')
                 ->with('message.fail', 'Your email address is not verified yet. Please check your inbox or resend the verification email.');
+        }
+
+        if ($request->session()->pull('course_login_intent')) {
+            $course = Course::where('is_active', true)->first();
+
+            if ($course && CoursePurchase::userHasAccess($user->id, $course->id)) {
+                return redirect()->route('course.index');
+            }
+
+            return redirect()->route('course.checkout');
         }
     }
 }

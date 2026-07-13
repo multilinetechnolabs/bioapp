@@ -15,9 +15,14 @@
     <div class="course-shell">
         <div class="course-container" style="max-width:520px;">
             <div class="course-panel" style="text-align:center;">
-                <span class="course-demo-flag">Dummy payment &mdash; UI/UX demo only</span>
 
-                @if ($status === 'success' && $alreadyPaid)
+                @if (!$course)
+                    <div class="course-locked-state__icon"><i class="fa fa-graduation-cap" aria-hidden="true"></i></div>
+                    <h1 class="course-hero__title" style="font-size:1.4rem;">No Course Available Yet</h1>
+                    <p class="course-hero__subtitle" style="margin:0 auto 20px;">We're still setting things up here. Please check back soon.</p>
+                    <a href="{{ route('app.dashboard') }}" class="course-btn course-btn--outline">Back to Dashboard</a>
+
+                @elseif ($status === 'success' && $alreadyPaid)
                     <div class="course-locked-state__icon" style="background:#d1fae5;border-color:#6ee7b7;color:#065f46;"><i class="fa fa-check" aria-hidden="true"></i></div>
                     <h1 class="course-hero__title" style="font-size:1.4rem;">Payment Successful</h1>
                     <p class="course-hero__subtitle" style="margin:0 auto 20px;">You now have 1 year of course access.</p>
@@ -30,13 +35,19 @@
                     <a href="{{ route('course.checkout') }}" class="course-btn course-btn--primary course-btn--block">Try Again</a>
 
                 @else
-                    <h1 class="course-hero__title" style="font-size:1.5rem;">Biomagnetism Certification Course</h1>
-                    <p class="course-hero__subtitle" style="margin:0 auto 20px;">Full access to the certification course, plus Body Scan &amp; Chakra Scan tools, for 1 year.</p>
+                    @if ($hasExpired)
+                        <div style="background:#fee2e2;border:1px solid #fca5a5;color:#b91c1c;border-radius:10px;padding:10px 14px;margin-bottom:16px;font-size:.85rem;">
+                            Your previous 1-year access has expired. Purchase again to continue.
+                        </div>
+                    @endif
+
+                    <h1 class="course-hero__title" style="font-size:1.5rem;">{{ $course->title }}</h1>
+                    <p class="course-hero__subtitle" style="margin:0 auto 20px;">{{ $course->description }}</p>
                     <div style="font-size:2.4rem;font-family:var(--course-font-serif);color:var(--course-primary-dark);margin:10px 0;">
-                        $197 <span style="font-size:.9rem;color:var(--course-ink-soft);">one-time</span>
+                        ${{ number_format($course->price, 0) }} <span style="font-size:.9rem;color:var(--course-ink-soft);">one-time</span>
                     </div>
                     <ul style="text-align:left;max-width:320px;margin:18px auto;padding:0;list-style:none;color:var(--course-ink-soft);font-size:.88rem;line-height:1.9;">
-                        <li>&#10003; All 9 modules &amp; certificate</li>
+                        <li>&#10003; All {{ $course->modules()->count() }} modules &amp; certificate</li>
                         <li>&#10003; Body Scan &amp; Chakra Scan access</li>
                         <li>&#10003; 1 year of full access</li>
                     </ul>
@@ -81,19 +92,15 @@
                             </details>
                         </div>
 
-                        <form action="{{ route('course.checkout.pay') }}" method="POST" style="margin-bottom:8px;">
+                        <form id="courseCheckoutForm">
                             @csrf
                             <div style="text-align:left;margin-bottom:12px;font-size:.85rem;">
                                 <label style="display:flex;align-items:flex-start;gap:8px;">
-                                    <input type="checkbox" name="agree_tos" required style="margin-top:3px;">
+                                    <input type="checkbox" id="courseAgreeTos" required style="margin-top:3px;">
                                     <span>I have read and agree to the Course Enrollment Agreement and Terms of Service above.</span>
                                 </label>
                             </div>
-                            <button type="submit" class="course-btn course-btn--primary course-btn--block">Pay $197 (Simulate Success)</button>
-                        </form>
-                        <form action="{{ route('course.checkout.fail') }}" method="POST">
-                            @csrf
-                            <button type="submit" class="course-btn course-btn--outline course-btn--block">Cancel Payment (Simulate Failure)</button>
+                            <button type="submit" class="course-btn course-btn--primary course-btn--block">Pay ${{ number_format($course->price, 0) }} &amp; Enroll</button>
                         </form>
                     @endif
                 @endif
@@ -101,4 +108,99 @@
         </div>
     </div>
 </main>
+
+@if ($course && !$alreadyPaid && $status !== 'failed')
+    @push('scripts')
+    <script src="https://checkout.freemius.com/js/v1/"></script>
+    <script>
+    (function () {
+        var form = document.getElementById('courseCheckoutForm');
+        if (!form) return;
+
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            var agree = document.getElementById('courseAgreeTos');
+            if (!agree.checked) {
+                alert('Please agree to the Course Enrollment Agreement before continuing.');
+                return;
+            }
+
+            try {
+                const response = await fetch("{{ route('course.checkout.freemiusInit') }}", {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                        'Accept': 'application/json'
+                    },
+                    body: new FormData(form)
+                });
+
+                const data = await response.json();
+
+                if (!data.success) {
+                    alert(data.message || 'Something went wrong while preparing the payment.');
+                    return;
+                }
+
+                if (!data.product_id || !data.plan_id || !data.public_key) {
+                    alert('Payment configuration is incomplete.');
+                    return;
+                }
+
+                const checkoutData = {
+                    product_id: data.product_id,
+                    plan_id: data.plan_id,
+                    public_key: data.public_key,
+                    image: data.image,
+                    ...(data.sandbox && { sandbox: { token: data.sandbox_token, ctx: data.sandbox_ctx } }),
+                };
+
+                const handler = new FS.Checkout(checkoutData);
+
+                handler.open({
+                    name: data.purchase_name,
+                    licenses: data.licenses,
+                    user_email: data.email,
+                    readonly_user: true,
+                    purchaseCompleted: async (response) => {
+                        try {
+                            await fetch("{{ route('course.checkout.freemiusSuccess') }}", {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                },
+                                body: JSON.stringify({ transaction_id: data.transaction_id, status: 'success', response: response })
+                            });
+                        } catch (error) {
+                            console.error('Course success update failed:', error);
+                        }
+                        window.location.href = "{{ route('course.checkout', ['status' => 'success']) }}";
+                    },
+                    cancel: async () => {
+                        try {
+                            await fetch("{{ route('course.checkout.freemiusFailed') }}", {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                },
+                                body: JSON.stringify({ transaction_id: data.transaction_id, status: 'failed' })
+                            });
+                        } catch (error) {
+                            console.error('Course failure update failed:', error);
+                        }
+                        window.location.href = "{{ route('course.checkout', ['status' => 'failed']) }}";
+                    }
+                });
+            } catch (error) {
+                console.error('Course Freemius checkout failed:', error);
+                alert('Unable to open the payment window right now. Please try again.');
+            }
+        });
+    })();
+    </script>
+    @endpush
+@endif
 @endsection

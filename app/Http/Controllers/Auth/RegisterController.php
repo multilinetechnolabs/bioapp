@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\Course;
+use App\Models\CoursePurchase;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -89,6 +91,21 @@ class RegisterController extends Controller
 
         if ($request->filled('plan_id')) {
             session(['pending_plan_id' => $request->plan_id]);
+        }
+
+        // Only act on the course intent once the user is actually usable (i.e. already
+        // verified — normally only true here via the testing-site bypass). Otherwise
+        // leave the flag in session so it's still there once they verify and log in.
+        if ($request->session()->get('course_login_intent') && $user->hasVerifiedEmail()) {
+            $request->session()->forget('course_login_intent');
+
+            $course = Course::where('is_active', true)->first();
+
+            if ($course && CoursePurchase::userHasAccess($user->id, $course->id)) {
+                return redirect()->route('course.index');
+            }
+
+            return redirect()->route('course.checkout');
         }
 
         $mailError = $this->sendVerificationEmail($user);

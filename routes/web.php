@@ -14,6 +14,12 @@
 // Whole-site password gate (staging/testing only — see SiteAccessGate middleware)
 Route::post('/site-access/verify', 'SiteAccessController@verify')->name('site-access.verify');
 
+// Course purchase entry point — reachable by guests. Sends already-logged-in users
+// straight to the right course page, or remembers the intent and sends guests to
+// log in/register first. Only users who arrive through here get redirected to the
+// course afterward — every other login/registration path is unaffected.
+Route::get('/course/start', 'CourseController@start')->name('course.start');
+
 Auth::routes(['verify' => true]);
 
 Route::get('/phpinfo', function () {
@@ -88,17 +94,20 @@ Route::middleware('verified')->group(function () {
     Route::get('/payments', 'HomeController@payments')->name('app.user.payments');
     Route::get('/subscriptions', 'HomeController@subscriptions')->name('app.user.subscriptions');
     Route::post('/subscriptions/{id}/cancel', 'SubscriptionController@cancelSubscription')->name('app.user.subscriptions.cancel');
+    Route::get('/course-subscriptions', 'HomeController@courseSubscriptions')->name('app.user.course_subscriptions');
+    Route::post('/course-subscriptions/{id}/cancel', 'CourseSubscriptionController@cancelSubscription')->name('app.user.course_subscriptions.cancel');
 
     ## Plans — no subscription check (these ARE the payment routes)
     Route::post('/plans/subscribe', 'PlanController@subscribe')->name('app.plans.subscribe');
     Route::post('/plans/success', 'PlanController@success')->name('app.plans.success');
     Route::post('/plans/failed', 'PlanController@failed')->name('app.plans.failed');
 
-    // Course — design preview (mock content + session-based progress/payment, no real backend yet)
+    // Course — dynamic DB-backed content; real Freemius one-time purchase for course access
     Route::prefix('course')->name('course.')->group(function () {
         Route::get('/checkout', 'CourseController@checkout')->name('checkout');
-        Route::post('/checkout/pay', 'CourseController@pay')->name('checkout.pay');
-        Route::post('/checkout/fail', 'CourseController@payFailed')->name('checkout.fail');
+        Route::post('/checkout/freemius-init', 'CourseController@freemiusInit')->name('checkout.freemiusInit');
+        Route::post('/checkout/freemius-success', 'CourseController@freemiusSuccess')->name('checkout.freemiusSuccess');
+        Route::post('/checkout/freemius-failed', 'CourseController@freemiusFailed')->name('checkout.freemiusFailed');
 
         Route::middleware('course.paid')->group(function () {
             Route::get('/', 'CourseController@index')->name('index');
@@ -106,6 +115,7 @@ Route::middleware('verified')->group(function () {
             Route::get('/module/{module}/lesson/{lesson}', 'CourseController@lesson')->where(['module' => '[0-9]+', 'lesson' => '[0-9]+'])->name('lesson');
             Route::post('/module/{module}/lesson/{lesson}/complete', 'CourseController@markComplete')->where(['module' => '[0-9]+', 'lesson' => '[0-9]+'])->name('lesson.complete');
             Route::get('/certificate', 'CourseController@certificate')->name('certificate');
+            Route::get('/certificate/download', 'CourseController@downloadCertificatePdf')->name('certificate.download');
             Route::post('/reset-progress', 'CourseController@resetProgress')->name('reset');
             Route::post('/remove-access', 'CourseController@removeAccess')->name('removeAccess');
         });
@@ -207,6 +217,32 @@ Route::prefix('admin')->namespace('Admin')->middleware(['verified', 'auth.admin'
     Route::get('/email', 'HomeController@email');
     Route::post('/email/send', 'HomeController@sendEmail');
 
+    ## Course config
+    Route::get('course', 'CourseController@index')->name('admin.course.index');
+    Route::get('course/create', 'CourseController@create')->name('admin.course.create');
+    Route::post('course', 'CourseController@store')->name('admin.course.store');
+    Route::get('course/{course}/edit', 'CourseController@edit')->name('admin.course.edit');
+    Route::put('course/{course}', 'CourseController@update')->name('admin.course.update');
+    Route::delete('course/{course}', 'CourseController@destroy')->name('admin.course.destroy');
+    Route::post('course/{course}/modules', 'CourseController@storeModule')->name('admin.course.module.store');
+    Route::put('course/modules/{module}', 'CourseController@updateModule')->name('admin.course.module.update');
+    Route::delete('course/modules/{module}', 'CourseController@destroyModule')->name('admin.course.module.destroy');
+
+    Route::get('course/modules/{module}/lessons', 'CourseLessonController@index')->name('admin.course.lesson.index');
+    Route::get('course/modules/{module}/lessons/create', 'CourseLessonController@create')->name('admin.course.lesson.create');
+    Route::post('course/modules/{module}/lessons', 'CourseLessonController@store')->name('admin.course.lesson.store');
+    Route::get('course/lessons/{lesson}/edit', 'CourseLessonController@edit')->name('admin.course.lesson.edit');
+    Route::put('course/lessons/{lesson}', 'CourseLessonController@update')->name('admin.course.lesson.update');
+    Route::delete('course/lessons/{lesson}', 'CourseLessonController@destroy')->name('admin.course.lesson.destroy');
+    Route::post('course/lessons/{lesson}/images', 'CourseLessonController@storeImage')->name('admin.course.lesson.image.store');
+    Route::delete('course/lessons/images/{image}', 'CourseLessonController@destroyImage')->name('admin.course.lesson.image.destroy');
+    Route::post('course/lessons/{lesson}/videos', 'CourseLessonController@storeVideo')->name('admin.course.lesson.video.store');
+    Route::delete('course/lessons/videos/{video}', 'CourseLessonController@destroyVideo')->name('admin.course.lesson.video.destroy');
+
+    ## Certificate template config
+    Route::get('certificate', 'CertificateTemplateController@edit')->name('admin.certificate.edit');
+    Route::put('certificate', 'CertificateTemplateController@update')->name('admin.certificate.update');
+
     ## Pairs
     Route::get('pairs', 'PairController@index');
     Route::get('pairs/bio', 'PairController@bio');
@@ -255,6 +291,8 @@ Route::prefix('admin')->namespace('Admin')->middleware(['verified', 'auth.admin'
     ## Orders
 Route::get('subscriptions', 'SubscriptionController@index')->name('admin.subscriptions');
     Route::post('subscriptions/{id}/cancel', 'SubscriptionController@cancelSubscription')->name('admin.subscriptions.cancel');
+    Route::get('course-subscriptions', 'CourseSubscriptionController@index')->name('admin.course_subscriptions');
+    Route::post('course-subscriptions/{id}/cancel', 'CourseSubscriptionController@cancelSubscription')->name('admin.course_subscriptions.cancel');
 
     ## Users
     Route::get('users', 'UserController@index');

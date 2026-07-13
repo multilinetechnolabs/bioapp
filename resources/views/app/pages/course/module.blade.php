@@ -28,8 +28,8 @@
                         <h1>{{ $moduleTitle }}</h1>
                     </div>
                     @if ($moduleUnlocked && !empty($lessons))
-                        <a href="{{ route('course.lesson', [$moduleNumber, 1]) }}" class="course-btn course-btn--primary">
-                            Start Module
+                        <a href="{{ route('course.lesson', [$moduleNumber, $resumeLesson]) }}" class="course-btn course-btn--primary">
+                            {{ $resumeLesson > 1 ? 'Continue Module' : 'Start Module' }}
                         </a>
                     @endif
                 </div>

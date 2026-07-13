@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Activity;
 use App\Models\Activity\Category as ActivityCategory;
+use App\Models\CoursePurchase;
 use App\Models\DrGoizPair;
 use App\Models\Logo;
 use App\Models\Media;
@@ -18,6 +19,7 @@ use App\Models\Subscription;
 use App\Models\User;
 use App\Policies\ActivityCategoryPolicy;
 use App\Policies\ActivityPolicy;
+use App\Policies\CoursePurchasePolicy;
 use App\Policies\DrGoizPairPolicy;
 use App\Policies\LogoPolicy;
 use App\Policies\MediaPolicy;
@@ -38,6 +40,7 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         ActivityCategory::class => ActivityCategoryPolicy::class,
         Activity::class => ActivityPolicy::class,
+        CoursePurchase::class => CoursePurchasePolicy::class,
         Logo::class => LogoPolicy::class,
         Media::class => MediaPolicy::class,
         ModelLabel::class => ModelLabelPolicy::class,

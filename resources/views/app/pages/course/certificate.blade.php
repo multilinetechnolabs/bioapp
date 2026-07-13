@@ -40,46 +40,47 @@
                     </div>
                 </div>
             @else
+                @php($accent = $template->accent_color ?: '#14b8a6')
                 <div class="course-certificate-wrap">
-                    <div class="course-certificate course-print-area">
-                        <div class="course-certificate__seal"><i class="fa fa-certificate" aria-hidden="true"></i></div>
-                        <div class="course-certificate__eyebrow">Certificate of Completion</div>
-                        <h1 class="course-certificate__title">Anew Avenue Biomagnetism<br>Certification Course</h1>
-                        <p class="course-certificate__intro">This certifies that</p>
-                        <div class="course-certificate__name">{{ Auth::user()->name ?? 'Student Name' }}</div>
-                        <p class="course-certificate__desc">has successfully completed all {{ $totalLessons }} lessons of the Anew Avenue Biomagnetism Certification Course, demonstrating mastery of advanced Chakra Mapping and Biomagnetic Pair protocols.</p>
-                        <p class="course-certificate__desc" style="font-size:.78rem;font-style:italic;">
-                            This certificate confirms completion of the course for personal application and professional practice, but does not convey authorization or licensure to teach or re-brand this curriculum.
-                        </p>
+                    <div class="course-certificate" style="border-color: {{ $accent }};">
+                        <div class="course-certificate__seal" style="background: radial-gradient(circle at 35% 30%, {{ $accent }}, var(--course-primary-dark));"><i class="fa fa-certificate" aria-hidden="true"></i></div>
+                        <div class="course-certificate__eyebrow">{{ $template->render($template->cert_eyebrow, $certData) }}</div>
+                        <h1 class="course-certificate__title">{!! nl2br(e($template->render($template->cert_title, $certData))) !!}</h1>
+                        <p class="course-certificate__intro">{{ $template->render($template->cert_intro, $certData) }}</p>
+                        <div class="course-certificate__name" style="border-color: {{ $accent }};">{{ $certData['name'] }}</div>
+                        <p class="course-certificate__desc">{{ $template->render($template->cert_body, $certData) }}</p>
+                        @if (!empty($template->cert_disclaimer))
+                            <p class="course-certificate__desc" style="font-size:.78rem;font-style:italic;">
+                                {{ $template->render($template->cert_disclaimer, $certData) }}
+                            </p>
+                        @endif
                         <div class="course-certificate__footer">
                             <div><strong>Date issued</strong><br>{{ $completionDate }}</div>
-                            <div><strong>Anew Avenue Biomagnetism</strong><br>anewavenuebio@gmail.com</div>
+                            <div><strong>{{ $template->issuer_name }}</strong><br>{{ $template->issuer_email }}</div>
                         </div>
                         <div class="course-certificate__actions">
-                            <button type="button" class="course-btn course-btn--primary" onclick="window.print()">
-                                <i class="fa fa-print" aria-hidden="true"></i> Print / Download
-                            </button>
+                            <a href="{{ route('course.certificate.download') }}" class="course-btn course-btn--primary">
+                                <i class="fa fa-download" aria-hidden="true"></i> Download Certificate (PDF)
+                            </a>
                         </div>
                     </div>
                 </div>
+                @if ($template->badge_enabled)
                 <div style="max-width:340px;margin:32px auto 0;text-align:center;background:#fff;border:1px solid var(--course-border);border-radius:16px;padding:24px;">
                     <h3 style="font-family:var(--course-font-serif);color:var(--course-primary-dark);font-size:1.05rem;margin:0 0 14px;">Your Digital Badge</h3>
-                    <div style="width:130px;height:130px;margin:0 auto 14px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#14b8a6,#0f766e);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(15,118,110,.35);border:4px solid #d1fae5;">
+                    <div style="width:130px;height:130px;margin:0 auto 14px;border-radius:50%;background:radial-gradient(circle at 35% 30%,{{ $accent }},#0f766e);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(15,118,110,.35);border:4px solid #d1fae5;">
                         <div style="color:#fff;text-align:center;line-height:1.2;">
                             <i class="fa fa-certificate" aria-hidden="true" style="font-size:1.6rem;display:block;margin-bottom:4px;"></i>
-                            <span style="font-size:.62rem;font-weight:700;letter-spacing:.04em;">CERTIFIED</span>
+                            <span style="font-size:.62rem;font-weight:700;letter-spacing:.04em;">{{ $template->badge_label }}</span>
                         </div>
                     </div>
-                    <p style="font-size:.86rem;color:var(--course-ink-soft);margin:0 0 4px;">"Certified in the Chakra Biomagnetism Method"</p>
-                    <p style="font-size:.72rem;color:var(--course-ink-soft);margin:0 0 16px;">Verifies completion of this course and app training — not a state-issued medical license.</p>
-                    <button type="button" class="course-btn course-btn--outline course-btn--small" disabled>
-                        <i class="fa fa-share-alt" aria-hidden="true"></i> Share / Download Badge
-                    </button>
-                    <p style="font-size:.68rem;color:var(--course-ink-soft);margin:8px 0 0;">Design preview — sharing/download not yet functional.</p>
+                    <p style="font-size:.86rem;color:var(--course-ink-soft);margin:0 0 4px;">"{{ $template->render($template->badge_caption, $certData) }}"</p>
+                    <p style="font-size:.72rem;color:var(--course-ink-soft);margin:0;">{{ $template->render($template->badge_subtext, $certData) }}</p>
                 </div>
+                @endif
 
                 <p style="text-align:center;font-size:.72rem;color:var(--course-ink-soft,#64748b);margin-top:14px;">
-                    &copy; {{ date('Y') }} Anew Avenue Biomagnetism. All rights reserved. For personal educational use only.
+                    &copy; {{ date('Y') }} {{ $template->issuer_name }}. All rights reserved. For personal educational use only.
                 </p>
             @endif
 

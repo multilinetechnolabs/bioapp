@@ -172,6 +172,10 @@
             </div>
         </section>
 
+        @php
+            $courseBannerData = \App\Models\Course::where('is_active', true)->first();
+        @endphp
+        @if ($courseBannerData)
         <section id="course-banner" class="mb-5">
             <style>
                 #course-banner .cb-box{background:linear-gradient(135deg,#0f766e,#0d9488);border-radius:18px;padding:26px 28px;color:#fff;cursor:pointer;display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between}
@@ -187,29 +191,30 @@
             </style>
             <div class="cb-box" id="cbOpen">
                 <div>
-                    <h3>New: Biomagnetism Certification Course</h3>
-                    <p>9 modules, guided lessons and a certificate — available as a one-time purchase, separate from your app subscription.</p>
+                    <h3>New: {{ $courseBannerData->title }}</h3>
+                    <p>{{ $courseBannerData->modules()->count() }} modules, guided lessons and a certificate — available as a one-time purchase, separate from your app subscription.</p>
                 </div>
-                <a href="{{ route('course.checkout') }}" class="cb-btn" onclick="event.stopPropagation()">Purchase Now</a>
+                <a href="{{ route('course.start') }}" class="cb-btn" onclick="event.stopPropagation()">Purchase Now</a>
             </div>
         </section>
 
         <div id="cbModalBackdrop">
             <div id="cbModal" style="position:relative">
                 <button type="button" class="cb-close" onclick="document.getElementById('cbModalBackdrop').style.display='none'">&times;</button>
-                <h3>Biomagnetism Certification Course</h3>
-                <div class="cb-price">$197 <span style="font-size:.9rem;color:#94a3b8;">one-time</span></div>
+                <h3>{{ $courseBannerData->title }}</h3>
+                <div class="cb-price">${{ number_format($courseBannerData->price, 0) }} <span style="font-size:.9rem;color:#94a3b8;">one-time</span></div>
                 <ul>
-                    <li>&#10003; All 9 modules &amp; completion certificate</li>
+                    <li>&#10003; All {{ $courseBannerData->modules()->count() }} modules &amp; completion certificate</li>
                     <li>&#10003; Body Scan &amp; Chakra Scan tool access</li>
                     <li>&#10003; 1 year of full access</li>
                 </ul>
-                <a href="{{ route('course.checkout') }}" class="cb-btn" style="display:block;background:#0d9488;color:#fff;">Purchase Now</a>
+                <a href="{{ route('course.start') }}" class="cb-btn" style="display:block;background:#0d9488;color:#fff;">Purchase Now</a>
             </div>
         </div>
         <script>
             document.getElementById('cbOpen').addEventListener('click', function(){ document.getElementById('cbModalBackdrop').style.display='flex'; });
         </script>
+        @endif
 
         <section id="pricing" class="mb-5">
             <h4 class="section-eyebrow mb-4">

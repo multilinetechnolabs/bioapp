@@ -20,6 +20,14 @@ return [
     // Leave SITE_ACCESS_PASSWORD unset (default) to disable — must stay unset in production.
     'site_access_password' => env('SITE_ACCESS_PASSWORD'),
 
+    // TESTING SITE ONLY. Leave BYPASS_EMAIL_VERIFICATION unset (default) and everything
+    // behaves exactly as it does today — real verification emails, real enforcement.
+    // Set BYPASS_EMAIL_VERIFICATION=true only on a testing/staging environment (e.g. one
+    // where outgoing mail is broken/unconfigured) to let new users register and use the
+    // app immediately without clicking an email verification link. Must NEVER be set on
+    // the live production site — it would let anyone register with a fake/unowned email.
+    'bypass_email_verification' => env('BYPASS_EMAIL_VERIFICATION', false),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment

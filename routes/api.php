@@ -245,6 +245,14 @@ Route::middleware('auth:api')->namespace('Api')->group(function () {
         Route::put('subscriptions/{id}', 'SubscriptionController@update')->name('api.v1.subscriptions.update');
         Route::delete('subscriptions/{id}', 'SubscriptionController@destroy')->name('api.v1.subscriptions.destroy');
 
+        ## Course Subscriptions
+        Route::get('course-subscriptions', 'CourseSubscriptionController@index')->name('api.v1.course-subscriptions.index');
+        Route::get('course-subscriptions/datatables', 'CourseSubscriptionController@datatables')->name('api.v1.course-subscriptions.datatables');
+        Route::post('course-subscriptions', 'CourseSubscriptionController@store')->name('api.v1.course-subscriptions.store');
+        Route::get('course-subscriptions/{id}', 'CourseSubscriptionController@show')->name('api.v1.course-subscriptions.show');
+        Route::put('course-subscriptions/{id}', 'CourseSubscriptionController@update')->name('api.v1.course-subscriptions.update');
+        Route::delete('course-subscriptions/{id}', 'CourseSubscriptionController@destroy')->name('api.v1.course-subscriptions.destroy');
+
         ## Users
         Route::get('users', 'UserController@index')->name('api.v1.users.index');
         Route::get('users/datatables', 'UserController@datatables')->name('api.v1.users.datatables');
@@ -319,6 +327,17 @@ Route::middleware('auth:api')->namespace('Api')->group(function () {
         Route::get('users/{user_id}/subscriptions/{id}', 'User\SubscriptionController@show');
         Route::put('users/{user_id}/subscriptions/{id}', 'User\SubscriptionController@update');
         Route::delete('users/{user_id}/subscriptions/{id}', 'User\SubscriptionController@destroy');
+
+        ## User - Course Subscriptions
+        Route::get('users/me/course-subscriptions', 'User\CourseSubscriptionController@index');
+        Route::get('users/me/course-subscriptions/datatables', 'User\CourseSubscriptionController@datatables');
+        Route::get('users/{user_id}/course-subscriptions', 'User\CourseSubscriptionController@index');
+        Route::post('users/{user_id}/course-subscriptions', 'User\CourseSubscriptionController@store');
+        Route::get('users/{user_id}/course-subscriptions/datatables', 'User\CourseSubscriptionController@datatables');
+        Route::get('users/me/course-subscriptions/{id}', 'User\CourseSubscriptionController@show');
+        Route::get('users/{user_id}/course-subscriptions/{id}', 'User\CourseSubscriptionController@show');
+        Route::put('users/{user_id}/course-subscriptions/{id}', 'User\CourseSubscriptionController@update');
+        Route::delete('users/{user_id}/course-subscriptions/{id}', 'User\CourseSubscriptionController@destroy');
 
         Route::fallback(function () {
             $status_code = Response::HTTP_NOT_FOUND;

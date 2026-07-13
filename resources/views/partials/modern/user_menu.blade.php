@@ -86,7 +86,11 @@
                 </a>
             </li>
 
-            @if (session('course_preview.paid'))
+            @php
+                $sidebarCourse = \App\Models\Course::where('is_active', true)->first();
+                $sidebarHasCourseAccess = $sidebarCourse && \App\Models\CoursePurchase::userHasAccess(Auth::id(), $sidebarCourse->id);
+            @endphp
+            @if ($sidebarHasCourseAccess)
             <li>
                 <a href="{{ route('course.index') }}"
                    class="user-side-menu__link {{ \Illuminate\Support\Str::startsWith($currentRouteName, 'course.') ? 'active' : '' }}">
@@ -109,6 +113,14 @@
                    class="user-side-menu__link {{ $currentRouteName === 'app.user.subscriptions' ? 'active' : '' }}">
                     <svg class="user-side-menu__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
                     My Subscriptions / Mis suscripciones
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ route('app.user.course_subscriptions') }}"
+                   class="user-side-menu__link {{ $currentRouteName === 'app.user.course_subscriptions' ? 'active' : '' }}">
+                    <svg class="user-side-menu__icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0v7m-7-4.5V15c0 1.657 3.134 3 7 3s7-1.343 7-3v-2.5"/></svg>
+                    My Course Subscriptions / Mis suscripciones a cursos
                 </a>
             </li>
 
