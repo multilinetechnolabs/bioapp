@@ -12,7 +12,9 @@ class CreateCoursePaymentTables extends Migration
         // since course access is a one-time purchase with its own 1-year expiry, not a recurring plan.
         Schema::create('course_freemius_transactions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            // users.id is INT UNSIGNED (legacy `increments()`), not BIGINT UNSIGNED —
+            // must match exactly or MySQL 8 rejects the FK below (error 3780).
+            $table->unsignedInteger('user_id');
             $table->unsignedBigInteger('course_id');
             $table->string('freemius_transaction_id')->nullable();
             $table->string('freemius_subscription_id')->nullable();
@@ -31,7 +33,7 @@ class CreateCoursePaymentTables extends Migration
 
         Schema::create('course_purchases', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedInteger('user_id');
             $table->unsignedBigInteger('course_id');
             $table->string('freemius_subscription_id')->nullable();
             $table->string('status')->default('active'); // active, cancelled
@@ -48,7 +50,7 @@ class CreateCoursePaymentTables extends Migration
         // needed since real access now spans up to a year across many login sessions).
         Schema::create('course_lesson_progress', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedInteger('user_id');
             $table->unsignedBigInteger('course_lesson_id');
             $table->timestamp('completed_at');
             $table->timestamps();
