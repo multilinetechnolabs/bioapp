@@ -15,7 +15,7 @@
     @endif
 
     <table class="table table-bordered">
-        <thead><tr><th>Order</th><th>Title</th><th class="text-center">Actions</th></tr></thead>
+        <thead><tr><th>Lesson Order</th><th>Lesson Title</th><th class="text-center">Actions</th></tr></thead>
         <tbody>
             @forelse ($lessons as $lesson)
                 <tr>

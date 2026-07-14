@@ -41,7 +41,6 @@ class CourseController extends Controller
             'description' => 'nullable|string',
             'price' => 'required|numeric|min:0',
             'is_active' => 'nullable|boolean',
-            'order' => 'nullable|integer',
         ]);
         $data['is_active'] = $request->boolean('is_active');
 
@@ -66,7 +65,6 @@ class CourseController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
             'is_active' => 'nullable|boolean',
-            'order' => 'nullable|integer',
         ]);
         $data['is_active'] = $request->boolean('is_active');
 

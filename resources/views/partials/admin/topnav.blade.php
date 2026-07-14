@@ -42,6 +42,20 @@
 
         <div class="admin-nav__section">Content</div>
 
+        <a href="{{ url('/admin/media') }}"
+           class="admin-nav__link {{ str_contains($currentPath, 'admin/media') ? 'active' : '' }}">
+            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.069A1 1 0 0121 8.87v6.26a1 1 0 01-1.447.899L15 14M3 8a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"/></svg>
+            Media Files
+        </a>
+
+        <a href="{{ url('/admin/playlist') }}"
+           class="admin-nav__link {{ str_contains($currentPath, 'admin/playlist') ? 'active' : '' }}">
+            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h10M4 18h10M15 14l5 3-5 3V14z"/></svg>
+            Playlists
+        </a>
+
+        <div class="admin-nav__section">Course</div>
+
         <a href="{{ url('/admin/course') }}"
            class="admin-nav__link {{ $currentPath === 'admin/course' || str_starts_with($currentPath, 'admin/course/') ? 'active' : '' }}">
             <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0v7m-7-4.5V15c0 1.657 3.134 3 7 3s7-1.343 7-3v-2.5"/></svg>
@@ -54,16 +68,10 @@
             Certificate Template
         </a>
 
-        <a href="{{ url('/admin/media') }}"
-           class="admin-nav__link {{ str_contains($currentPath, 'admin/media') ? 'active' : '' }}">
-            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.069A1 1 0 0121 8.87v6.26a1 1 0 01-1.447.899L15 14M3 8a2 2 0 012-2h8a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2V8z"/></svg>
-            Media Files
-        </a>
-
-        <a href="{{ url('/admin/playlist') }}"
-           class="admin-nav__link {{ str_contains($currentPath, 'admin/playlist') ? 'active' : '' }}">
-            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h10M4 18h10M15 14l5 3-5 3V14z"/></svg>
-            Playlists
+        <a href="{{ route('admin.course_subscriptions') }}"
+           class="admin-nav__link {{ str_contains($currentPath, 'admin/course-subscriptions') ? 'active' : '' }}">
+            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0v7m-7-4.5V15c0 1.657 3.134 3 7 3s7-1.343 7-3v-2.5"/></svg>
+            Course Subscriptions
         </a>
 
         <div class="admin-nav__section">Scanning</div>
@@ -92,12 +100,6 @@
            class="admin-nav__link {{ str_contains($currentPath, 'admin/subscriptions') ? 'active' : '' }}">
             <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
             Subscriptions
-        </a>
-
-        <a href="{{ route('admin.course_subscriptions') }}"
-           class="admin-nav__link {{ str_contains($currentPath, 'admin/course-subscriptions') ? 'active' : '' }}">
-            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0v7m-7-4.5V15c0 1.657 3.134 3 7 3s7-1.343 7-3v-2.5"/></svg>
-            Course Subscriptions
         </a>
 
         <div class="admin-nav__section">Users</div>
