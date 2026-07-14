@@ -172,6 +172,13 @@
             </div>
         </section>
 
+        <section id="pricing" class="mb-5">
+            <h4 class="section-eyebrow mb-4">
+                {{ $l === 'es' ? 'Planes y Precios' : ($l === 'fr' ? 'Plans et Tarifs' : 'Plans & Pricing') }}
+            </h4>
+            @include('partials.modern.pricing')
+        </section>
+
         @php
             $courseBannerData = \App\Models\Course::where('is_active', true)->first();
         @endphp
@@ -192,7 +199,7 @@
             <div class="cb-box" id="cbOpen">
                 <div>
                     <h3>New: {{ $courseBannerData->title }}</h3>
-                    <p>{{ $courseBannerData->modules()->count() }} modules, guided lessons and a certificate — available as a one-time purchase, separate from your app subscription.</p>
+                    <p>{{ $courseBannerData->modules()->count() }} modules</p>
                 </div>
                 <a href="{{ route('course.start') }}" class="cb-btn" onclick="event.stopPropagation()">Purchase Now</a>
             </div>
@@ -215,13 +222,6 @@
             document.getElementById('cbOpen').addEventListener('click', function(){ document.getElementById('cbModalBackdrop').style.display='flex'; });
         </script>
         @endif
-
-        <section id="pricing" class="mb-5">
-            <h4 class="section-eyebrow mb-4">
-                {{ $l === 'es' ? 'Planes y Precios' : ($l === 'fr' ? 'Plans et Tarifs' : 'Plans & Pricing') }}
-            </h4>
-            @include('partials.modern.pricing')
-        </section>
 
     </main>
 
