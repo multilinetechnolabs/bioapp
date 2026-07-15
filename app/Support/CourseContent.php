@@ -61,8 +61,28 @@ class CourseContent
             'type' => $lesson->type,
             'image_source' => $defaultImage,
             'images_by_lang' => $imagesByLang,
-            'video_files' => $lesson->videos->isEmpty() ? null : $lesson->videos->pluck('url')->all(),
+            'video_files' => $lesson->videos->isEmpty() ? null : $lesson->videos->pluck('url')->map([self::class, 'withAutoCaptions'])->all(),
         ];
+    }
+
+    /**
+     * Bunny embeds only — makes captions show automatically on playback instead of
+     * requiring the viewer to click the CC button first. English is the only caption
+     * track uploaded to Bunny for these videos today; once Spanish/French tracks are
+     * added there, this can switch to the viewer's selected language the same way
+     * the local-video caption toggle already does.
+     */
+    public static function withAutoCaptions(string $url): string
+    {
+        if (!str_contains($url, 'mediadelivery.net')) {
+            return $url;
+        }
+
+        $parts = parse_url($url);
+        parse_str($parts['query'] ?? '', $query);
+        $query['captions'] = 'en-auto';
+
+        return $parts['scheme'] . '://' . $parts['host'] . ($parts['path'] ?? '') . '?' . http_build_query($query);
     }
 
     public static function moduleNumbers(): array
