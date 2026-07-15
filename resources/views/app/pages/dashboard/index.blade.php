@@ -104,5 +104,28 @@
         </a>
 
     </div>
+
+    {{-- Course banner (purchasers only) --}}
+    @php
+        $dashCourse = \App\Models\Course::where('is_active', true)->first();
+        $dashHasCourseAccess = $dashCourse && \App\Models\CoursePurchase::userHasAccess(Auth::id(), $dashCourse->id);
+    @endphp
+    @if ($dashHasCourseAccess)
+        <style>
+            .dash-course-banner{background:linear-gradient(135deg,#0f766e,#0d9488);border-radius:18px;padding:22px 26px;color:#fff;display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;text-decoration:none;margin-top:1.25rem;}
+            .dash-course-banner:hover{color:#fff;text-decoration:none;}
+            .dash-course-banner h3{font-family:Georgia,serif;margin:0 0 4px;font-size:1.25rem;}
+            .dash-course-banner p{margin:0;opacity:.9;font-size:.9rem;}
+            .dash-course-banner__btn{background:#fff;color:#0f766e;font-weight:700;border:none;border-radius:999px;padding:11px 22px;font-size:.9rem;white-space:nowrap;}
+        </style>
+        <a href="{{ route('course.index') }}" class="dash-course-banner">
+            <div>
+                <h3>Your Course: {{ $dashCourse->title }}</h3>
+                <p>Continue where you left off.</p>
+            </div>
+            <span class="dash-course-banner__btn">Go to Course</span>
+        </a>
+    @endif
+
 </div>
 @endsection
