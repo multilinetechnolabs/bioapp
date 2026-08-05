@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Course;
+use App\Models\CoursePurchase;
 use Illuminate\Foundation\Auth\VerifiesEmails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -30,6 +32,21 @@ class VerificationController extends Controller
 
     protected function redirectPath()
     {
+        // Course purchase intent takes priority — a user who clicked "Purchase Now"
+        // for the course before registering must land back on the course, not get
+        // swept into the unrelated plan/pricing checks below.
+        if (session('course_login_intent')) {
+            session()->forget('course_login_intent');
+
+            $course = Course::where('is_active', true)->first();
+
+            if ($course && CoursePurchase::userHasAccess(auth()->id(), $course->id)) {
+                return route('course.index');
+            }
+
+            return route('course.checkout');
+        }
+
         $planId = session('pending_plan_id');
 
         if ($planId && \App\Models\Plan::find($planId)) {
