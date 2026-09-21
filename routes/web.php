@@ -20,6 +20,9 @@ Route::post('/site-access/verify', 'SiteAccessController@verify')->name('site-ac
 // course afterward — every other login/registration path is unaffected.
 Route::get('/course/start', 'CourseController@start')->name('course.start');
 
+// Image captcha for the Register form. Public; throttled so it can't be used to burn CPU.
+Route::get('/captcha', 'CaptchaController@image')->name('captcha.image')->middleware('throttle:30,1');
+
 Auth::routes(['verify' => true]);
 
 Route::get('/phpinfo', function () {
@@ -116,8 +119,6 @@ Route::middleware('verified')->group(function () {
             Route::post('/module/{module}/lesson/{lesson}/complete', 'CourseController@markComplete')->where(['module' => '[0-9]+', 'lesson' => '[0-9]+'])->name('lesson.complete');
             Route::get('/certificate', 'CourseController@certificate')->name('certificate');
             Route::get('/certificate/download', 'CourseController@downloadCertificatePdf')->name('certificate.download');
-            Route::post('/reset-progress', 'CourseController@resetProgress')->name('reset');
-            Route::post('/remove-access', 'CourseController@removeAccess')->name('removeAccess');
         });
     });
 
