@@ -43,13 +43,18 @@ class ReCaptchaTest extends TestCase
                 && $request['secret'] === 'test-secret'
                 && $request['response'] === 'token';
         });
+        Log::shouldNotHaveReceived('warning');
     }
 
-    public function testFailsWhenGoogleRejectsTheToken()
+    public function testFailsWhenGoogleRejectsTheTokenAndLogsGooglesReason()
     {
-        Http::fake(['*' => Http::response(['success' => false, 'error-codes' => ['invalid-input-response']])]);
+        Http::fake(['*' => Http::response(['success' => false, 'error-codes' => ['invalid-input-secret']])]);
 
         $this->assertFalse($this->passes());
+
+        Log::shouldHaveReceived('warning')->withArgs(function ($message, $context) {
+            return $context['error_codes'] === ['invalid-input-secret'] && $context['http_status'] === 200;
+        })->once();
     }
 
     public function testFailsInsteadOfThrowingWhenGoogleIsUnreachable()
@@ -68,6 +73,10 @@ class ReCaptchaTest extends TestCase
         Http::fake(['*' => Http::response('Bad Gateway', 502)]);
 
         $this->assertFalse($this->passes());
+
+        Log::shouldHaveReceived('warning')->withArgs(function ($message, $context) {
+            return $context['http_status'] === 502;
+        })->once();
     }
 
     public function testFailsOnAReplyThatIsNotJson()
@@ -75,6 +84,10 @@ class ReCaptchaTest extends TestCase
         Http::fake(['*' => Http::response('<html>oops</html>', 200)]);
 
         $this->assertFalse($this->passes());
+
+        Log::shouldHaveReceived('warning')->withArgs(function ($message, $context) {
+            return $context['error_codes'] === null;
+        })->once();
     }
 
     public function testFailsWithoutCallingGoogleWhenTheSecretIsNotConfigured()

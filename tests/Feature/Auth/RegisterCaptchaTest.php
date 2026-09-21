@@ -5,19 +5,19 @@ namespace Tests\Feature\Auth;
 use Tests\TestCase;
 
 use App\Http\Middleware\SecureHeaders;
-use Illuminate\Http\Client\ConnectionException;
-use Illuminate\Support\Facades\Http;
+use App\Support\Captcha;
 use Spatie\Permission\Models\Role;
 
 class RegisterCaptchaTest extends TestCase
 {
+    const CODE = 'ABCDE';
+
     protected function setUp(): void
     {
         parent::setUp();
 
         // Keep the developer's .env (staging password gate, verification bypass) out of these tests.
         config([
-            'services.recaptcha.secret_key' => 'test-secret',
             'app.site_access_password' => null,
             'app.bypass_email_verification' => false,
         ]);
@@ -38,8 +38,20 @@ class RegisterCaptchaTest extends TestCase
             'email' => 'captcha.tester@example.com',
             'password' => 'secret123',
             'password_confirmation' => 'secret123',
-            'g-recaptcha-response' => 'token',
+            'captcha' => self::CODE,
         ], $overrides);
+    }
+
+    // Plays the part of a visitor whose form currently shows the image for CODE.
+    private function issueCode(?int $expiresAt = null): void
+    {
+        $entry = app(Captcha::class)->entryFor(self::CODE);
+
+        if ($expiresAt !== null) {
+            $entry['expires_at'] = $expiresAt;
+        }
+
+        $this->withSession([Captcha::SESSION_KEY => $entry]);
     }
 
     private function register(array $overrides = [])
@@ -47,72 +59,113 @@ class RegisterCaptchaTest extends TestCase
         return $this->from(route('register'))->post(route('register'), $this->payload($overrides));
     }
 
-    public function testRegisterPageShowsTheCaptchaWidget()
+    private function assertNoUser(): void
     {
-        config(['services.recaptcha.site_key' => 'test-site-key']);
+        $this->assertDatabaseMissing('users', ['email' => 'captcha.tester@example.com']);
+    }
 
+    public function testRegisterPageShowsTheImageCaptchaAndNoGoogleWidget()
+    {
         $this->get(route('register'))
             ->assertOk()
-            ->assertSee('class="g-recaptcha"', false)
-            ->assertSee('data-sitekey="test-site-key"', false)
-            ->assertSee('https://www.google.com/recaptcha/api.js', false);
+            ->assertSee('id="captchaImage"', false)
+            ->assertSee('src="/captcha?', false)
+            ->assertSee('name="captcha"', false)
+            ->assertDontSee('g-recaptcha', false)
+            ->assertDontSee('recaptcha/api.js', false);
     }
 
-    public function testRegistrationIsRejectedWithoutACaptchaToken()
+    public function testCaptchaImageIsANoStorePngAndStartsACode()
     {
-        Http::fake();
+        $response = $this->get(route('captcha.image'))
+            ->assertOk()
+            ->assertHeader('Content-Type', 'image/png')
+            ->assertSessionHas(Captcha::SESSION_KEY);
 
-        $this->register(['g-recaptcha-response' => ''])
+        $this->assertStringContainsString('no-store', $response->headers->get('Cache-Control'));
+        $this->assertSame("\x89PNG", substr($response->getContent(), 0, 4));
+    }
+
+    public function testCaptchaImageIsThrottled()
+    {
+        for ($i = 0; $i < 30; $i++) {
+            $this->get(route('captcha.image'))->assertOk();
+        }
+
+        $this->get(route('captcha.image'))->assertStatus(429);
+    }
+
+    public function testRegistrationIsRejectedWithoutACode()
+    {
+        $this->issueCode();
+
+        $this->register(['captcha' => ''])
             ->assertRedirect(route('register'))
-            ->assertSessionHasErrors('g-recaptcha-response');
+            ->assertSessionHasErrors('captcha');
 
-        $this->assertDatabaseMissing('users', ['email' => 'captcha.tester@example.com']);
-        Http::assertNothingSent();
+        $this->assertNoUser();
     }
 
-    public function testRegistrationIsRejectedWhenGoogleRejectsTheToken()
+    public function testRegistrationIsRejectedWithAWrongCodeAndUsesUpTheCode()
     {
-        Http::fake(['*' => Http::response(['success' => false])]);
+        $this->issueCode();
+
+        $this->register(['captcha' => 'WRONG'])
+            ->assertRedirect(route('register'))
+            ->assertSessionHasErrors('captcha')
+            ->assertSessionMissing(Captcha::SESSION_KEY);
+
+        $this->assertNoUser();
+    }
+
+    public function testRegistrationIsRejectedWhenNoCodeWasEverShown()
+    {
+        $this->register()
+            ->assertRedirect(route('register'))
+            ->assertSessionHasErrors('captcha');
+
+        $this->assertNoUser();
+    }
+
+    public function testRegistrationIsRejectedWhenTheCodeHasExpired()
+    {
+        $this->issueCode(now()->timestamp - 1);
 
         $this->register()
             ->assertRedirect(route('register'))
-            ->assertSessionHasErrors('g-recaptcha-response');
+            ->assertSessionHasErrors('captcha');
 
-        $this->assertDatabaseMissing('users', ['email' => 'captcha.tester@example.com']);
+        $this->assertNoUser();
     }
 
-    public function testRegistrationFailsGracefullyWhenGoogleIsUnreachable()
+    public function testRegistrationSucceedsWithTheRightCodeWhateverTheCaseOrSpacing()
     {
-        Http::fake(function () {
-            throw new ConnectionException('cURL error 28: Operation timed out');
-        });
+        $this->issueCode();
 
-        $this->register()
-            ->assertRedirect(route('register'))
-            ->assertSessionHasErrors('g-recaptcha-response');
-
-        $this->assertDatabaseMissing('users', ['email' => 'captcha.tester@example.com']);
-    }
-
-    public function testRegistrationSucceedsWhenGoogleConfirmsTheToken()
-    {
-        Http::fake(['*' => Http::response(['success' => true])]);
-
-        $this->register()
+        $this->register(['captcha' => 'ab cde'])
             ->assertRedirect(route('verification.notice'))
             ->assertSessionHasNoErrors();
 
         $this->assertDatabaseHas('users', ['email' => 'captcha.tester@example.com']);
     }
 
+    public function testACorrectCodeCannotBeReplayedAfterTheFormFailedForAnotherReason()
+    {
+        $this->issueCode();
+
+        $this->register(['username' => 'short'])->assertSessionHasErrors('username');
+
+        $this->register()->assertSessionHasErrors('captcha');
+
+        $this->assertNoUser();
+    }
+
     public function testRegistrationIsThrottledPerIp()
     {
-        Http::fake();
-
         for ($i = 0; $i < 10; $i++) {
-            $this->register(['g-recaptcha-response' => '']);
+            $this->register(['captcha' => '']);
         }
 
-        $this->register(['g-recaptcha-response' => ''])->assertStatus(429);
+        $this->register(['captcha' => ''])->assertStatus(429);
     }
 }

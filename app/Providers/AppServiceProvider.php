@@ -30,6 +30,7 @@ class AppServiceProvider extends ServiceProvider
         }
 
         \Validator::extend('recaptcha', 'App\Validators\ReCaptcha@validate');
+        \Validator::extend('captcha', 'App\Validators\CaptchaCode@validate');
 
         VerifyEmail::toMailUsing(function ($notifiable, $verificationUrl) {
             return (new MailMessage)

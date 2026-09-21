@@ -62,10 +62,10 @@ class RegisterController extends Controller
             'email'   => 'required|string|email|max:255|unique:users,email',
             'password'=> 'required|string|min:6|confirmed',
             'plan_id' => 'nullable|exists:plans,id',
-            'g-recaptcha-response' => 'required|recaptcha',
+            'captcha' => 'required|captcha',
         ], [
-            'g-recaptcha-response.required' => 'Please verify that you are not a robot. / Por favor verifique que no es un robot.',
-            'g-recaptcha-response.recaptcha' => 'Captcha verification failed. Please try again. / La verificación del captcha falló. Inténtelo de nuevo.',
+            'captcha.required' => 'Please enter the code shown in the image. / Por favor ingrese el código que aparece en la imagen.',
+            'captcha.captcha' => 'That code was incorrect or has expired. Please try again with the new image. / El código es incorrecto o ha expirado. Inténtelo de nuevo con la nueva imagen.',
         ]);
     }
 

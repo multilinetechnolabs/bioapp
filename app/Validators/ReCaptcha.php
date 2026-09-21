@@ -39,6 +39,20 @@ class ReCaptcha
             return false;
         }
 
-        return $response->successful() && $response->json('success') === true;
+        $body = $response->json();
+
+        if (!$response->successful() || ($body['success'] ?? false) !== true) {
+            // Google's own reason ("invalid-input-secret", "timeout-or-duplicate", ...) is the only
+            // way to tell a bad key pair from an expired token, so keep it in the log.
+            Log::warning('reCAPTCHA verification rejected.', [
+                'http_status' => $response->status(),
+                'error_codes' => $body['error-codes'] ?? null,
+                'hostname' => $body['hostname'] ?? null,
+            ]);
+
+            return false;
+        }
+
+        return true;
     }
 }

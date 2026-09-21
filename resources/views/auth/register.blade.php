@@ -101,10 +101,21 @@
                         </div>
                     </div>
 
-                    <div class="register-recaptcha mb-3">
-                        <div class="g-recaptcha" data-sitekey="{{ config('services.recaptcha.site_key') }}"></div>
-                        @error('g-recaptcha-response')
-                            <span class="invalid-feedback d-block text-center"><strong>{{ $errors->first('g-recaptcha-response') }}</strong></span>
+                    <div class="mb-3">
+                        <label for="captcha" class="modern-auth-label">Security Code / Código de seguridad</label>
+                        <div class="d-flex align-items-center flex-wrap mb-2">
+                            <img id="captchaImage" src="{{ route('captcha.image', [], false) }}?{{ uniqid() }}"
+                                alt="Security code / Código de seguridad" width="170" height="56"
+                                class="border rounded mr-2 mb-1" style="max-width: 100%; height: auto;">
+                            <button type="button" id="captchaRefresh" class="btn btn-link p-0 mb-1"
+                                title="Show a new code / Mostrar un código nuevo"
+                                aria-label="Show a new code / Mostrar un código nuevo">&#8635; New code / Nuevo código</button>
+                        </div>
+                        <input type="text" class="form-control modern-auth-input @error('captcha') is-invalid @enderror"
+                            name="captcha" id="captcha" autocomplete="off" autocapitalize="characters" spellcheck="false"
+                            maxlength="10" required placeholder="Type the code above / Escriba el código de arriba">
+                        @error('captcha')
+                            <span class="invalid-feedback d-block"><strong>{{ $errors->first('captcha') }}</strong></span>
                         @enderror
                     </div>
 
@@ -119,17 +130,18 @@
         </div>
     </main>
 
-    @push('head')
-        <style>
-            .register-recaptcha { display: flex; flex-direction: column; align-items: center; }
-            /* The checkbox widget is a fixed 304px wide; the card is narrower than that on small phones. */
-            @media (max-width: 380px) {
-                .register-recaptcha .g-recaptcha { transform: scale(0.8); transform-origin: center top; margin-bottom: -15px; }
-            }
-        </style>
-    @endpush
-
     @push('scripts')
-        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+        <script>
+            (function () {
+                var image = document.getElementById('captchaImage');
+                var input = document.getElementById('captcha');
+
+                document.getElementById('captchaRefresh').addEventListener('click', function () {
+                    image.src = '{{ route('captcha.image', [], false) }}?' + Date.now();
+                    input.value = '';
+                    input.focus();
+                });
+            })();
+        </script>
     @endpush
 @endsection
