@@ -43,6 +43,8 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+        // Backstop behind the captcha: caps how fast a single IP can submit registrations.
+        $this->middleware('throttle:10,1')->only('register');
     }
 
     /**
@@ -60,6 +62,10 @@ class RegisterController extends Controller
             'email'   => 'required|string|email|max:255|unique:users,email',
             'password'=> 'required|string|min:6|confirmed',
             'plan_id' => 'nullable|exists:plans,id',
+            'g-recaptcha-response' => 'required|recaptcha',
+        ], [
+            'g-recaptcha-response.required' => 'Please verify that you are not a robot. / Por favor verifique que no es un robot.',
+            'g-recaptcha-response.recaptcha' => 'Captcha verification failed. Please try again. / La verificación del captcha falló. Inténtelo de nuevo.',
         ]);
     }
 

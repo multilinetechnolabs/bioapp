@@ -101,6 +101,13 @@
                         </div>
                     </div>
 
+                    <div class="register-recaptcha mb-3">
+                        <div class="g-recaptcha" data-sitekey="{{ config('services.recaptcha.site_key') }}"></div>
+                        @error('g-recaptcha-response')
+                            <span class="invalid-feedback d-block text-center"><strong>{{ $errors->first('g-recaptcha-response') }}</strong></span>
+                        @enderror
+                    </div>
+
                     <button type="submit" class="btn modern-auth-btn-main btn-block">{{ __('Sign Up') }} / Registrarse</button>
                 </form>
 
@@ -111,4 +118,18 @@
             </section>
         </div>
     </main>
+
+    @push('head')
+        <style>
+            .register-recaptcha { display: flex; flex-direction: column; align-items: center; }
+            /* The checkbox widget is a fixed 304px wide; the card is narrower than that on small phones. */
+            @media (max-width: 380px) {
+                .register-recaptcha .g-recaptcha { transform: scale(0.8); transform-origin: center top; margin-bottom: -15px; }
+            }
+        </style>
+    @endpush
+
+    @push('scripts')
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    @endpush
 @endsection
