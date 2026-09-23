@@ -9,6 +9,14 @@ use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
+    public function __construct()
+    {
+        // Backstop behind the captcha: caps how fast a single IP can submit the contact form,
+        // across all three locale routes (they all reach this same action). Named (3rd arg) so
+        // it doesn't share a bucket with unrelated `throttle:` uses elsewhere in the app.
+        $this->middleware('throttle:10,1,contact')->only('store');
+    }
+
     public function show()
     {
         $locale  = $this->detectLocale();
@@ -23,6 +31,11 @@ class ContactController extends Controller
             'email'   => 'required|email|max:100',
             'subject' => 'nullable|string|max:200',
             'message' => 'required|string|max:5000',
+            'captcha' => 'required|captcha',
+        ], [
+            // English only, matching the other messages on this form (none of which are localized).
+            'captcha.required' => 'Please enter the code shown in the image.',
+            'captcha.captcha' => 'That code was incorrect or has expired. Please try again with the new image.',
         ]);
 
         $emailSent = false;

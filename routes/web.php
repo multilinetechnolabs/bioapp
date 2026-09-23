@@ -20,8 +20,9 @@ Route::post('/site-access/verify', 'SiteAccessController@verify')->name('site-ac
 // course afterward — every other login/registration path is unaffected.
 Route::get('/course/start', 'CourseController@start')->name('course.start');
 
-// Image captcha for the Register form. Public; throttled so it can't be used to burn CPU.
-Route::get('/captcha', 'CaptchaController@image')->name('captcha.image')->middleware('throttle:30,1');
+// Image captcha for Register/Contact. Public; throttled so it can't be used to burn CPU. Named
+// (3rd throttle arg) so it doesn't share a bucket with the form-submission throttles below.
+Route::get('/captcha', 'CaptchaController@image')->name('captcha.image')->middleware('throttle:30,1,captcha-image');
 
 Auth::routes(['verify' => true]);
 

@@ -296,22 +296,7 @@
                         <span style="color:#0f766e;font-weight:600;">{{ session('contact.success') }}</span>
                     </div>
                 @else
-                    @php
-                        $contactRoute = $l === 'es' ? 'contact.store.es' : ($l === 'fr' ? 'contact.store.fr' : 'contact.store');
-                    @endphp
-                    <form class="dashboard-contact__form" action="{{ route($contactRoute) }}" method="POST">
-                        @csrf
-                        <input type="text" name="name" placeholder="{{ $l === 'es' ? 'Tu Nombre' : ($l === 'fr' ? 'Votre Nom' : 'Your Name') }}" class="dashboard-contact__input @error('name') is-invalid @enderror" value="{{ old('name') }}" required>
-                        @error('name')<span style="color:#dc2626;font-size:0.8rem;margin-top:-0.4rem;display:block;">{{ $message }}</span>@enderror
-                        <input type="email" name="email" placeholder="{{ $l === 'es' ? 'Tu Correo Electrónico' : ($l === 'fr' ? 'Votre E-mail' : 'Your Email') }}" class="dashboard-contact__input @error('email') is-invalid @enderror" value="{{ old('email') }}" required>
-                        @error('email')<span style="color:#dc2626;font-size:0.8rem;margin-top:-0.4rem;display:block;">{{ $message }}</span>@enderror
-                        <input type="text" name="subject" placeholder="{{ $l === 'es' ? 'Asunto' : ($l === 'fr' ? 'Objet' : 'Subject') }}" class="dashboard-contact__input" value="{{ old('subject') }}">
-                        <textarea name="message" placeholder="{{ $l === 'es' ? 'Tu Mensaje' : ($l === 'fr' ? 'Votre Message' : 'Your Message') }}" class="dashboard-contact__textarea @error('message') is-invalid @enderror" rows="5" required>{{ old('message') }}</textarea>
-                        @error('message')<span style="color:#dc2626;font-size:0.8rem;margin-top:-0.4rem;display:block;">{{ $message }}</span>@enderror
-                        <button type="submit" class="dashboard-contact__submit">
-                            {{ $l === 'es' ? 'Enviar Mensaje' : ($l === 'fr' ? 'Envoyer le Message' : 'Send Message') }}
-                        </button>
-                    </form>
+                    @include('partials.contact_form', ['locale' => $l])
                 @endif
             </div>
         </div>

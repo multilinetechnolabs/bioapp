@@ -44,7 +44,9 @@ class RegisterController extends Controller
     {
         $this->middleware('guest');
         // Backstop behind the captcha: caps how fast a single IP can submit registrations.
-        $this->middleware('throttle:10,1')->only('register');
+        // Named (3rd arg) so this doesn't share a bucket with the other unrelated `throttle:`
+        // uses in the app — those key only on domain+IP, with no route in the signature.
+        $this->middleware('throttle:10,1,register')->only('register');
     }
 
     /**

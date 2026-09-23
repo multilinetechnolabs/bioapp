@@ -66,23 +66,7 @@
                             <span style="color:#0f766e;font-weight:600;">{{ session('contact.success') }}</span>
                         </div>
                     @else
-                        @php
-                            $locale = $locale ?? 'en';
-                            $contactRoute = $locale === 'es' ? 'contact.store.es' : ($locale === 'fr' ? 'contact.store.fr' : 'contact.store');
-                        @endphp
-                        <form class="dashboard-contact__form" action="{{ route($contactRoute) }}" method="POST">
-                            @csrf
-                            <input type="text" name="name" placeholder="{{ $locale === 'es' ? 'Tu Nombre' : ($locale === 'fr' ? 'Votre Nom' : 'Your Name') }}" class="dashboard-contact__input @error('name') is-invalid @enderror" value="{{ old('name') }}" required>
-                            @error('name')<span style="color:#dc2626;font-size:0.8rem;margin-top:-0.4rem;display:block;">{{ $message }}</span>@enderror
-                            <input type="email" name="email" placeholder="{{ $locale === 'es' ? 'Tu Correo Electrónico' : ($locale === 'fr' ? 'Votre E-mail' : 'Your Email') }}" class="dashboard-contact__input @error('email') is-invalid @enderror" value="{{ old('email') }}" required>
-                            @error('email')<span style="color:#dc2626;font-size:0.8rem;margin-top:-0.4rem;display:block;">{{ $message }}</span>@enderror
-                            <input type="text" name="subject" placeholder="{{ $locale === 'es' ? 'Asunto' : ($locale === 'fr' ? 'Objet' : 'Subject') }}" class="dashboard-contact__input" value="{{ old('subject') }}">
-                            <textarea name="message" placeholder="{{ $locale === 'es' ? 'Tu Mensaje' : ($locale === 'fr' ? 'Votre Message' : 'Your Message') }}" class="dashboard-contact__textarea @error('message') is-invalid @enderror" rows="5" required>{{ old('message') }}</textarea>
-                            @error('message')<span style="color:#dc2626;font-size:0.8rem;margin-top:-0.4rem;display:block;">{{ $message }}</span>@enderror
-                            <button type="submit" class="dashboard-contact__submit">
-                                {{ $locale === 'es' ? 'Enviar Mensaje' : ($locale === 'fr' ? 'Envoyer le Message' : 'Send Message') }}
-                            </button>
-                        </form>
+                        @include('partials.contact_form', ['locale' => $locale ?? 'en'])
                     @endif
                 </div>
             </div>
